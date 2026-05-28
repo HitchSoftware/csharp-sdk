@@ -180,6 +180,7 @@ public abstract partial class MapMcpTests
             // and no persistent server instance for the backcompat retry loop). The server returns
             // a JSON-RPC error.
             await using var client = await ConnectAsync(configureClient: configureClient);
+
             var ex = await Assert.ThrowsAsync<McpProtocolException>(() =>
                 client.CallToolAsync("mrtr-mixed",
                     cancellationToken: TestContext.Current.CancellationToken).AsTask());
@@ -267,6 +268,10 @@ public abstract partial class MapMcpTests
         // Parallel awaits work with regular JSON-RPC but fail with MRTR because
         // MrtrContext only supports one exchange at a time (TrySetResult gate).
         Assert.SkipWhen(Stateless, "Await-style API requires handler suspension (stateful only).");
+        // Under the draft protocol revision (SEP-2567), the server is implicitly stateless for draft
+        // clients, so parallel-await MRTR can't reach its concurrency gate. Skip the experimental-client
+        // case for the same reason as Mrtr_MixedExceptionAndAwaitStyle.
+        Assert.SkipWhen(experimentalClient, "Await-style MRTR requires session affinity; draft protocol revision (SEP-2567) is sessionless.");
 
         ConfigureServer(MrtrParallelAwait);
         await using var app = Builder.Build();

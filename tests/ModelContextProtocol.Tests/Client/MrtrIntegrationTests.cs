@@ -165,7 +165,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
                 Model = "test-model"
             });
 
-        // Start the client task - it will send initialize and block waiting for response
+        // Start the client task — it will send server/discover (draft) and block waiting for response
         var clientTask = McpClient.CreateAsync(
             new StreamClientTransport(
                 clientToServer.Writer.AsStream(),
@@ -175,35 +175,32 @@ public class MrtrIntegrationTests : ClientServerTestBase
             loggerFactory: LoggerFactory,
             cancellationToken: TestContext.Current.CancellationToken);
 
-        // Simulate server: read initialize request, respond with experimental version
+        // Simulate server: read server/discover request, respond with a DiscoverResult
+        // that advertises support for the experimental version.
         var serverReader = new StreamReader(clientToServer.Reader.AsStream());
         var serverWriter = serverToClient.Writer.AsStream();
 
-        // Read the initialize request from client
-        var initLine = await serverReader.ReadLineAsync(TestContext.Current.CancellationToken);
-        Assert.NotNull(initLine);
-        var initRequest = JsonSerializer.Deserialize<JsonRpcRequest>(initLine, McpJsonUtilities.DefaultOptions);
-        Assert.NotNull(initRequest);
-        Assert.Equal("initialize", initRequest.Method);
+        // Read the server/discover request from client (draft revision skips initialize per SEP-2575).
+        var discoverLine = await serverReader.ReadLineAsync(TestContext.Current.CancellationToken);
+        Assert.NotNull(discoverLine);
+        var discoverRequest = JsonSerializer.Deserialize<JsonRpcRequest>(discoverLine, McpJsonUtilities.DefaultOptions);
+        Assert.NotNull(discoverRequest);
+        Assert.Equal(RequestMethods.ServerDiscover, discoverRequest.Method);
 
-        // Respond with experimental protocol version (MRTR negotiated)
-        var initResponse = new JsonRpcResponse
+        // Respond with a DiscoverResult that includes the experimental version in supportedVersions.
+        var discoverResponse = new JsonRpcResponse
         {
-            Id = initRequest.Id,
-            Result = JsonSerializer.SerializeToNode(new InitializeResult
+            Id = discoverRequest.Id,
+            Result = JsonSerializer.SerializeToNode(new DiscoverResult
             {
-                ProtocolVersion = "DRAFT-2026-v1",
+                SupportedVersions = new List<string> { "DRAFT-2026-v1" },
                 Capabilities = new ServerCapabilities(),
-                ServerInfo = new Implementation { Name = "MockMrtrServer", Version = "1.0" }
+                ServerInfo = new Implementation { Name = "MockMrtrServer", Version = "1.0" },
             }, McpJsonUtilities.DefaultOptions),
         };
-        await WriteJsonRpcAsync(serverWriter, initResponse);
+        await WriteJsonRpcAsync(serverWriter, discoverResponse);
 
-        // Read the initialized notification from client
-        var initializedLine = await serverReader.ReadLineAsync(TestContext.Current.CancellationToken);
-        Assert.NotNull(initializedLine);
-
-        // Client is now connected with MRTR negotiated
+        // Client is now connected with MRTR negotiated (no initialized notification under draft).
         await using var client = await clientTask;
         Assert.Equal("DRAFT-2026-v1", client.NegotiatedProtocolVersion);
 
