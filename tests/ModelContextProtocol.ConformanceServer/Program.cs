@@ -28,7 +28,12 @@ public class Program
         builder.Services.AddDistributedMemoryCache();
         builder.Services
             .AddMcpServer()
-            .WithHttpTransport()
+            .WithHttpTransport(options =>
+            {
+                // ConformanceTests rely on stateful behaviors (resumability, session-scoped subscriptions, OAuth).
+                // Pin Stateless = false explicitly now that draft (SEP-2567) defaults to true.
+                options.Stateless = false;
+            })
             .WithDistributedCacheEventStreamStore()
             .WithTools<ConformanceTools>()
             .WithTools<IncompleteResultTools>()
