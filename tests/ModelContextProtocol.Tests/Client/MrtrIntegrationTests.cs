@@ -31,7 +31,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
         services.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug));
         services.Configure<McpServerOptions>(options =>
         {
-            options.ProtocolVersion = "DRAFT-2026-v1";
+            options.ProtocolVersion = "2026-07-28";
             _messageTracker.AddFilters(options.Filters.Message);
         });
 
@@ -95,14 +95,14 @@ public class MrtrIntegrationTests : ClientServerTestBase
         // input resolution failures back to the server.
         StartServer();
 
-        var clientOptions = new McpClientOptions { ProtocolVersion = "DRAFT-2026-v1" };
+        var clientOptions = new McpClientOptions { ProtocolVersion = "2026-07-28" };
         clientOptions.Handlers.ElicitationHandler = (request, ct) =>
         {
             throw new InvalidOperationException("Client-side elicitation failure");
         };
 
         await using var client = await CreateMcpClientForServer(clientOptions);
-        Assert.Equal("DRAFT-2026-v1", client.NegotiatedProtocolVersion);
+        Assert.Equal("2026-07-28", client.NegotiatedProtocolVersion);
 
         // The client handler throws during input resolution, so the exception
         // escapes ResolveInputRequestAsync and surfaces directly to the caller.
@@ -130,7 +130,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
         // SendMessageAsync should throw InvalidOperationException if the message is a
         // JsonRpcRequest, regardless of MRTR state. Use SendRequestAsync for requests.
         StartServer();
-        var clientOptions = new McpClientOptions { ProtocolVersion = "DRAFT-2026-v1" };
+        var clientOptions = new McpClientOptions { ProtocolVersion = "2026-07-28" };
         clientOptions.Handlers.ElicitationHandler = (request, ct) =>
             new ValueTask<ElicitResult>(new ElicitResult { Action = "accept" });
 
@@ -155,7 +155,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
         var clientToServer = new Pipe();
         var serverToClient = new Pipe();
 
-        var clientOptions = new McpClientOptions { ProtocolVersion = "DRAFT-2026-v1" };
+        var clientOptions = new McpClientOptions { ProtocolVersion = "2026-07-28" };
         clientOptions.Handlers.ElicitationHandler = (request, ct) =>
             new ValueTask<ElicitResult>(new ElicitResult { Action = "accept" });
         clientOptions.Handlers.SamplingHandler = (request, progress, ct) =>
@@ -193,7 +193,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
             Id = discoverRequest.Id,
             Result = JsonSerializer.SerializeToNode(new DiscoverResult
             {
-                SupportedVersions = new List<string> { "DRAFT-2026-v1" },
+                SupportedVersions = new List<string> { "2026-07-28" },
                 Capabilities = new ServerCapabilities(),
                 ServerInfo = new Implementation { Name = "MockMrtrServer", Version = "1.0" },
             }, McpJsonUtilities.DefaultOptions),
@@ -202,7 +202,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
 
         // Client is now connected with MRTR negotiated (no initialized notification under draft).
         await using var client = await clientTask;
-        Assert.Equal("DRAFT-2026-v1", client.NegotiatedProtocolVersion);
+        Assert.Equal("2026-07-28", client.NegotiatedProtocolVersion);
 
         // Now simulate the non-compliant server sending a legacy elicitation/create request
         var legacyRequest = new JsonRpcRequest
@@ -250,7 +250,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
         var clientToServer = new Pipe();
         var serverToClient = new Pipe();
 
-        // Client does NOT set DRAFT-2026-v1 - standard protocol only
+        // Client does NOT set 2026-07-28 - standard protocol only
         var clientOptions = new McpClientOptions();
         clientOptions.Handlers.ElicitationHandler = (request, ct) =>
             new ValueTask<ElicitResult>(new ElicitResult
@@ -428,7 +428,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
         var serverReader = new StreamReader(clientToServer.Reader.AsStream());
         var serverWriter = serverToClient.Writer.AsStream();
 
-        // Initialize handshake - negotiate DRAFT-2026-v1 so the client treats InputRequiredResult as MRTR.
+        // Initialize handshake - negotiate 2026-07-28 so the client treats InputRequiredResult as MRTR.
         var initLine = await serverReader.ReadLineAsync(TestContext.Current.CancellationToken);
         Assert.NotNull(initLine);
         var initRequest = JsonSerializer.Deserialize<JsonRpcRequest>(initLine, McpJsonUtilities.DefaultOptions);
@@ -440,7 +440,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
             Id = initRequest.Id,
             Result = JsonSerializer.SerializeToNode(new InitializeResult
             {
-                ProtocolVersion = "DRAFT-2026-v1",
+                ProtocolVersion = "2026-07-28",
                 Capabilities = new ServerCapabilities { Tools = new() },
                 ServerInfo = new Implementation { Name = "MrtrServer", Version = "1.0" }
             }, McpJsonUtilities.DefaultOptions),
@@ -451,7 +451,7 @@ public class MrtrIntegrationTests : ClientServerTestBase
         Assert.NotNull(initializedLine);
 
         await using var client = await clientTask;
-        Assert.Equal("DRAFT-2026-v1", client.NegotiatedProtocolVersion);
+        Assert.Equal("2026-07-28", client.NegotiatedProtocolVersion);
 
         var cancellationToken = TestContext.Current.CancellationToken;
 

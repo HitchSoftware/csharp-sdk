@@ -9,17 +9,13 @@ namespace ModelContextProtocol.Tests.Client;
 /// <summary>
 /// Tests for the draft protocol revision (SEP-2575 + SEP-2567) connection flow on
 /// <see cref="McpClient"/> — the client should call <c>server/discover</c> instead of
-/// <c>initialize</c> when <see cref="McpClientOptions.ExperimentalProtocolVersion"/> is set and
-/// the server supports the requested version, and it should fall back to the legacy
-/// <c>initialize</c> handshake otherwise.
+/// <c>initialize</c> when <see cref="McpClientOptions.ProtocolVersion"/> is set to
+/// <see cref="McpSessionHandler.DraftProtocolVersion"/>.
 /// </summary>
-#pragma warning disable MCPEXP002 // ExperimentalProtocolVersion
 public class DraftConnectionTests : ClientServerTestBase
 {
-    private const string DraftVersion = "2026-06-XX";
+    private const string DraftVersion = McpHttpHeaders.DraftProtocolVersion;
     private const string LatestStableVersion = "2025-11-25";
-
-    private bool _serverHasExperimental;
 
     public DraftConnectionTests(ITestOutputHelper testOutputHelper)
         : base(testOutputHelper, startServer: false)
@@ -31,20 +27,15 @@ public class DraftConnectionTests : ClientServerTestBase
         services.Configure<McpServerOptions>(options =>
         {
             options.ServerInfo = new Implementation { Name = nameof(DraftConnectionTests), Version = "1.0" };
-            if (_serverHasExperimental)
-            {
-                options.ExperimentalProtocolVersion = DraftVersion;
-            }
         });
     }
 
     [Fact]
-    public async Task DraftClient_ConnectingToDraftServer_NegotiatesExperimentalVersion()
+    public async Task DraftClient_ConnectingToDraftServer_NegotiatesDraftVersion()
     {
-        _serverHasExperimental = true;
         StartServer();
 
-        var options = new McpClientOptions { ExperimentalProtocolVersion = DraftVersion };
+        var options = new McpClientOptions { ProtocolVersion = DraftVersion };
         await using var client = await CreateMcpClientForServer(options);
 
         Assert.Equal(DraftVersion, client.NegotiatedProtocolVersion);
@@ -53,22 +44,8 @@ public class DraftConnectionTests : ClientServerTestBase
     }
 
     [Fact]
-    public async Task DraftClient_ConnectingToLegacyServer_FallsBackToLegacyInitialize()
-    {
-        _serverHasExperimental = false;
-        StartServer();
-
-        var options = new McpClientOptions { ExperimentalProtocolVersion = DraftVersion };
-        await using var client = await CreateMcpClientForServer(options);
-
-        Assert.NotEqual(DraftVersion, client.NegotiatedProtocolVersion);
-        Assert.Equal(LatestStableVersion, client.NegotiatedProtocolVersion);
-    }
-
-    [Fact]
     public async Task LegacyClient_ConnectingToDraftServer_NegotiatesLegacyVersion()
     {
-        _serverHasExperimental = true;
         StartServer();
 
         await using var client = await CreateMcpClientForServer();
@@ -77,11 +54,10 @@ public class DraftConnectionTests : ClientServerTestBase
     }
 
     [Fact]
-    public async Task LegacyClient_CanCallServerDiscover_EvenWithoutDraftConfigured()
+    public async Task LegacyClient_CanCallServerDiscover()
     {
         // server/discover is registered unconditionally, so a legacy client can probe it
         // (e.g., to learn capabilities without doing a second initialize).
-        _serverHasExperimental = false;
         StartServer();
 
         await using var client = await CreateMcpClientForServer();
@@ -98,9 +74,8 @@ public class DraftConnectionTests : ClientServerTestBase
     }
 
     [Fact]
-    public async Task DraftServer_DiscoverIncludesExperimentalVersion()
+    public async Task DraftServer_DiscoverIncludesDraftVersion()
     {
-        _serverHasExperimental = true;
         StartServer();
 
         await using var client = await CreateMcpClientForServer();

@@ -15,22 +15,16 @@ namespace ModelContextProtocol.AspNetCore.Tests;
 /// </summary>
 public class DraftHttpHandlerTests(ITestOutputHelper outputHelper) : KestrelInMemoryTest(outputHelper), IAsyncDisposable
 {
-    private const string DraftVersion = "2026-06-XX";
+    private const string DraftVersion = McpHttpHeaders.DraftProtocolVersion;
 
     private WebApplication? _app;
 
-    private async Task StartAsync(bool experimentalServer)
+    private async Task StartAsync()
     {
-#pragma warning disable MCPEXP001 // ExperimentalProtocolVersion is experimental
         Builder.Services.AddMcpServer(options =>
         {
             options.ServerInfo = new Implementation { Name = nameof(DraftHttpHandlerTests), Version = "1" };
-            if (experimentalServer)
-            {
-                options.ExperimentalProtocolVersion = DraftVersion;
-            }
         }).WithHttpTransport();
-#pragma warning restore MCPEXP001
 
         _app = Builder.Build();
         _app.MapMcp();
@@ -52,9 +46,10 @@ public class DraftHttpHandlerTests(ITestOutputHelper outputHelper) : KestrelInMe
     [Fact]
     public async Task DraftRequest_DoesNotEmitMcpSessionIdHeader()
     {
-        await StartAsync(experimentalServer: true);
+        await StartAsync();
 
         HttpClient.DefaultRequestHeaders.Add("MCP-Protocol-Version", DraftVersion);
+        HttpClient.DefaultRequestHeaders.Add("Mcp-Method", "server/discover");
 
         // server/discover should succeed without creating a session.
         var content = new StringContent(
@@ -69,9 +64,10 @@ public class DraftHttpHandlerTests(ITestOutputHelper outputHelper) : KestrelInMe
     [Fact]
     public async Task RequestWithUnsupportedProtocolVersion_Returns_UnsupportedProtocolVersionError()
     {
-        await StartAsync(experimentalServer: false);
+        await StartAsync();
 
         HttpClient.DefaultRequestHeaders.Add("MCP-Protocol-Version", "2099-12-31");
+        HttpClient.DefaultRequestHeaders.Add("Mcp-Method", "server/discover");
 
         var content = new StringContent(
             """{"jsonrpc":"2.0","id":1,"method":"server/discover","params":{}}""",
@@ -99,9 +95,10 @@ public class DraftHttpHandlerTests(ITestOutputHelper outputHelper) : KestrelInMe
         // For back-compat with clients that opted into the experimental version on top of the legacy
         // stateful session model (MRTR-as-extension-on-initialize), draft-version requests that DO
         // include an Mcp-Session-Id are still accepted via the legacy session lookup path.
-        await StartAsync(experimentalServer: true);
+        await StartAsync();
 
         HttpClient.DefaultRequestHeaders.Add("MCP-Protocol-Version", DraftVersion);
+        HttpClient.DefaultRequestHeaders.Add("Mcp-Method", "server/discover");
         HttpClient.DefaultRequestHeaders.Add("Mcp-Session-Id", "non-existent-session-id");
 
         var content = new StringContent(
@@ -116,7 +113,7 @@ public class DraftHttpHandlerTests(ITestOutputHelper outputHelper) : KestrelInMe
     [Fact]
     public async Task DraftGet_WithoutSessionId_IsRejected()
     {
-        await StartAsync(experimentalServer: true);
+        await StartAsync();
 
         HttpClient.DefaultRequestHeaders.Add("MCP-Protocol-Version", DraftVersion);
 
@@ -128,7 +125,7 @@ public class DraftHttpHandlerTests(ITestOutputHelper outputHelper) : KestrelInMe
     [Fact]
     public async Task DraftDelete_WithoutSessionId_IsRejected()
     {
-        await StartAsync(experimentalServer: true);
+        await StartAsync();
 
         HttpClient.DefaultRequestHeaders.Add("MCP-Protocol-Version", DraftVersion);
 

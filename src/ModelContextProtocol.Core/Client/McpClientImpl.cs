@@ -674,8 +674,10 @@ internal sealed partial class McpClientImpl : McpClient
                 // Instead, the client calls server/discover to learn the server's capabilities and
                 // then begins sending normal RPCs that carry protocolVersion / clientInfo /
                 // clientCapabilities in their per-request _meta.
-                if (_options.ExperimentalProtocolVersion is { } draftVersion)
+                if (_options.ProtocolVersion == McpSessionHandler.DraftProtocolVersion)
                 {
+                    string draftVersion = McpSessionHandler.DraftProtocolVersion;
+
                     // Eagerly set the negotiated version so InjectDraftMetaIfNeeded recognizes us as
                     // a draft client when SendRequestAsync is invoked for server/discover.
                     _negotiatedProtocolVersion = draftVersion;
@@ -967,6 +969,8 @@ internal sealed partial class McpClientImpl : McpClient
 
                     request = new JsonRpcRequest { Method = request.Method, Params = paramsObj, Context = request.Context };
                     InjectDraftMetaIfNeeded(request);
+                }
+                else if (inputRequiredResult.RequestState is not null)
                 {
                     // No input requests but has requestState (e.g., load shedding) - just retry with state.
                     var paramsObj = request.Params?.DeepClone() as JsonObject ?? new JsonObject();
@@ -1013,13 +1017,11 @@ internal sealed partial class McpClientImpl : McpClient
     }
 
     /// <summary>
-    /// Returns <see langword="true"/> when the negotiated protocol version is the experimental draft
-    /// revision (SEP-2575 + SEP-2567 + MRTR).
+    /// Returns <see langword="true"/> when the negotiated protocol version is the draft revision
+    /// (SEP-2575 + SEP-2567 + MRTR).
     /// </summary>
     internal bool IsDraftProtocol() =>
-        _negotiatedProtocolVersion is not null &&
-        _options.ExperimentalProtocolVersion is not null &&
-        _negotiatedProtocolVersion == _options.ExperimentalProtocolVersion;
+        _negotiatedProtocolVersion == McpSessionHandler.DraftProtocolVersion;
 
     /// <inheritdoc/>
     public override Task SendMessageAsync(JsonRpcMessage message, CancellationToken cancellationToken = default)

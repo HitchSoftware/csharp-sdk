@@ -40,7 +40,7 @@ internal sealed class StreamableHttpHandler(
         "2025-03-26",
         "2025-06-18",
         "2025-11-25",
-        "DRAFT-2026-v1",
+        McpHttpHeaders.DraftProtocolVersion,
     ];
 
     private static readonly JsonTypeInfo<JsonRpcMessage> s_messageTypeInfo = GetRequiredJsonTypeInfo<JsonRpcMessage>();
@@ -83,7 +83,7 @@ internal sealed class StreamableHttpHandler(
             return;
         }
 
-        if (!ValidateMcpHeaders(context, message, mcpServerOptionsSnapshot.Value.ToolCollection, out errorMessage))
+        if (!ValidateMcpHeaders(context, message, mcpServerOptionsSnapshot.Value.ToolCollection, out var errorMessage))
         {
             await WriteJsonRpcErrorAsync(context, errorMessage, StatusCodes.Status400BadRequest, (int)McpErrorCode.HeaderMismatch);
             return;
@@ -394,22 +394,14 @@ internal sealed class StreamableHttpHandler(
     }
 
     /// <summary>
-    /// Returns <see langword="true"/> when the request declares the experimental draft protocol revision via
+    /// Returns <see langword="true"/> when the request declares the draft protocol revision via
     /// the <c>MCP-Protocol-Version</c> header. Draft requests are always sessionless and do not perform
     /// the legacy <c>initialize</c> handshake (SEP-2575 + SEP-2567).
     /// </summary>
-    private bool IsDraftProtocolRequest(HttpContext context)
+    private static bool IsDraftProtocolRequest(HttpContext context)
     {
-#pragma warning disable MCPEXP001 // ExperimentalProtocolVersion is for evaluation purposes only
-        var experimental = mcpServerOptionsSnapshot.Value.ExperimentalProtocolVersion;
-#pragma warning restore MCPEXP001
-        if (experimental is null)
-        {
-            return false;
-        }
-
         var protocolVersionHeader = context.Request.Headers[McpProtocolVersionHeaderName].ToString();
-        return string.Equals(protocolVersionHeader, experimental, StringComparison.Ordinal);
+        return string.Equals(protocolVersionHeader, McpHttpHeaders.DraftProtocolVersion, StringComparison.Ordinal);
     }
 
     private async ValueTask<StreamableHttpSession> StartNewSessionAsync(HttpContext context, bool forceStateless = false)

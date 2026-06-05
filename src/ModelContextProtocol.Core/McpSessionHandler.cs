@@ -36,7 +36,7 @@ internal sealed partial class McpSessionHandler : IAsyncDisposable
     /// Clients and servers opt in by setting <see cref="McpClientOptions.ProtocolVersion"/>
     /// or <see cref="McpServerOptions.ProtocolVersion"/> to this value.
     /// </summary>
-    internal const string DraftProtocolVersion = "DRAFT-2026-v1";
+    internal const string DraftProtocolVersion = "2026-07-28";
 
     /// <summary>
     /// All protocol versions supported by this implementation.

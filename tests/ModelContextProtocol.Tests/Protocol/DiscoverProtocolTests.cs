@@ -16,7 +16,7 @@ public static class DiscoverProtocolTests
         {
             Meta = new JsonObject
             {
-                [NotificationMethods.ProtocolVersionMetaKey] = "2026-06-XX",
+                [NotificationMethods.ProtocolVersionMetaKey] = "2026-07-28",
                 [NotificationMethods.ClientInfoMetaKey] = new JsonObject
                 {
                     ["name"] = "test-client",
@@ -31,7 +31,7 @@ public static class DiscoverProtocolTests
 
         Assert.NotNull(deserialized);
         Assert.NotNull(deserialized.Meta);
-        Assert.Equal("2026-06-XX", (string)deserialized.Meta[NotificationMethods.ProtocolVersionMetaKey]!);
+        Assert.Equal("2026-07-28", (string)deserialized.Meta[NotificationMethods.ProtocolVersionMetaKey]!);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public static class DiscoverProtocolTests
     {
         var original = new DiscoverResult
         {
-            SupportedVersions = new List<string> { "2025-11-25", "2026-06-XX" },
+            SupportedVersions = new List<string> { "2025-11-25", "2026-07-28" },
             Capabilities = new ServerCapabilities
             {
                 Tools = new ToolsCapability { ListChanged = true },
@@ -52,7 +52,7 @@ public static class DiscoverProtocolTests
         var deserialized = JsonSerializer.Deserialize<DiscoverResult>(json, McpJsonUtilities.DefaultOptions);
 
         Assert.NotNull(deserialized);
-        Assert.Equal(["2025-11-25", "2026-06-XX"], deserialized.SupportedVersions);
+        Assert.Equal(["2025-11-25", "2026-07-28"], deserialized.SupportedVersions);
         Assert.NotNull(deserialized.Capabilities.Tools);
         Assert.True(deserialized.Capabilities.Tools.ListChanged);
         Assert.Equal("test-server", deserialized.ServerInfo.Name);
@@ -64,7 +64,7 @@ public static class DiscoverProtocolTests
     {
         var original = new DiscoverResult
         {
-            SupportedVersions = new List<string> { "2026-06-XX" },
+            SupportedVersions = new List<string> { "2026-07-28" },
             Capabilities = new ServerCapabilities(),
             ServerInfo = new Implementation { Name = "minimal-server", Version = "1.0" },
         };
@@ -74,7 +74,7 @@ public static class DiscoverProtocolTests
 
         Assert.NotNull(deserialized);
         Assert.Single(deserialized.SupportedVersions);
-        Assert.Equal("2026-06-XX", deserialized.SupportedVersions[0]);
+        Assert.Equal("2026-07-28", deserialized.SupportedVersions[0]);
         Assert.Null(deserialized.Instructions);
     }
 }

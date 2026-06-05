@@ -359,24 +359,17 @@ internal sealed partial class McpServerImpl : McpServer
     /// </summary>
     /// <remarks>
     /// The handler is registered unconditionally so legacy clients can probe it too. It returns the server's
-    /// supported protocol versions (including any configured <see cref="McpServerOptions.ExperimentalProtocolVersion"/>),
-    /// server capabilities, server info, and optional instructions.
+    /// supported protocol versions (<see cref="McpSessionHandler.SupportedProtocolVersions"/>), server
+    /// capabilities, server info, and optional instructions.
     /// </remarks>
     private void ConfigureDiscover(McpServerOptions options)
     {
         _requestHandlers.Set(RequestMethods.ServerDiscover,
             (request, _, _) =>
             {
-                var supportedVersions = new List<string>(McpSessionHandler.SupportedProtocolVersions);
-                if (options.ExperimentalProtocolVersion is { } experimental &&
-                    !supportedVersions.Contains(experimental))
-                {
-                    supportedVersions.Add(experimental);
-                }
-
                 return new ValueTask<DiscoverResult>(new DiscoverResult
                 {
-                    SupportedVersions = supportedVersions,
+                    SupportedVersions = [.. McpSessionHandler.SupportedProtocolVersions],
                     Capabilities = ServerCapabilities ?? new(),
                     ServerInfo = options.ServerInfo ?? DefaultImplementation,
                     Instructions = options.ServerInstructions,
@@ -1330,7 +1323,7 @@ internal sealed partial class McpServerImpl : McpServer
         };
 
     /// <summary>
-    /// Checks whether the negotiated protocol version enables MRTR per SEP-2322 (DRAFT-2026-v1).
+    /// Checks whether the negotiated protocol version enables MRTR per SEP-2322 (2026-07-28).
     /// </summary>
     internal bool ClientSupportsMrtr() =>
         _negotiatedProtocolVersion == McpSessionHandler.DraftProtocolVersion;
@@ -1388,7 +1381,7 @@ internal sealed partial class McpServerImpl : McpServer
                 // In stateless mode without MRTR, the server can't resolve input requests via
                 // JSON-RPC (no persistent session for server-to-client requests), and the client
                 // won't recognize the InputRequiredResult. This is the one unsupported configuration.
-                // TODO(stateless-draft): When DRAFT-2026-v1 becomes stateless-only, the IsStatefulSession() gate collapses - the stateful path will only matter for legacy clients on the current protocol.
+                // TODO(stateless-draft): When 2026-07-28 becomes stateless-only, the IsStatefulSession() gate collapses - the stateful path will only matter for legacy clients on the current protocol.
                 if (!IsStatefulSession())
                 {
                     throw new McpException(
@@ -1615,7 +1608,7 @@ internal sealed partial class McpServerImpl : McpServer
             }
 
             // Implicit MRTR (handler suspension across ElicitAsync/SampleAsync) emits
-            // InputRequiredResult on the wire, which only DRAFT-2026-v1 clients understand,
+            // InputRequiredResult on the wire, which only 2026-07-28 clients understand,
             // and requires the same server instance to handle the retry (stateful session).
             // For all other cases - legacy clients, stateless sessions - fall through to the
             // exception-based path, which transparently resolves InputRequiredException via

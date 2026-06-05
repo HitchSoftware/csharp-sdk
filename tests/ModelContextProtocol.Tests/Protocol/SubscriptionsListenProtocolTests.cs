@@ -23,7 +23,7 @@ public static class SubscriptionsListenProtocolTests
             },
             Meta = new JsonObject
             {
-                [NotificationMethods.ProtocolVersionMetaKey] = "2026-06-XX",
+                [NotificationMethods.ProtocolVersionMetaKey] = "2026-07-28",
                 [NotificationMethods.LogLevelMetaKey] = "info",
             },
         };
@@ -37,7 +37,7 @@ public static class SubscriptionsListenProtocolTests
         Assert.True(deserialized.Notifications.ResourcesListChanged);
         Assert.NotNull(deserialized.Notifications.ResourceSubscriptions);
         Assert.Equal(["file:///foo.txt", "file:///bar.txt"], deserialized.Notifications.ResourceSubscriptions);
-        Assert.Equal("2026-06-XX", (string)deserialized.Meta![NotificationMethods.ProtocolVersionMetaKey]!);
+        Assert.Equal("2026-07-28", (string)deserialized.Meta![NotificationMethods.ProtocolVersionMetaKey]!);
     }
 
     [Fact]

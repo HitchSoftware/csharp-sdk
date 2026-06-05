@@ -14,7 +14,7 @@ public static class DraftErrorDataTests
         var original = new UnsupportedProtocolVersionErrorData
         {
             Supported = new List<string> { "2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25" },
-            Requested = "2026-06-XX",
+            Requested = "2026-07-28",
         };
 
         var json = JsonSerializer.Serialize(original, McpJsonUtilities.DefaultOptions);
@@ -23,7 +23,7 @@ public static class DraftErrorDataTests
         Assert.NotNull(deserialized);
         Assert.Equal(4, deserialized.Supported.Count);
         Assert.Contains("2025-11-25", deserialized.Supported);
-        Assert.Equal("2026-06-XX", deserialized.Requested);
+        Assert.Equal("2026-07-28", deserialized.Requested);
     }
 
     [Fact]
