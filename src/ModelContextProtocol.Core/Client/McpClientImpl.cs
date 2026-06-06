@@ -686,6 +686,18 @@ internal sealed partial class McpClientImpl : McpClient
                     DiscoverResult? discoverResult = null;
                     bool fallbackToLegacy = false;
                     IList<string>? serverSupportedVersions = null;
+
+                    // Apply a probe timeout so dual-era clients don't block forever waiting for a
+                    // legacy server that silently drops unknown methods (per stdio.mdx fallback rules).
+                    // The probe timeout is bounded by InitializationTimeout, but we cap it at 5s so we
+                    // can quickly fall back when a server isn't going to respond.
+                    var probeTimeout = TimeSpan.FromSeconds(5);
+                    using var probeCts = CancellationTokenSource.CreateLinkedTokenSource(initializationCts.Token);
+                    if (_options.InitializationTimeout > probeTimeout)
+                    {
+                        probeCts.CancelAfter(probeTimeout);
+                    }
+
                     try
                     {
                         discoverResult = await SendRequestAsync(
@@ -693,20 +705,36 @@ internal sealed partial class McpClientImpl : McpClient
                             new DiscoverRequestParams(),
                             McpJsonUtilities.JsonContext.Default.DiscoverRequestParams,
                             McpJsonUtilities.JsonContext.Default.DiscoverResult,
-                            cancellationToken: initializationCts.Token).ConfigureAwait(false);
-                    }
-                    catch (McpProtocolException ex) when (ex.ErrorCode == McpErrorCode.MethodNotFound)
-                    {
-                        // Server doesn't implement server/discover (likely a legacy server). Fall back
-                        // to the legacy initialize handshake per SEP-2575 §"Supporting Multiple Versions".
-                        fallbackToLegacy = true;
+                            cancellationToken: probeCts.Token).ConfigureAwait(false);
                     }
                     catch (UnsupportedProtocolVersionException ex)
                     {
-                        // Server rejected the experimental protocol version at the transport layer.
-                        // Per SEP-2575, fall back to a mutually-supported version reported in ex.Supported.
+                        // Spec-recognized modern-server signal: -32004 with data.supported[]. The server is
+                        // modern but doesn't speak our preferred version. Retry with a mutually supported
+                        // version from data.supported[] instead of falling back to legacy initialize.
                         fallbackToLegacy = true;
                         serverSupportedVersions = (IList<string>)ex.Supported;
+                    }
+                    catch (MissingRequiredClientCapabilityException)
+                    {
+                        // Spec-recognized modern-server signal: -32003. The server is modern but rejected
+                        // our capability set. Surface as-is (no fallback): the user must add capabilities.
+                        throw;
+                    }
+                    catch (McpProtocolException)
+                    {
+                        // Any other JSON-RPC error from the probe indicates a legacy server (e.g.,
+                        // -32601 MethodNotFound, -32602 InvalidParams from a server confused by _meta,
+                        // -32700 ParseError from a server that can't handle our payload shape).
+                        // Per the spec's stdio fallback rules, treat all non-modern errors as a
+                        // legacy-server signal and fall back to the initialize handshake.
+                        fallbackToLegacy = true;
+                    }
+                    catch (OperationCanceledException) when (probeCts.IsCancellationRequested && !initializationCts.IsCancellationRequested)
+                    {
+                        // Probe timeout elapsed without a response. Per stdio.mdx fallback rules, no
+                        // response within a reasonable timeout means the server is legacy. Fall back.
+                        fallbackToLegacy = true;
                     }
 
                     if (discoverResult is not null && !discoverResult.SupportedVersions.Contains(draftVersion))
@@ -729,6 +757,18 @@ internal sealed partial class McpClientImpl : McpClient
                             .OrderByDescending(v => v, StringComparer.Ordinal)
                             .FirstOrDefault()
                             ?? McpSessionHandler.LatestProtocolVersion;
+
+                        // Honor MinProtocolVersion: refuse to fall back below the configured minimum.
+                        // String.Compare is the spec's prescribed ordering for ISO-8601 date-based versions.
+                        if (_options.MinProtocolVersion is { } minVersion &&
+                            StringComparer.Ordinal.Compare(fallbackVersion, minVersion) < 0)
+                        {
+                            throw new McpException(
+                                $"Server does not support the configured minimum protocol version '{minVersion}'. " +
+                                (serverSupportedVersions is null
+                                    ? "The server appears to be a legacy server that requires the deprecated initialize handshake."
+                                    : $"Server-supported versions: {string.Join(", ", serverSupportedVersions)}."));
+                        }
 
                         await PerformLegacyInitializeAsync(fallbackVersion, initializationCts.Token).ConfigureAwait(false);
                     }

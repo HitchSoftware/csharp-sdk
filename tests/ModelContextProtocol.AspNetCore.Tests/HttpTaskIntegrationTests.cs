@@ -48,7 +48,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -81,7 +81,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -121,7 +121,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -160,7 +160,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -199,7 +199,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -240,7 +240,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -279,7 +279,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -302,7 +302,7 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         {
             options.TaskStore = taskStore;
         })
-        .WithHttpTransport()
+        .WithHttpTransport(options => options.Stateless = false)
         .WithTools<LongRunningTools>();
 
         await using var app = Builder.Build();
@@ -340,3 +340,4 @@ public class HttpTaskIntegrationTests(ITestOutputHelper outputHelper) : KestrelI
         }
     }
 }
+
