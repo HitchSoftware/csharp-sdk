@@ -60,7 +60,7 @@ public sealed class McpClientOptions
     /// <para>
     /// This is useful when the client requires features (such as the draft revision's removal of the
     /// <c>initialize</c> handshake or <c>Mcp-Session-Id</c>) that are not available in older protocol
-    /// revisions. Setting this to <see cref="McpSessionHandler.DraftProtocolVersion"/> disables the
+    /// revisions. Setting this to <see cref="McpSession.DraftProtocolVersion"/> disables the
     /// automatic legacy-server fallback that otherwise switches to the <c>initialize</c> handshake.
     /// </para>
     /// <para>
@@ -71,8 +71,8 @@ public sealed class McpClientOptions
     /// <code>
     /// var clientOptions = new McpClientOptions
     /// {
-    ///     ProtocolVersion = McpSessionHandler.DraftProtocolVersion,
-    ///     MinProtocolVersion = McpSessionHandler.DraftProtocolVersion,
+    ///     ProtocolVersion = McpSession.DraftProtocolVersion,
+    ///     MinProtocolVersion = McpSession.DraftProtocolVersion,
     /// };
     /// </code>
     /// </example>
