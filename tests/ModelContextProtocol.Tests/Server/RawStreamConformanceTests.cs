@@ -70,7 +70,7 @@ public sealed class RawStreamConformanceTests : LoggedTest, IAsyncDisposable
 
     private async Task<JsonNode> ReadAsync()
     {
-        var line = await _reader.ReadLineAsync(_cts.Token);
+        var line = await _reader.ReadLineAsync().WaitAsync(_cts.Token);
         Assert.NotNull(line);
         return JsonNode.Parse(line!)!;
     }
