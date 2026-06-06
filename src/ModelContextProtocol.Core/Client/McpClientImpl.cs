@@ -839,13 +839,33 @@ internal sealed partial class McpClientImpl : McpClient
         _serverInfo = initializeResponse.ServerInfo;
         _serverInstructions = initializeResponse.Instructions;
 
-        bool isResponseProtocolValid =
-            _options.ProtocolVersion is { } optionsProtocol ? optionsProtocol == initializeResponse.ProtocolVersion :
-            McpSessionHandler.SupportedProtocolVersions.Contains(initializeResponse.ProtocolVersion);
+        // When the user explicitly pinned a legacy (non-draft) protocol version, the server MUST
+        // respect it. When the user pinned the draft version but we fell back (e.g., legacy server
+        // rejected server/discover), or when no version was pinned, accept any supported response.
+        // This is the spec-mandated behavior: a draft client must be able to downgrade to whatever
+        // legacy version the server advertises.
+        bool isResponseProtocolValid;
+        if (_options.ProtocolVersion is { } optionsProtocol && optionsProtocol != McpSessionHandler.DraftProtocolVersion)
+        {
+            isResponseProtocolValid = optionsProtocol == initializeResponse.ProtocolVersion;
+        }
+        else
+        {
+            isResponseProtocolValid = McpSessionHandler.SupportedProtocolVersions.Contains(initializeResponse.ProtocolVersion);
+        }
         if (!isResponseProtocolValid)
         {
             LogServerProtocolVersionMismatch(_endpointName, requestProtocol, initializeResponse.ProtocolVersion);
             throw new McpException($"Server protocol version mismatch. Expected {requestProtocol}, got {initializeResponse.ProtocolVersion}");
+        }
+
+        // If the user set a MinProtocolVersion, also enforce it against the negotiated response
+        // (the server could have downgraded further than the version we asked for).
+        if (_options.MinProtocolVersion is { } minVersion &&
+            StringComparer.Ordinal.Compare(initializeResponse.ProtocolVersion, minVersion) < 0)
+        {
+            throw new McpException(
+                $"Server negotiated protocol version '{initializeResponse.ProtocolVersion}' is below the configured minimum '{minVersion}'.");
         }
 
         _negotiatedProtocolVersion = initializeResponse.ProtocolVersion;
