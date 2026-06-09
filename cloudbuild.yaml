@@ -55,7 +55,7 @@ steps:
 
         for nupkg in ./.artifacts/*.nupkg; do
           echo "Pushing $nupkg to GitHub Packages"
-          dotnet nuget push "$nupkg" -v detailed --source github --configfile /workspace/nuget.config --skip-duplicate --no-symbols --timeout 600
+          dotnet nuget push "$nupkg" --verbosity detailed --source github --configfile /workspace/nuget.config --skip-duplicate --no-symbols --timeout 600
         done
 
 options:
