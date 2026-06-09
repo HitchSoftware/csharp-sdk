@@ -53,9 +53,10 @@ steps:
         </configuration>
         EOF
 
-        for nupkg in ./.artifacts/*.nupkg; do
-          echo "Pushing $nupkg to GitHub Packages"
-          dotnet nuget push "$nupkg" --verbosity detailed --source github --configfile /workspace/nuget.config --skip-duplicate --no-symbols --timeout 600
+        for nupkg in $(ls ./.artifacts/*.nupkg | sort); do
+          echo "=== Pushing: $nupkg ==="
+          dotnet nuget push "$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
+          echo "=== Done: $nupkg ==="
         done
 
 options:
