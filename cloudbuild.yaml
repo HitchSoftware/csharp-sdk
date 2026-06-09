@@ -53,6 +53,9 @@ steps:
         </configuration>
         EOF
 
+        echo "=== Optimizing network MTU for GCP Cloud Build ==="
+        ip link set dev eth0 mtu 1400 || true
+
         # Push Core first to test if the hang is Core-specific
         CORE_PKG=$$(ls ./.artifacts/*ModelContextProtocol.Core*.nupkg)
         echo "=== Pushing Core FIRST: $$CORE_PKG ==="
