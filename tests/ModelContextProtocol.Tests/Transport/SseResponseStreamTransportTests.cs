@@ -1,4 +1,4 @@
-﻿using ModelContextProtocol.Server;
+﻿using Garden.ModelContextProtocol.Server;
 using ModelContextProtocol.Tests.Utils;
 using System.IO.Pipelines;
 

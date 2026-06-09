@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Tests.Utils;
 
 namespace ModelContextProtocol.ConformanceTests;
 

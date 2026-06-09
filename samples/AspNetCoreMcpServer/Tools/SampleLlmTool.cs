@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.AI;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 
 namespace AspNetCoreMcpServer.Tools;

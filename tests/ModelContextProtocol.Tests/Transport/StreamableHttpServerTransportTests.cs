@@ -1,5 +1,6 @@
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using ModelContextProtocol.Tests.Utils;
 
 namespace ModelContextProtocol.Tests.Transport;

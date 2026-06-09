@@ -15,6 +15,9 @@
     <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="$(System10Version)" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(System10Version)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(System10Version)" />
+    <PackageVersion Include="Garden.ModelContextProtocol" Version="11.2.0" />
+    <PackageVersion Include="Garden.ModelContextProtocol.Core" Version="11.2.0" />
+    <PackageVersion Include="Garden.ModelContextProtocol.AspNetCore" Version="11.2.0" />
   </ItemGroup>
 
   <!-- Product dependencies < .NET 10 -->

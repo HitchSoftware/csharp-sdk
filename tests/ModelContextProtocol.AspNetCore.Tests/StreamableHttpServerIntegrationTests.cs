@@ -1,4 +1,4 @@
-﻿using ModelContextProtocol.Client;
+﻿using Garden.ModelContextProtocol.Client;
 using System.Text;
 
 namespace ModelContextProtocol.AspNetCore.Tests;

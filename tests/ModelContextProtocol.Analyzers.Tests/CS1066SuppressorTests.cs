@@ -1,3 +1,4 @@
+using Garden.ModelContextProtocol.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -12,7 +13,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMcpServerToolAttribute_SuppressesCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 
@@ -48,7 +49,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMcpServerPromptAttribute_SuppressesCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 
@@ -84,7 +85,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMcpServerResourceAttribute_SuppressesCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 
@@ -151,7 +152,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMultipleParameters_SuppressesAllCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 

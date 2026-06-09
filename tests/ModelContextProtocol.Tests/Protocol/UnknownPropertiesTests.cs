@@ -1,5 +1,5 @@
 using System.Text.Json;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
 namespace ModelContextProtocol.Tests.Protocol;
 

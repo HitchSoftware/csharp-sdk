@@ -1,4 +1,4 @@
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 
 namespace ModelContextProtocol.Tests.Server;
 

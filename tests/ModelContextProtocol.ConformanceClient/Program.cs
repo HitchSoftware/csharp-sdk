@@ -3,8 +3,8 @@ using System.Net.Sockets;
 using System.Text.Json;
 using System.Web;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 
 // This program expects the following command-line arguments:
 // 1. The client conformance test scenario to run (e.g., "tools_call")
@@ -76,7 +76,7 @@ if (!string.IsNullOrEmpty(conformanceContext))
     }
 }
 
-var oauthOptions = new ModelContextProtocol.Authentication.ClientOAuthOptions
+var oauthOptions = new Garden.ModelContextProtocol.Authentication.ClientOAuthOptions
 {
     RedirectUri = clientRedirectUri,
     // Configure the metadata document URI for CIMD.

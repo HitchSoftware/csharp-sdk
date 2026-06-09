@@ -2,7 +2,7 @@
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;

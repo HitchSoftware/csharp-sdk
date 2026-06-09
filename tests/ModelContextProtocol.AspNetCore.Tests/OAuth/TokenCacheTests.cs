@@ -1,5 +1,5 @@
-using ModelContextProtocol.Authentication;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Client;
 
 namespace ModelContextProtocol.AspNetCore.Tests.OAuth;
 

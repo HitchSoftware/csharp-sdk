@@ -1,3 +1,4 @@
+using Garden.ModelContextProtocol.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -13,7 +14,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithSummaryOnly_GeneratesMethodDescription()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -42,7 +43,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -61,7 +62,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithSummaryAndRemarks_CombinesInMethodDescription()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -92,7 +93,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -111,7 +112,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithParameterDocs_GeneratesParameterDescriptions()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -141,7 +142,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -160,7 +161,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithReturnDocs_GeneratesReturnDescription()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -189,7 +190,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -209,7 +210,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithExistingMethodDescription_DoesNotGenerateMethodDescription()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -239,7 +240,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -258,7 +259,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithExistingParameterDescription_SkipsThatParameter()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -288,7 +289,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -307,7 +308,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithoutMcpServerToolAttribute_DoesNotGenerate()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -332,7 +333,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithoutPartialKeyword_DoesNotGenerate()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -359,7 +360,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialMethodWithXmlDocs_ReportsMCP002Diagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -392,7 +393,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialMethodWithParameterDocs_ReportsMCP002Diagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -421,7 +422,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialMethodWithReturnDocs_ReportsMCP002Diagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -450,7 +451,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialMethodWithoutXmlDocs_DoesNotReportDiagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -477,7 +478,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialMethodWithEmptyXmlDocs_DoesNotReportDiagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -505,7 +506,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialMethodWithExistingDescriptions_DoesNotReportDiagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -537,7 +538,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialMethodWithPartialExistingDescriptions_ReportsMCP002Diagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -568,7 +569,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialPromptWithXmlDocs_ReportsMCP002Diagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -599,7 +600,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_NonPartialResourceWithXmlDocs_ReportsMCP002Diagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -630,7 +631,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithSpecialCharacters_EscapesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -661,7 +662,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -680,7 +681,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithInvalidXml_GeneratesPartialAndReportsDiagnostic()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -710,7 +711,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -735,7 +736,7 @@ public partial class XmlToDescriptionGeneratorTests
         // This test verifies that diagnostic locations are properly reconstructed
         // and point to valid source positions (regression test for locations from stale compilations)
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -778,7 +779,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithGenericType_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -807,7 +808,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -826,7 +827,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithEmptyXmlComments_GeneratesPartialWithoutDescription()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -854,7 +855,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -872,7 +873,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithMultilineComments_CombinesIntoSingleLine()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -903,7 +904,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -922,7 +923,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithParametersOnly_GeneratesParameterDescriptions()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -950,7 +951,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -968,7 +969,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithNestedType_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1000,7 +1001,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1022,7 +1023,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithManyToolsAcrossMultipleNestedTypes_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test.Outer;
@@ -1109,7 +1110,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test.Outer
             {
@@ -1186,7 +1187,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithRecordClass_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1215,7 +1216,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1234,7 +1235,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithRecordStruct_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1263,7 +1264,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1282,7 +1283,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithVirtualMethod_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1311,7 +1312,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1330,7 +1331,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithAbstractMethod_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1356,7 +1357,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1375,7 +1376,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithMcpServerPrompt_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1404,7 +1405,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1423,7 +1424,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithMcpServerResource_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1452,7 +1453,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1471,7 +1472,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithGlobalNamespace_GeneratesCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             [McpServerToolType]
@@ -1498,7 +1499,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             partial class GlobalTools
             {
@@ -1514,7 +1515,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithDefaultParameterValues_PreservesDefaults()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1549,7 +1550,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1568,7 +1569,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithAsyncMethod_ExcludesAsyncModifier()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
             using System.Threading.Tasks;
 
@@ -1599,7 +1600,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1618,7 +1619,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithAsyncStaticMethod_ExcludesAsyncModifier()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
             using System.Threading.Tasks;
 
@@ -1649,7 +1650,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1668,7 +1669,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithDefaultParameterValuesAndAsync_HandlesBothCorrectly()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
             using System.Threading.Tasks;
 
@@ -1701,7 +1702,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1720,7 +1721,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithStringDefaultValue_PreservesQuotedDefault()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace Test;
@@ -1749,7 +1750,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test
             {
@@ -1778,7 +1779,7 @@ public partial class XmlToDescriptionGeneratorTests
         string parameterType = useFullyQualifiedTypesInSource ? "MyApp.Actions.MyAction" : "MyAction";
 
         var result = RunGenerator($$"""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
             using System.Threading.Tasks;
             {{usingDirective}}
@@ -1818,7 +1819,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace MyApp
             {
@@ -1837,7 +1838,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithGenericListParameter_GeneratesFullyQualifiedTypeName()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
             using System.Collections.Generic;
 
@@ -1870,7 +1871,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace MyApp
             {
@@ -1889,7 +1890,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithGenericDictionaryParameter_GeneratesFullyQualifiedTypeName()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
             using System.Collections.Generic;
 
@@ -1923,7 +1924,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace MyApp
             {
@@ -1942,7 +1943,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithArrayParameter_GeneratesFullyQualifiedTypeName()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace MyApp.Models
@@ -1974,7 +1975,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace MyApp
             {
@@ -1993,7 +1994,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithNullableReferenceTypeParameter_GeneratesFullyQualifiedTypeName()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace MyApp.Models
@@ -2025,7 +2026,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace MyApp
             {
@@ -2044,7 +2045,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithNestedTypeParameter_GeneratesFullyQualifiedTypeName()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace MyApp.Models
@@ -2079,7 +2080,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace MyApp
             {
@@ -2098,7 +2099,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Generator_WithNullableValueTypeParameter_GeneratesFullyQualifiedTypeName()
     {
         var result = RunGenerator("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             using System.ComponentModel;
 
             namespace MyApp.Models
@@ -2130,7 +2131,7 @@ public partial class XmlToDescriptionGeneratorTests
             #pragma warning disable
 
             using System.ComponentModel;
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace MyApp
             {
@@ -2249,7 +2250,7 @@ public partial class XmlToDescriptionGeneratorTests
     {
         // This tests that running the same compilation twice uses cached results
         const string Source = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2288,7 +2289,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Caching_WithNewCompilationSameSource_OutputsCached()
     {
         const string Source = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2341,7 +2342,7 @@ public partial class XmlToDescriptionGeneratorTests
     {
         // Adding an unrelated file should not cause MCP method extraction to re-run
         const string McpSource = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2396,7 +2397,7 @@ public partial class XmlToDescriptionGeneratorTests
     {
         // Changing XML docs should cause regeneration
         const string Source1 = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2409,7 +2410,7 @@ public partial class XmlToDescriptionGeneratorTests
             """;
 
         const string Source2 = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2448,7 +2449,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Caching_WithAddedMethod_ExistingMethodCached()
     {
         const string Source1 = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2461,7 +2462,7 @@ public partial class XmlToDescriptionGeneratorTests
             """;
 
         const string Source2 = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2510,7 +2511,7 @@ public partial class XmlToDescriptionGeneratorTests
     public void Caching_MultipleMethodsAcrossFiles_IndependentCaching()
     {
         const string File1 = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2523,7 +2524,7 @@ public partial class XmlToDescriptionGeneratorTests
             """;
 
         const string File2Original = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]
@@ -2536,7 +2537,7 @@ public partial class XmlToDescriptionGeneratorTests
             """;
 
         const string File2Modified = """
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
             namespace Test;
 
             [McpServerToolType]

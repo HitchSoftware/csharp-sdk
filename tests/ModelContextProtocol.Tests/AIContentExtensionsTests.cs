@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.AI;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Tests.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Garden.ModelContextProtocol;
 
 namespace ModelContextProtocol.Tests;
 

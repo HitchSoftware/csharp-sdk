@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Time.Testing;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.Text.Json;
 using TestInMemoryMcpTaskStore = ModelContextProtocol.Tests.Internal.InMemoryMcpTaskStore;
 

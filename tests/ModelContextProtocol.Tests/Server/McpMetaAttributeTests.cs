@@ -1,4 +1,4 @@
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 

@@ -1,7 +1,7 @@
 using System.Net.ServerSentEvents;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
 
 namespace ModelContextProtocol.AspNetCore.Tests;
 

@@ -1,4 +1,4 @@
-﻿using ModelContextProtocol.Protocol;
+﻿using Garden.ModelContextProtocol.Protocol;
 using System.Text.Json;
 
 namespace ModelContextProtocol.Tests.Protocol;

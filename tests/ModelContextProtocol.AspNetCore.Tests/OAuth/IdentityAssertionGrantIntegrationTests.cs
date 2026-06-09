@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Authentication;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Client;
 using System.Net.Http.Headers;
 
 namespace ModelContextProtocol.AspNetCore.Tests.OAuth;

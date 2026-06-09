@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
-using ModelContextProtocol;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 
 namespace EverythingServer;
 

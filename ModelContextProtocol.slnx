@@ -1,14 +1,4 @@
 <Solution>
-  <Folder Name="/.github/">
-    <File Path=".github/release-process.md" />
-  </Folder>
-  <Folder Name="/.github/workflows/">
-    <File Path=".github/workflows/ci-build-test.yml" />
-    <File Path=".github/workflows/ci-code-coverage.yml" />
-    <File Path=".github/workflows/docs.yml" />
-    <File Path=".github/workflows/markdown-link-check.yml" />
-    <File Path=".github/workflows/release.yml" />
-  </Folder>
   <Folder Name="/docs/" />
   <Folder Name="/docs/concepts/" />
   <Folder Name="/docs/concepts/elicitation/" />

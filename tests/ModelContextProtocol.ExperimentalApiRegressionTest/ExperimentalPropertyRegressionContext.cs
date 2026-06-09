@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
 namespace ModelContextProtocol.ExperimentalApiRegressionTest;
 

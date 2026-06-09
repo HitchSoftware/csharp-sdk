@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Text.Json;
-using ModelContextProtocol;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using static ModelContextProtocol.Protocol.ElicitRequestParams;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using static Garden.ModelContextProtocol.Protocol.ElicitRequestParams;
 
 namespace Elicitation.Tools;
 

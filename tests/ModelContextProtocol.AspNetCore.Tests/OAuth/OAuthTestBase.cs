@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using ModelContextProtocol.AspNetCore.Authentication;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.AspNetCore.Authentication;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Authentication;
 using System.Net;
 
 namespace ModelContextProtocol.AspNetCore.Tests.OAuth;

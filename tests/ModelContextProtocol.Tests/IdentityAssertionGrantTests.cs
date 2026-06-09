@@ -1,6 +1,6 @@
 using System.Net;
 using System.Text.Json.Nodes;
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Authentication;
 
 namespace ModelContextProtocol.Tests;
 

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics;
 using System.Net;
 using System.Text;

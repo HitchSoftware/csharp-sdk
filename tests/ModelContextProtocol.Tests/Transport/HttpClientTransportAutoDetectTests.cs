@@ -1,5 +1,5 @@
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.Net;
 
 namespace ModelContextProtocol.Tests.Transport;
