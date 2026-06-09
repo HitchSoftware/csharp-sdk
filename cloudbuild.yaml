@@ -35,7 +35,7 @@ steps:
     secretEnv:
       - GITHUB_PACKAGES_PAT
     env:
-      - 'DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0'
+      - 'DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2SUPPORT=0'
     args:
       - -c
       - |
