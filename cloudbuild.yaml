@@ -61,7 +61,7 @@ steps:
         dotnet nuget push "$$CORE_PKG" --source github --configfile /workspace/nuget.config --skip-duplicate
         echo "=== Done Core: $$CORE_PKG ==="
 
-        for nupkg in $$(ls ./.artifacts/*.nupkg | grep -v Core | sort); do
+        for nupkg in $$(ls ./.artifacts/*.nupkg | grep -v "ModelContextProtocol.Core" | sort); do
           echo "=== Pushing: $$nupkg ==="
           dotnet nuget push "$$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
           echo "=== Done: $$nupkg ==="
