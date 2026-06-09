@@ -35,15 +35,11 @@ steps:
     secretEnv:
       - GITHUB_PACKAGES_PAT
     env:
-      - 'DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2SUPPORT=0'
+      - 'DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0'
     args:
       - -c
       - |
         set -euo pipefail
-
-        echo "=== Installing iproute2 and setting MTU ==="
-        apt-get update && apt-get install -y iproute2
-        ip link set dev eth0 mtu 1400 || true
 
         cat > /workspace/nuget.config <<EOF
         <configuration>
@@ -59,9 +55,16 @@ steps:
         </configuration>
         EOF
 
-        for nupkg in ./.artifacts/*.nupkg; do
-          echo "Pushing $nupkg to GitHub Packages"
-          dotnet nuget push "$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
+        # Push Core first (this pattern worked in 11.2.11)
+        CORE_PKG=$$(ls ./.artifacts/Garden.ModelContextProtocol.Core.*.nupkg)
+        echo "=== Pushing Core FIRST: $$CORE_PKG ==="
+        dotnet nuget push "$$CORE_PKG" --source github --configfile /workspace/nuget.config --skip-duplicate
+        echo "=== Done Core: $$CORE_PKG ==="
+
+        for nupkg in $$(ls ./.artifacts/*.nupkg | grep -v Core | sort); do
+          echo "=== Pushing: $$nupkg ==="
+          dotnet nuget push "$$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
+          echo "=== Done: $$nupkg ==="
         done
 
 options:
