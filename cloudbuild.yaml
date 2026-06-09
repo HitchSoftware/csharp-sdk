@@ -34,37 +34,29 @@ steps:
     entrypoint: bash
     secretEnv:
       - GITHUB_PACKAGES_PAT
-    env:
-      - 'DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0'
     args:
       - -c
       - |
         set -euo pipefail
 
-        cat > /workspace/nuget.config <<EOF
-        <configuration>
-          <packageSources>
-            <add key="github" value="https://nuget.pkg.github.com/HitchSoftware/index.json" />
-          </packageSources>
-          <packageSourceCredentials>
-            <github>
-              <add key="Username" value="HitchSoftware" />
-              <add key="ClearTextPassword" value="$$GITHUB_PACKAGES_PAT" />
-            </github>
-          </packageSourceCredentials>
-        </configuration>
-        EOF
+        echo "=== Pushing Packages to GitHub Packages via Resilient Curl ==="
 
-        # Push Core first (this pattern worked in 11.2.11)
-        CORE_PKG=$$(ls ./.artifacts/Garden.ModelContextProtocol.Core.*.nupkg)
-        echo "=== Pushing Core FIRST: $$CORE_PKG ==="
-        dotnet nuget push "$$CORE_PKG" --source github --configfile /workspace/nuget.config --skip-duplicate
-        echo "=== Done Core: $$CORE_PKG ==="
+        # Loop through all packages, including Core, and upload sequentially
+        for nupkg in $$(ls ./.artifacts/*.nupkg | sort); do
+          filename=$$(basename "$$nupkg")
+          echo "=== Pushing: $$filename ==="
+          
+          # Using curl bypasses the .NET HttpClient socket reuse deadlock 
+          # and handles GCP's MTU packet segmentation flawlessly.
+          curl -X PUT \
+            -H "Authorization: token $$GITHUB_PACKAGES_PAT" \
+            -T "$$nupkg" \
+            "https://nuget.pkg.github.com/HitchSoftware/" \
+            --fail \
+            --show-error \
+            --location
 
-        for nupkg in $$(ls ./.artifacts/*.nupkg | grep -v "ModelContextProtocol.Core" | sort); do
-          echo "=== Pushing: $$nupkg ==="
-          dotnet nuget push "$$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
-          echo "=== Done: $$nupkg ==="
+          echo "=== Done: $$filename ==="
         done
 
 options:
