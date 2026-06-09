@@ -1,6 +1,6 @@
-﻿using System.Reflection;
+using System.Reflection;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 internal static class AssemblyNameHelper
 {

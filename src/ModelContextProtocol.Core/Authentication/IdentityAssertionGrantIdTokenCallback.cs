@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents a method that returns an OIDC ID token for use in a Cross-Application Access authorization flow.

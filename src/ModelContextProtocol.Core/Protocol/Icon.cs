@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents an icon that can be used to visually identify an implementation, resource, tool, or prompt.
@@ -26,7 +26,7 @@ namespace ModelContextProtocol.Protocol;
 /// <item><description>image/webp - WebP images (modern, efficient format)</description></item>
 /// </list>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]

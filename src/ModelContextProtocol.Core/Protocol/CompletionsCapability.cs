@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the completions capability for providing auto-completion suggestions
@@ -18,7 +18,7 @@ namespace ModelContextProtocol.Protocol;
 /// contextual suggestions for argument values or resource identifiers based on partial input.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// <para>
 /// This class is intentionally empty as the Model Context Protocol specification does not

@@ -2,12 +2,12 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Net.ServerSentEvents;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// An <see cref="ISseEventStreamStore"/> implementation backed by <see cref="IDistributedCache"/>.

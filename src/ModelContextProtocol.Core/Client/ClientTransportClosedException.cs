@@ -1,7 +1,7 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// An <see cref="IOException"/> that indicates the client transport was closed, carrying

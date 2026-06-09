@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a message issued from the server to elicit additional information from the user via the client.

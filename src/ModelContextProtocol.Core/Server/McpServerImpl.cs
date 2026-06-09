@@ -1,14 +1,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <inheritdoc />
 #pragma warning disable MCPEXP002

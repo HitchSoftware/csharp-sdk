@@ -1,11 +1,11 @@
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Buffers;
 using System.Net.ServerSentEvents;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 /// <summary>
 /// Provides extension methods for <see cref="ISseEventStreamReader"/>.

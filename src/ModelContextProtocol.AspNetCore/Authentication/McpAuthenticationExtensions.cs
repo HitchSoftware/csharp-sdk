@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
-using ModelContextProtocol.AspNetCore.Authentication;
+using Garden.ModelContextProtocol.AspNetCore.Authentication;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

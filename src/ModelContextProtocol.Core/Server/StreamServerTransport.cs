@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides an <see cref="ITransport"/> implemented using a pair of input and output streams.

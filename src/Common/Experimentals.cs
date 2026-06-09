@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Defines diagnostic IDs, messages, and URLs for APIs annotated with <see cref="ExperimentalAttribute"/>.
@@ -48,7 +48,7 @@ internal static class Experimentals
     /// <summary>
     /// URL for the experimental MCP Tasks feature.
     /// </summary>
-    public const string Tasks_Url = "https://github.com/modelcontextprotocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp001";
+    public const string Tasks_Url = "https://github.com/Garden.ModelContextProtocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp001";
 
     /// <summary>
     /// Diagnostic ID for the experimental MCP Extensions feature.
@@ -69,7 +69,7 @@ internal static class Experimentals
     /// <summary>
     /// URL for the experimental MCP Extensions feature.
     /// </summary>
-    public const string Extensions_Url = "https://github.com/modelcontextprotocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp001";
+    public const string Extensions_Url = "https://github.com/Garden.ModelContextProtocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp001";
 
     /// <summary>
     /// Diagnostic ID for experimental SDK APIs unrelated to the MCP specification,
@@ -90,7 +90,7 @@ internal static class Experimentals
     /// <summary>
     /// URL for experimental subclassing of McpClient and McpServer.
     /// </summary>
-    public const string Subclassing_Url = "https://github.com/modelcontextprotocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp002";
+    public const string Subclassing_Url = "https://github.com/Garden.ModelContextProtocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp002";
 
     /// <summary>
     /// Diagnostic ID for the experimental <c>RunSessionHandler</c> API.
@@ -109,7 +109,7 @@ internal static class Experimentals
     /// <summary>
     /// URL for the experimental <c>RunSessionHandler</c> API.
     /// </summary>
-    public const string RunSessionHandler_Url = "https://github.com/modelcontextprotocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp002";
+    public const string RunSessionHandler_Url = "https://github.com/Garden.ModelContextProtocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp002";
 
     /// <summary>
     /// Diagnostic ID for the experimental Multi Round-Trip Requests (MRTR) feature.
@@ -128,5 +128,5 @@ internal static class Experimentals
     /// <summary>
     /// URL for the experimental MRTR feature.
     /// </summary>
-    public const string Mrtr_Url = "https://github.com/modelcontextprotocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp001";
+    public const string Mrtr_Url = "https://github.com/Garden.ModelContextProtocol/csharp-sdk/blob/main/docs/list-of-diagnostics.md#mcpexp001";
 }

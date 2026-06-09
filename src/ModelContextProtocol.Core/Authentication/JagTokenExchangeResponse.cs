@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents the response from an RFC 8693 Token Exchange for the JAG flow.

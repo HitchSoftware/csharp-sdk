@@ -1,14 +1,14 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Provides internal utilities for the Cross-Application Access authorization flow.
 /// </summary>
 /// <remarks>
 /// Implements the Enterprise Managed Authorization flow as specified at
-/// <see href="https://github.com/modelcontextprotocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx"/>.
+/// <see href="https://github.com/Garden.ModelContextProtocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx"/>.
 /// </remarks>
 internal static class IdentityAssertionGrant
 {
@@ -29,7 +29,7 @@ internal static class IdentityAssertionGrant
     /// <summary>
     /// Token type URN for Identity Assertion JWT Authorization Grants.
     /// As specified at
-    /// <see href="https://github.com/modelcontextprotocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx"/>.
+    /// <see href="https://github.com/Garden.ModelContextProtocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx"/>.
     /// </summary>
     public const string TokenTypeIdJag = "urn:ietf:params:oauth:token-type:id-jag";
 

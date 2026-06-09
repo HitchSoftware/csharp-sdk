@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides details about why an MCP client session completed.

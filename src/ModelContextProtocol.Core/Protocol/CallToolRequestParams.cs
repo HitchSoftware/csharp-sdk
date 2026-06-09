@@ -2,14 +2,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the parameters used with a <see cref="RequestMethods.ToolsCall"/> request from a client to invoke a tool provided by the server.
 /// </summary>
 /// <remarks>
 /// The server will respond with a <see cref="CallToolResult"/> containing the result of the tool invocation.
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 public sealed class CallToolRequestParams : RequestParams
 {

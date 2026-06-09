@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>Provides a base interface for metadata with name (identifier) and title (display name) properties.</summary>
 public interface IBaseMetadata

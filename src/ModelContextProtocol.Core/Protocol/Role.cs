@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the type of role in the Model Context Protocol conversation.

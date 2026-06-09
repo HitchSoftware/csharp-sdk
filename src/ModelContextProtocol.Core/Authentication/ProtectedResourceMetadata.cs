@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents the resource metadata for OAuth authorization as defined in <see href="https://datatracker.ietf.org/doc/rfc9728/">RFC 9728</see>.
@@ -192,7 +192,7 @@ public sealed class ProtectedResourceMetadata
     /// set relationship between the challenged scope set and scopes_supported. Clients MUST treat the scopes provided
     /// in the challenge as authoritative for satisfying the current request.
     ///
-    /// https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization#protected-resource-metadata-discovery-requirements
+    /// https://Garden.ModelContextProtocol.io/specification/2025-11-25/basic/authorization#protected-resource-metadata-discovery-requirements
     /// </summary>
     [JsonIgnore]
     internal string? WwwAuthenticateScope { get; set; }

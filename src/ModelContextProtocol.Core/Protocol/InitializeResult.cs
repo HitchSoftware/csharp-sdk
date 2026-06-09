@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the result of a <see cref="RequestMethods.Initialize"/> request sent to the server during connection establishment.
@@ -16,7 +16,7 @@ namespace ModelContextProtocol.Protocol;
 /// notification to complete the handshake.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class InitializeResult : Result
@@ -34,7 +34,7 @@ public sealed class InitializeResult : Result
     /// The protocol uses a date-based versioning scheme in the format "YYYY-MM-DD".
     /// </para>
     /// <para>
-    /// See the <see href="https://spec.modelcontextprotocol.io/specification/">protocol specification</see> for version details.
+    /// See the <see href="https://spec.Garden.ModelContextProtocol.io/specification/">protocol specification</see> for version details.
     /// </para>
     /// </remarks>
     [JsonPropertyName("protocolVersion")]

@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a client capability that enables root resource discovery in the Model Context Protocol.
@@ -18,7 +18,7 @@ namespace ModelContextProtocol.Protocol;
 /// about the working context, providing informational guidance rather than enforcing access control.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class RootsCapability

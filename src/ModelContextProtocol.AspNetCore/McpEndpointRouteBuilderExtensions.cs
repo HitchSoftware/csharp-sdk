@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.AspNetCore;
-using ModelContextProtocol.Protocol;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Garden.ModelContextProtocol.AspNetCore;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Builder;
@@ -21,8 +25,8 @@ public static class McpEndpointRouteBuilderExtensions
     /// <returns>Returns a builder for configuring additional endpoint conventions like authorization policies.</returns>
     /// <exception cref="InvalidOperationException">The required MCP services have not been registered. Ensure <see cref="HttpMcpServerBuilderExtensions.WithHttpTransport"/> has been called during application startup.</exception>
     /// <remarks>
-    /// For details about the Streamable HTTP transport, see the <see href="https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http">2025-11-25 protocol specification</see>.
-    /// When legacy SSE is enabled via <see cref="HttpServerTransportOptions.EnableLegacySse"/>, this method also maps legacy SSE endpoints at the path "/sse" and "/message". For details about the HTTP with SSE transport, see the <see href="https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse">2024-11-05 protocol specification</see>.
+    /// For details about the Streamable HTTP transport, see the <see href="https://Garden.ModelContextProtocol.io/specification/2025-11-25/basic/transports#streamable-http">2025-11-25 protocol specification</see>.
+    /// When legacy SSE is enabled via <see cref="HttpServerTransportOptions.EnableLegacySse"/>, this method also maps legacy SSE endpoints at the path "/sse" and "/message". For details about the HTTP with SSE transport, see the <see href="https://Garden.ModelContextProtocol.io/specification/2024-11-05/basic/transports#http-with-sse">2024-11-05 protocol specification</see>.
     /// </remarks>
     public static IEndpointConventionBuilder MapMcp(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern = "")
     {
@@ -66,6 +70,92 @@ public static class McpEndpointRouteBuilderExtensions
             {
                 // Map legacy HTTP with SSE endpoints. These are disabled by default because the SSE transport
                 // has no built-in request backpressure (POST returns 202 immediately). Enable only for trusted clients.
+                var sseHandler = endpoints.ServiceProvider.GetRequiredService<SseHandler>();
+                var sseGroup = mcpGroup.MapGroup("")
+                    .WithDisplayName(b => $"MCP HTTP with SSE | {b.DisplayName}");
+
+                sseGroup.MapGet("/sse", sseHandler.HandleSseRequestAsync)
+                    .WithMetadata(new ProducesResponseTypeMetadata(StatusCodes.Status200OK, contentTypes: ["text/event-stream"]));
+                sseGroup.MapPost("/message", sseHandler.HandleMessageRequestAsync)
+                    .WithMetadata(new AcceptsMetadata(["application/json"]))
+                    .WithMetadata(new ProducesResponseTypeMetadata(StatusCodes.Status202Accepted));
+            }
+        }
+
+        return mcpGroup;
+    }
+
+    /// <summary>
+    /// Sets up endpoints for handling MCP Streamable HTTP transport with per-route tool configuration.
+    /// </summary>
+    public static IEndpointConventionBuilder MapMcp(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern,
+        Action<McpServerOptions> configure,
+        Action<HttpServerTransportOptions>? transportConfigure = null)
+    {
+        var options = new McpServerOptions();
+        configure(options);
+
+        // Create a route-scoped handler so this route gets its own McpServerOptions (and thus its own tools)
+        var handler = new StreamableHttpHandler(
+            endpoints.ServiceProvider.GetRequiredService<IOptions<McpServerOptions>>(),
+            endpoints.ServiceProvider.GetRequiredService<IOptionsFactory<McpServerOptions>>(),
+            endpoints.ServiceProvider.GetRequiredService<IOptions<HttpServerTransportOptions>>(),
+            endpoints.ServiceProvider.GetRequiredService<StatefulSessionManager>(),
+            endpoints.ServiceProvider.GetRequiredService<IHostApplicationLifetime>(),
+            endpoints.ServiceProvider,
+            endpoints.ServiceProvider.GetRequiredService<ILoggerFactory>(),
+            configure);  // route-specific configure
+
+        if (transportConfigure is not null)
+        {
+            // Apply transport-level settings (stateless, SSE, etc.) for this route
+            var transportOptions = new HttpServerTransportOptions();
+            transportConfigure(transportOptions);
+            // Note: full per-route transport options would require additional handler support;
+            // current minimal impl focuses on McpServerOptions isolation.
+        }
+
+        return MapMcpCore(endpoints, pattern, handler);
+    }
+
+    private static IEndpointConventionBuilder MapMcpCore(
+        IEndpointRouteBuilder endpoints,
+        string pattern,
+        StreamableHttpHandler streamableHttpHandler)
+    {
+        var options = streamableHttpHandler.HttpServerTransportOptions;
+
+#pragma warning disable MCP9004 // EnableLegacySse
+        if (options.Stateless && options.EnableLegacySse)
+        {
+            throw new InvalidOperationException(
+                "Legacy SSE endpoints cannot be enabled in stateless mode because SSE requires in-memory session state " +
+                "shared between the GET /sse and POST /message requests. Remove the EnableLegacySse setting or disable stateless mode.");
+        }
+#pragma warning restore MCP9004
+
+        var mcpGroup = endpoints.MapGroup(pattern);
+        var streamableHttpGroup = mcpGroup.MapGroup("")
+            .WithDisplayName(b => $"MCP Streamable HTTP | {b.DisplayName}")
+            .WithMetadata(new ProducesResponseTypeMetadata(StatusCodes.Status404NotFound, typeof(JsonRpcError), contentTypes: ["application/json"]));
+
+        streamableHttpGroup.MapPost("", streamableHttpHandler.HandlePostRequestAsync)
+            .WithMetadata(new AcceptsMetadata(["application/json"]))
+            .WithMetadata(new ProducesResponseTypeMetadata(StatusCodes.Status200OK, contentTypes: ["text/event-stream"]))
+            .WithMetadata(new ProducesResponseTypeMetadata(StatusCodes.Status202Accepted));
+
+        if (!options.Stateless)
+        {
+            streamableHttpGroup.MapGet("", streamableHttpHandler.HandleGetRequestAsync)
+                .WithMetadata(new ProducesResponseTypeMetadata(StatusCodes.Status200OK, contentTypes: ["text/event-stream"]));
+            streamableHttpGroup.MapDelete("", streamableHttpHandler.HandleDeleteRequestAsync);
+
+#pragma warning disable MCP9004
+            if (options.EnableLegacySse)
+#pragma warning restore MCP9004
+            {
                 var sseHandler = endpoints.ServiceProvider.GetRequiredService<SseHandler>();
                 var sseGroup = mcpGroup.MapGroup("")
                     .WithDisplayName(b => $"MCP HTTP with SSE | {b.DisplayName}");

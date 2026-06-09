@@ -1,12 +1,12 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a server's response to a <see cref="RequestMethods.ResourcesRead"/> request from the client.
 /// </summary>
 /// <remarks>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 public sealed class ReadResourceResult : Result
 {

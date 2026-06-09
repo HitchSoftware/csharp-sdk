@@ -1,6 +1,6 @@
 using System;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Internal helper methods for DebuggerDisplay implementations.

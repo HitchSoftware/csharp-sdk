@@ -1,6 +1,6 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Represents a named resource template that can be retrieved from an MCP server.

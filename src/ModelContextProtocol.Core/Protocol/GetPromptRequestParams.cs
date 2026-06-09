@@ -1,14 +1,14 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the parameters used with a <see cref="RequestMethods.PromptsGet"/> request from a client to get a prompt provided by a server.
 /// </summary>
 /// <remarks>
 /// The server will respond with a <see cref="GetPromptResult"/> containing the resulting prompt.
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 public sealed class GetPromptRequestParams : RequestParams
 {

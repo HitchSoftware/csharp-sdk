@@ -1,7 +1,7 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Net.ServerSentEvents;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides read access to an SSE event stream, allowing events to be consumed asynchronously.

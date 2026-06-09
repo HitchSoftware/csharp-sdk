@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
-using ModelContextProtocol.Server;
+using Microsoft.Extensions.Hosting;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Hosted service for a single-session (e.g. stdio) MCP server.

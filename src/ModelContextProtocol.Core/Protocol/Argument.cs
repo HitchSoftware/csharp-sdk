@@ -1,13 +1,13 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents an argument used in completion requests to provide context for auto-completion functionality.
 /// </summary>
 /// <remarks>
 /// This class is used when requesting completion suggestions for a particular field or parameter.
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 public sealed class Argument
 {

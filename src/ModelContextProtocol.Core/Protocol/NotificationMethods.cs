@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Provides constants with the names of common notification methods used in the MCP protocol.
@@ -164,7 +164,7 @@ public static class NotificationMethods
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This constant defines the key <c>"io.modelcontextprotocol/related-task"</c> used in the
+    /// This constant defines the key <c>"io.Garden.ModelContextProtocol/related-task"</c> used in the
     /// <c>_meta</c> field to associate messages with their originating task across the entire
     /// request lifecycle.
     /// </para>
@@ -177,5 +177,5 @@ public static class NotificationMethods
     /// metadata should not be included as the taskId is already present in the message structure.
     /// </para>
     /// </remarks>
-    public const string RelatedTaskMetaKey = "io.modelcontextprotocol/related-task";
+    public const string RelatedTaskMetaKey = "io.Garden.ModelContextProtocol/related-task";
 }

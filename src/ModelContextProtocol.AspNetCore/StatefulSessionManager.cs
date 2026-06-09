@@ -1,11 +1,11 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 internal sealed partial class StatefulSessionManager(
     IOptions<HttpServerTransportOptions> httpServerTransportOptions,

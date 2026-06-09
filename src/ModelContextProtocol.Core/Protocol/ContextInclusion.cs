@@ -1,13 +1,13 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Specifies the context inclusion options for a request in the Model Context Protocol (MCP).
 /// </summary>
 /// <remarks>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// <para>
 /// <see cref="ContextInclusion"/>, and in particular <see cref="ThisServer"/> and <see cref="AllServers"/>, are deprecated.

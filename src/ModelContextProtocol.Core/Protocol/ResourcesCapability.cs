@@ -1,14 +1,14 @@
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the resources capability configuration.
 /// </summary>
 /// <remarks>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 public sealed class ResourcesCapability
 {

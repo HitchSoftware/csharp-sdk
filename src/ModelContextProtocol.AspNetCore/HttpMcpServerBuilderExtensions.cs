@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.AspNetCore;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.AspNetCore;
+using Garden.ModelContextProtocol.Server;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

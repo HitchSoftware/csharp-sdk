@@ -1,6 +1,6 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides the metadata captured from a previous MCP client session that is required to resume it.

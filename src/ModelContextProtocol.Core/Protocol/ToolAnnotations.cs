@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents additional properties describing a <see cref="Tool"/> to clients.

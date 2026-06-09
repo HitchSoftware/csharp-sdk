@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the logging capability configuration for a Model Context Protocol server.
@@ -10,7 +10,7 @@ namespace ModelContextProtocol.Protocol;
 /// <remarks>
 /// <para>
 /// This capability allows clients to set the logging level and receive log messages from the server.
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// <para>
 /// This class is intentionally empty as the Model Context Protocol specification does not

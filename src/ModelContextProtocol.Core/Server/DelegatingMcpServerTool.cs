@@ -1,6 +1,6 @@
-﻿using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>Provides an <see cref="McpServerTool"/> that delegates all operations to an inner <see cref="McpServerTool"/>.</summary>
 /// <remarks>

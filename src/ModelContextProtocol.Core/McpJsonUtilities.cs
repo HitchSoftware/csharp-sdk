@@ -1,12 +1,12 @@
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Authentication;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>Provides a collection of utility methods for working with JSON data in the context of MCP.</summary>
 public static partial class McpJsonUtilities
@@ -17,7 +17,7 @@ public static partial class McpJsonUtilities
     /// <remarks>
     /// <para>
     /// For Native AOT or applications disabling <see cref="JsonSerializer.IsReflectionEnabledByDefault"/>, this instance
-    /// includes source generated contracts for all common exchange types contained in the ModelContextProtocol library.
+    /// includes source generated contracts for all common exchange types contained in the Garden.ModelContextProtocol library.
     /// </para>
     /// <para>
     /// It additionally turns on the following settings:
@@ -195,7 +195,7 @@ public static partial class McpJsonUtilities
     [JsonSerializable(typeof(DynamicClientRegistrationResponse))]
 
     // For Enterprise Managed Authorization flow as specified at
-    // https://github.com/modelcontextprotocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx
+    // https://github.com/Garden.ModelContextProtocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx
     [JsonSerializable(typeof(JagTokenExchangeResponse))]
     [JsonSerializable(typeof(JwtBearerAccessTokenResponse))]
     [JsonSerializable(typeof(OAuthErrorResponse))]

@@ -6,7 +6,7 @@ using System.Buffers.Binary;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using ModelContextProtocol;
+using Garden.ModelContextProtocol;
 
 namespace System.IO;
 

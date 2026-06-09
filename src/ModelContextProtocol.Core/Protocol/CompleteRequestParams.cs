@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the parameters used with a <see cref="RequestMethods.CompletionComplete"/> request from 
@@ -14,7 +14,7 @@ namespace ModelContextProtocol.Protocol;
 /// The server will respond with a <see cref="CompleteResult"/> containing matching values.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class CompleteRequestParams : RequestParams

@@ -1,6 +1,6 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Represents a transport mechanism for Model Context Protocol (MCP) client-to-server communication.

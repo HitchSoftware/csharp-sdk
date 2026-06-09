@@ -1,12 +1,12 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the tools capability configuration.
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </summary>
 public sealed class ToolsCapability
 {

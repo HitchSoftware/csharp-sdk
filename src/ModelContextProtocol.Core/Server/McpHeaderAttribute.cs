@@ -1,6 +1,6 @@
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Indicates that a tool parameter should be mirrored as an HTTP header in client requests.

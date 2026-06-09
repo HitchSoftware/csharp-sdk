@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.WebUtilities;
@@ -6,15 +6,15 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 internal sealed class StreamableHttpHandler(
     IOptions<McpServerOptions> mcpServerOptionsSnapshot,
@@ -25,13 +25,27 @@ internal sealed class StreamableHttpHandler(
     IServiceProvider applicationServices,
     ILoggerFactory loggerFactory)
 {
+    internal StreamableHttpHandler(
+        IOptions<McpServerOptions> mcpServerOptionsSnapshot,
+        IOptionsFactory<McpServerOptions> mcpServerOptionsFactory,
+        IOptions<HttpServerTransportOptions> httpServerTransportOptions,
+        StatefulSessionManager sessionManager,
+        IHostApplicationLifetime hostApplicationLifetime,
+        IServiceProvider applicationServices,
+        ILoggerFactory loggerFactory,
+        Action<McpServerOptions>? routeConfigureOptions)
+        : this(mcpServerOptionsSnapshot, mcpServerOptionsFactory, httpServerTransportOptions, sessionManager, hostApplicationLifetime, applicationServices, loggerFactory)
+    {
+        _routeConfigureOptions = routeConfigureOptions;
+    }
+
     private const string McpSessionIdHeaderName = McpHttpHeaders.SessionId;
     private const string McpProtocolVersionHeaderName = McpHttpHeaders.ProtocolVersion;
     private const string LastEventIdHeaderName = McpHttpHeaders.LastEventId;
 
     /// <summary>
     /// All protocol versions supported by this implementation.
-    /// Keep in sync with McpSessionHandler.SupportedProtocolVersions in ModelContextProtocol.Core.
+    /// Keep in sync with McpSessionHandler.SupportedProtocolVersions in Garden.ModelContextProtocol.Core.
     /// </summary>
     private static readonly HashSet<string> s_supportedProtocolVersions =
     [
@@ -46,9 +60,10 @@ internal sealed class StreamableHttpHandler(
     private static readonly JsonTypeInfo<JsonRpcError> s_errorTypeInfo = GetRequiredJsonTypeInfo<JsonRpcError>();
 
     private static bool AllowNewSessionForNonInitializeRequests { get; } =
-        AppContext.TryGetSwitch("ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests", out var enabled) && enabled;
+        AppContext.TryGetSwitch("Garden.ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests", out var enabled) && enabled;
 
     private readonly ConcurrentDictionary<string, SemaphoreSlim> _migrationLocks = new(StringComparer.Ordinal);
+    private readonly Action<McpServerOptions>? _routeConfigureOptions;
 
     public HttpServerTransportOptions HttpServerTransportOptions => httpServerTransportOptions.Value;
 
@@ -244,7 +259,7 @@ internal sealed class StreamableHttpHandler(
             await WriteJsonRpcErrorAsync(context,
                 "Bad Request: Mcp-Session-Id header is required for GET and DELETE requests when the server is using sessions. " +
                 "If your server doesn't need sessions, enable stateless mode by setting HttpServerTransportOptions.Stateless = true. " +
-                "See https://csharp.sdk.modelcontextprotocol.io/concepts/stateless/stateless.html for more details.",
+                "See https://csharp.sdk.Garden.ModelContextProtocol.io/concepts/stateless/stateless.html for more details.",
                 StatusCodes.Status400BadRequest);
             return null;
         }
@@ -330,7 +345,7 @@ internal sealed class StreamableHttpHandler(
                 await WriteJsonRpcErrorAsync(context,
                     "Bad Request: A new session can only be created by an initialize request. Include a valid Mcp-Session-Id header for non-initialize requests, " +
                     "or enable stateless mode by setting HttpServerTransportOptions.Stateless = true if your server doesn't need sessions. " +
-                    "See https://csharp.sdk.modelcontextprotocol.io/concepts/stateless/stateless.html for more details.",
+                    "See https://csharp.sdk.Garden.ModelContextProtocol.io/concepts/stateless/stateless.html for more details.",
                     StatusCodes.Status400BadRequest);
                 return null;
             }
@@ -393,24 +408,25 @@ internal sealed class StreamableHttpHandler(
     {
         var mcpServerServices = applicationServices;
         var mcpServerOptions = mcpServerOptionsSnapshot.Value;
-        if (HttpServerTransportOptions.Stateless || HttpServerTransportOptions.ConfigureSessionOptions is not null || configureOptions is not null)
-        {
-            mcpServerOptions = mcpServerOptionsFactory.Create(Options.DefaultName);
-
-            if (HttpServerTransportOptions.Stateless)
+            if (HttpServerTransportOptions.Stateless || HttpServerTransportOptions.ConfigureSessionOptions is not null || configureOptions is not null || _routeConfigureOptions is not null)
             {
-                // The session does not outlive the request in stateless mode.
-                mcpServerServices = context.RequestServices;
-                mcpServerOptions.ScopeRequests = false;
-            }
+                mcpServerOptions = mcpServerOptionsFactory.Create(Options.DefaultName);
 
-            configureOptions?.Invoke(mcpServerOptions);
+                if (HttpServerTransportOptions.Stateless)
+                {
+                    // The session does not outlive the request in stateless mode.
+                    mcpServerServices = context.RequestServices;
+                    mcpServerOptions.ScopeRequests = false;
+                }
 
-            if (HttpServerTransportOptions.ConfigureSessionOptions is { } configureSessionOptions)
-            {
-                await configureSessionOptions(context, mcpServerOptions, context.RequestAborted);
+                _routeConfigureOptions?.Invoke(mcpServerOptions);
+                configureOptions?.Invoke(mcpServerOptions);
+
+                if (HttpServerTransportOptions.ConfigureSessionOptions is { } configureSessionOptions)
+                {
+                    await configureSessionOptions(context, mcpServerOptions, context.RequestAborted);
+                }
             }
-        }
 
         var server = McpServer.Create(transport, mcpServerOptions, loggerFactory, mcpServerServices);
         context.Features.Set(server);

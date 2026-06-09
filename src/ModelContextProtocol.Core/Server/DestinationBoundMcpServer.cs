@@ -1,8 +1,8 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 #pragma warning disable MCPEXP002
 internal sealed class DestinationBoundMcpServer(McpServerImpl server, ITransport? transport) : McpServer

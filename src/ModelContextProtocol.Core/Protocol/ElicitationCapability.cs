@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the capability for a client to provide server-requested additional information during interactions.

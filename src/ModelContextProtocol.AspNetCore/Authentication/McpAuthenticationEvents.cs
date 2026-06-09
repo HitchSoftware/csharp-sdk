@@ -1,4 +1,4 @@
-﻿namespace ModelContextProtocol.AspNetCore.Authentication;
+namespace Garden.ModelContextProtocol.AspNetCore.Authentication;
 
 /// <summary>
 /// Represents the authentication events for Model Context Protocol.

@@ -1,12 +1,12 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 
 #if MCP_TEST_TIME_PROVIDER
-namespace ModelContextProtocol.Tests.Internal;
+namespace Garden.ModelContextProtocol.Tests.Internal;
 #else
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 #endif
 
 /// <summary>

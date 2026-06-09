@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 /// <summary>
 /// Provides hooks for persisting and restoring MCP session initialization data,

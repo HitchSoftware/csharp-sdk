@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Authentication;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides an <see cref="IClientTransport"/> over HTTP using the Server-Sent Events (SSE) or Streamable HTTP protocol.

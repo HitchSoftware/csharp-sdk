@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents text-based contents of a resource in the Model Context Protocol.
@@ -17,7 +17,7 @@ namespace ModelContextProtocol.Protocol;
 /// appropriate type is chosen based on the nature of the content.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for more details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for more details.
 /// </para>
 /// </remarks>
 [DebuggerDisplay("Uri = \"{Uri}\", Text = \"{Text}\"")]

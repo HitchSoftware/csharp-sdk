@@ -1,7 +1,7 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>Provides thread-safe storage for notification handlers.</summary>
 internal sealed class NotificationHandlers

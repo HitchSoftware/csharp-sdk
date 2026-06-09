@@ -1,7 +1,7 @@
-ï»¿using System.Diagnostics.CodeAnalysis;
-using ModelContextProtocol.Protocol;
+using System.Diagnostics.CodeAnalysis;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Represents an instance of a Model Context Protocol (MCP) client session that connects to and communicates with an MCP server.
@@ -90,13 +90,13 @@ public abstract partial class McpClient : McpSession
     /// <list type="bullet">
     ///   <item>Registered tools are added to the same internal tool cache used by <see cref="McpClient.ListToolsAsync(RequestOptions?, CancellationToken)"/>.</item>
     ///   <item>Calling <see cref="McpClient.ListToolsAsync(RequestOptions?, CancellationToken)"/> after <see cref="AddKnownTools"/> preserves
-    ///     manually registered tools â€” only server-discovered tools are cleared and repopulated.</item>
+    ///     manually registered tools — only server-discovered tools are cleared and repopulated.</item>
     ///   <item>If the server returns a tool with the same name as a manually registered tool, the server's
     ///     definition overwrites the registered one in the cache, but the tool retains its known status
     ///     and will survive subsequent cache clears. This registration is sticky for the lifetime of the
     ///     <see cref="McpClient"/>; use <see cref="RemoveKnownTools"/> or <see cref="ClearKnownTools"/> to
     ///     explicitly drop known tools that are no longer needed.</item>
-    ///   <item>Tools can be registered at any time â€” before or after <see cref="McpClient.ListToolsAsync(RequestOptions?, CancellationToken)"/>,
+    ///   <item>Tools can be registered at any time — before or after <see cref="McpClient.ListToolsAsync(RequestOptions?, CancellationToken)"/>,
     ///     and across multiple calls.</item>
     ///   <item>Re-registering a tool with the same name overwrites the previous definition in the cache (last write wins).</item>
     /// </list>

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents a client registration request for OAuth 2.0 Dynamic Client Registration (RFC 7591).

@@ -2,13 +2,13 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a prompt that the server offers.
 /// </summary>
 /// <remarks>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 public sealed class Prompt : IBaseMetadata

@@ -1,5 +1,5 @@
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents a method that selects or filters the OAuth scopes to request during authorization.

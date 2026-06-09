@@ -1,22 +1,22 @@
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a reference to a resource or prompt in the Model Context Protocol.
 /// </summary>
 /// <remarks>
 /// <para>
-/// References are commonly used with <see cref="McpClient.CompleteAsync(Reference, string, string, ModelContextProtocol.RequestOptions?, CancellationToken)"/>
+/// References are commonly used with <see cref="McpClient.CompleteAsync(Reference, string, string, Garden.ModelContextProtocol.RequestOptions?, CancellationToken)"/>
 /// to request completion suggestions for arguments, and with other methods that need to reference resources or prompts.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 [JsonConverter(typeof(Converter))]

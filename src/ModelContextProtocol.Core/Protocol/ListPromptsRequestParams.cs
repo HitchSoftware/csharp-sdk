@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the parameters used with a <see cref="RequestMethods.PromptsList"/> request from a client to request
@@ -6,6 +6,6 @@ namespace ModelContextProtocol.Protocol;
 /// </summary>
 /// <remarks>
 /// The server responds with a <see cref="ListPromptsResult"/> containing the available prompts.
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 public sealed class ListPromptsRequestParams : PaginatedRequestParams;

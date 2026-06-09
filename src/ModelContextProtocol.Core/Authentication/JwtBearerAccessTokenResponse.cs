@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents the response from a JWT Bearer grant (RFC 7523) access token request.

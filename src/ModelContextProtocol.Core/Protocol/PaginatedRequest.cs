@@ -1,12 +1,12 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Provides a base class for paginated requests.
 /// </summary>
 /// <remarks>
-/// <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">See the schema for details</see>
+/// <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">See the schema for details</see>
 /// </remarks>
 public abstract class PaginatedRequestParams : RequestParams
 {

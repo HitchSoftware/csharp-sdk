@@ -1,4 +1,4 @@
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Represents an exception that is thrown when a Model Context Protocol (MCP) protocol-level error occurs.

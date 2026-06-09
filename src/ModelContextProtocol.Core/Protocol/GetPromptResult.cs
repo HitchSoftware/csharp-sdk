@@ -1,7 +1,7 @@
 using Microsoft.Extensions.AI;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a server's response to a <see cref="RequestMethods.PromptsGet"/> request from the client.
@@ -12,7 +12,7 @@ namespace ModelContextProtocol.Protocol;
 /// a collection of <see cref="ChatMessage"/> objects using the <see cref="AIContentExtensions.ToChatMessages"/> extension method.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class GetPromptResult : Result

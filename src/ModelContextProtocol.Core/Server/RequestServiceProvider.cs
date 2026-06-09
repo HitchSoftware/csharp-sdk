@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Security.Claims;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>Augments a service provider with additional request-related services.</summary>
 internal sealed class RequestServiceProvider<TRequestParams>(RequestContext<TRequestParams> request) :

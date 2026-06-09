@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Authentication;
 
-namespace ModelContextProtocol.AspNetCore.Authentication;
+namespace Garden.ModelContextProtocol.AspNetCore.Authentication;
 
 /// <summary>
 /// Represents the context for resource metadata request events.

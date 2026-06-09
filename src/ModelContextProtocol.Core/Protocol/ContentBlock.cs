@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents content within the Model Context Protocol (MCP).
@@ -24,7 +24,7 @@ namespace ModelContextProtocol.Protocol;
 /// and other communication between clients and servers.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for more details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for more details.
 /// </para>
 /// </remarks>
 [JsonConverter(typeof(Converter))]

@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a message issued to or received from an LLM API within the Model Context Protocol.
@@ -24,7 +24,7 @@ namespace ModelContextProtocol.Protocol;
 /// audio content in the same message.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]

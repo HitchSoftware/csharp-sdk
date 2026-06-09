@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.AI;
-using ModelContextProtocol.Protocol;
+using Microsoft.Extensions.AI;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides a container for handlers used in the creation of an MCP client.

@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Represents the execution context for a task being executed by the server.

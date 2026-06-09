@@ -3,7 +3,7 @@ using System.Buffers.Text;
 using System.Diagnostics;
 using System.Text;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>Provides helper methods for encoding operations.</summary>
 internal static class EncodingUtilities

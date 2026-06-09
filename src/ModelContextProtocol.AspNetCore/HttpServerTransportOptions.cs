@@ -1,15 +1,15 @@
-ï»¿using Microsoft.AspNetCore.Http;
-using ModelContextProtocol.Server;
+using Microsoft.AspNetCore.Http;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 /// <summary>
 /// Represents configuration options for <see cref="M:McpEndpointRouteBuilderExtensions.MapMcp"/>,
 /// which implements the Streamable HTTP transport for the Model Context Protocol.
-/// See the protocol specification for details on the Streamable HTTP transport. <see href="https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http"/>
+/// See the protocol specification for details on the Streamable HTTP transport. <see href="https://Garden.ModelContextProtocol.io/specification/2025-11-25/basic/transports#streamable-http"/>
 /// </summary>
 /// <remarks>
-/// For details on the Streamable HTTP transport, see the <see href="https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http">protocol specification</see>.
+/// For details on the Streamable HTTP transport, see the <see href="https://Garden.ModelContextProtocol.io/specification/2025-11-25/basic/transports#streamable-http">protocol specification</see>.
 /// </remarks>
 public class HttpServerTransportOptions
 {
@@ -73,7 +73,7 @@ public class HttpServerTransportOptions
     /// The legacy SSE transport separates request and response channels: clients POST JSON-RPC messages
     /// to <c>/message</c> and receive responses through a long-lived GET SSE stream on <c>/sse</c>.
     /// Because the POST endpoint returns <c>202 Accepted</c> immediately, there is no HTTP-level
-    /// backpressure on handler concurrency â€” unlike Streamable HTTP, where each POST is held open
+    /// backpressure on handler concurrency — unlike Streamable HTTP, where each POST is held open
     /// until the handler responds.
     /// </para>
     /// <para>
@@ -87,13 +87,13 @@ public class HttpServerTransportOptions
     /// throws an <see cref="InvalidOperationException"/> at startup, because SSE requires in-memory session state.
     /// </para>
     /// <para>
-    /// This property can also be enabled via the <c>ModelContextProtocol.AspNetCore.EnableLegacySse</c>
+    /// This property can also be enabled via the <c>Garden.ModelContextProtocol.AspNetCore.EnableLegacySse</c>
     /// <see cref="AppContext"/> switch.
     /// </para>
     /// </remarks>
     [Obsolete(Obsoletions.EnableLegacySse_Message, DiagnosticId = Obsoletions.EnableLegacySse_DiagnosticId, UrlFormat = Obsoletions.EnableLegacySse_Url)]
     public bool EnableLegacySse { get; set; } =
-        AppContext.TryGetSwitch("ModelContextProtocol.AspNetCore.EnableLegacySse", out var enabled) && enabled;
+        AppContext.TryGetSwitch("Garden.ModelContextProtocol.AspNetCore.EnableLegacySse", out var enabled) && enabled;
 
     /// <summary>
     /// Gets or sets the event store for resumability support.
@@ -158,7 +158,7 @@ public class HttpServerTransportOptions
     /// and should restart their session. A client can keep their session open by keeping a GET request open.
     /// </para>
     /// <para>
-    /// Legacy SSE sessions (when <see cref="EnableLegacySse"/> is enabled) are not subject to this timeout â€” their lifetime is
+    /// Legacy SSE sessions (when <see cref="EnableLegacySse"/> is enabled) are not subject to this timeout — their lifetime is
     /// tied to the open GET <c>/sse</c> request, and they are removed immediately when the client disconnects.
     /// </para>
     /// </remarks>
@@ -178,7 +178,7 @@ public class HttpServerTransportOptions
     /// </para>
     /// <para>
     /// Legacy SSE sessions (when <see cref="EnableLegacySse"/> is enabled) are never considered idle because their lifetime is
-    /// tied to the open GET <c>/sse</c> request. They are not subject to <see cref="IdleTimeout"/> or this limit â€” they exist
+    /// tied to the open GET <c>/sse</c> request. They are not subject to <see cref="IdleTimeout"/> or this limit — they exist
     /// exactly as long as the SSE connection is open.
     /// </para>
     /// </remarks>

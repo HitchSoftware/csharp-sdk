@@ -1,9 +1,9 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Buffers;
 using System.Net.ServerSentEvents;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides MCP extension methods for <see cref="SseEventWriter"/>.

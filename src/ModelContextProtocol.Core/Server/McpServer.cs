@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Represents an instance of a Model Context Protocol (MCP) server that connects to and communicates with an MCP client.

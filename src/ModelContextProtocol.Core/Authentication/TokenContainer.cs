@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents a cacheable combination of tokens ready to be used for authentication.

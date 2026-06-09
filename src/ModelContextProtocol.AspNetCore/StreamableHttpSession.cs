@@ -1,8 +1,8 @@
-﻿using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.Diagnostics;
 using System.Security.Claims;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 internal sealed class StreamableHttpSession(
     string sessionId,

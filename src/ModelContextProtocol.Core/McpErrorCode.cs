@@ -1,4 +1,4 @@
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Represents standard JSON-RPC error codes as defined in the MCP specification.

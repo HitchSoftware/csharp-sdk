@@ -1,4 +1,4 @@
-using ModelContextProtocol;
+using Garden.ModelContextProtocol;
 using System.Buffers;
 using System.Runtime.InteropServices;
 using System.Text;

@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the parameters used with a <see cref="RequestMethods.ToolsList"/> request from a client to request
@@ -6,6 +6,6 @@ namespace ModelContextProtocol.Protocol;
 /// </summary>
 /// <remarks>
 /// The server responds with a <see cref="ListToolsResult"/> containing the available tools.
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </remarks>
 public sealed class ListToolsRequestParams : PaginatedRequestParams;

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a server's response to a <see cref="RequestMethods.ResourcesList"/> request from the client, containing available resources.
@@ -15,7 +15,7 @@ namespace ModelContextProtocol.Protocol;
 /// resources available beyond what was returned in the current response.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class ListResourcesResult : PaginatedResult

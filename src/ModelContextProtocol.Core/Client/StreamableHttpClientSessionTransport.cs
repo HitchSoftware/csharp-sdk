@@ -5,11 +5,11 @@ using System.Net.Http.Headers;
 using System.Net.ServerSentEvents;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Threading.Channels;
 using System.Net;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// The Streamable HTTP client transport implementation

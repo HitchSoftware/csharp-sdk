@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.Extensions.AI;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a message within the Model Context Protocol (MCP) system, used for communication between clients and AI models.
@@ -24,7 +24,7 @@ namespace ModelContextProtocol.Protocol;
 /// <see cref="AIContentExtensions.ToPromptMessages(ChatMessage)"/>.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]

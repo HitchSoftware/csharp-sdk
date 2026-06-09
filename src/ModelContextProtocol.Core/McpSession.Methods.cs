@@ -1,9 +1,9 @@
-﻿using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 public abstract partial class McpSession : IAsyncDisposable
 {

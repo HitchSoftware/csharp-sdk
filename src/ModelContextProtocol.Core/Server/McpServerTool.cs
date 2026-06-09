@@ -1,11 +1,11 @@
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 using System.Reflection;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Represents an invocable tool used by Model Context Protocol clients and servers.

@@ -1,6 +1,6 @@
-﻿using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Provides an <see cref="IProgress{ProgressNotificationValue}"/> tied to a specific progress token and that will issue

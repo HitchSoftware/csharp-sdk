@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Configures the McpServerOptions using additional services from DI.

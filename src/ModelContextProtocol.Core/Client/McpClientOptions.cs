@@ -1,8 +1,8 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides configuration options for creating <see cref="McpClient"/> instances.

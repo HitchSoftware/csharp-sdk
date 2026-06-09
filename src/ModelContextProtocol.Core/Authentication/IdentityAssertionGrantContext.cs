@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Context provided to the <see cref="IdentityAssertionGrantIdTokenCallback"/> for a Cross-Application Access

@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Protocol;
+using Microsoft.Extensions.Logging;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides an <see cref="ITransport"/> implemented via "stdio" (standard input/output).

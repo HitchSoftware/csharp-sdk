@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the capability for a client to generate text or other content using an AI model.

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides a <see cref="IClientTransport"/> implemented via "stdio" (standard input/output).

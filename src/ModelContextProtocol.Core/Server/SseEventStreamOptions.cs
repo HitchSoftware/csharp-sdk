@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Configuration options for creating an SSE event stream.

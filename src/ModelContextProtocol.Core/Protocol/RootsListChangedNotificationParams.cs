@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the parameters used with a <see cref="NotificationMethods.RootsListChangedNotification"/>
@@ -9,7 +9,7 @@ namespace ModelContextProtocol.Protocol;
 /// This notification can be issued by clients without any previous subscription from the server.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class RootsListChangedNotificationParams : NotificationParams;

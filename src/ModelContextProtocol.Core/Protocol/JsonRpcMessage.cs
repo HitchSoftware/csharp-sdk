@@ -1,11 +1,11 @@
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents any JSON-RPC message used in the Model Context Protocol (MCP).

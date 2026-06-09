@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Headers;
@@ -8,7 +8,7 @@ using System.Net.ServerSentEvents;
 using System.Text.Json;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// The ServerSideEvents client transport implementation

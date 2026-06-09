@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the capabilities that a client supports.
@@ -15,7 +15,7 @@ namespace ModelContextProtocol.Protocol;
 /// These are advertised to the server during the initialize handshake.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class ClientCapabilities
@@ -100,7 +100,7 @@ public sealed class ClientCapabilities
     /// <remarks>
     /// <para>
     /// Keys are extension identifiers in reverse domain notation with an extension name
-    /// (e.g., <c>"io.modelcontextprotocol/oauth-client-credentials"</c>), and values are
+    /// (e.g., <c>"io.Garden.ModelContextProtocol/oauth-client-credentials"</c>), and values are
     /// per-extension settings objects. An empty object indicates support with no additional settings.
     /// </para>
     /// <para>

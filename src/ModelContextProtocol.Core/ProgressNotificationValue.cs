@@ -1,4 +1,4 @@
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Provides a progress value that can be sent using <see cref="IProgress{ProgressNotificationValue}"/>.

@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Specifies the transport mode for HTTP client connections.

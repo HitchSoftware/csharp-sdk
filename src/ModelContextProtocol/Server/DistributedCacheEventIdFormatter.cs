@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// This is a shared source file included in both ModelContextProtocol and the test project.
+// This is a shared source file included in both Garden.ModelContextProtocol and the test project.
 // Do not reference symbols internal to the core project, as they won't be available in tests.
 #if NET
 using System.Buffers;
@@ -11,7 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 #endif
 using System.Text;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides methods for formatting and parsing event IDs used by <see cref="DistributedCacheEventStreamStore"/>.

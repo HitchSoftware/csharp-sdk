@@ -1,5 +1,5 @@
-﻿
-namespace ModelContextProtocol.Authentication;
+
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Represents a method that handles the OAuth authorization URL and returns the authorization code.

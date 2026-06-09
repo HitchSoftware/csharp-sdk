@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 internal sealed class SseHandler(
     IOptions<McpServerOptions> mcpServerOptionsSnapshot,

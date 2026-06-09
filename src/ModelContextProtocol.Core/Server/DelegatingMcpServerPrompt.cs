@@ -1,6 +1,6 @@
-﻿using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>Provides an <see cref="McpServerPrompt"/> that delegates all operations to an inner <see cref="McpServerPrompt"/>.</summary>
 /// <remarks>

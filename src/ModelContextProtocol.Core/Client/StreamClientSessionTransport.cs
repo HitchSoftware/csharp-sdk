@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>Provides the client side of a stream-based session transport.</summary>
 internal class StreamClientSessionTransport : TransportBase

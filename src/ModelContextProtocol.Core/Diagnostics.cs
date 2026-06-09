@@ -1,17 +1,17 @@
-﻿using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Metrics;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 internal static class Diagnostics
 {
-    internal static ActivitySource ActivitySource { get; } = new("Experimental.ModelContextProtocol");
+    internal static ActivitySource ActivitySource { get; } = new("Experimental.Garden.ModelContextProtocol");
 
-    internal static Meter Meter { get; } = new("Experimental.ModelContextProtocol");
+    internal static Meter Meter { get; } = new("Experimental.Garden.ModelContextProtocol");
 
     internal static Histogram<double> CreateDurationHistogram(string name, string description) =>
         Meter.CreateHistogram(name, "s", description, advice: ExplicitBucketBoundaries);

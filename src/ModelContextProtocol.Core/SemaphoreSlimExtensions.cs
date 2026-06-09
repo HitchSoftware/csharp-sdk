@@ -1,4 +1,4 @@
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 internal static class SynchronizationExtensions
 {

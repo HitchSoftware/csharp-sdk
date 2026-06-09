@@ -1,11 +1,11 @@
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Provides extension methods for converting between Model Context Protocol (MCP) types and Microsoft.Extensions.AI types.

@@ -1,5 +1,5 @@
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 #if NET9_0_OR_GREATER
@@ -12,7 +12,7 @@ using System.Text;
 using System.Text.Json;
 using System.Web;
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// A generic implementation of an OAuth authorization provider.
@@ -172,7 +172,7 @@ internal sealed partial class ClientOAuthProvider : McpHttpClient
         }
 
         // Only retry 403 Forbidden if it contains an insufficient_scope error as described in Section 10.1.1 of the MCP specification
-        // https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization#runtime-insufficient-scope-errors
+        // https://Garden.ModelContextProtocol.io/specification/2025-11-25/basic/authorization#runtime-insufficient-scope-errors
         if (response.StatusCode != System.Net.HttpStatusCode.Forbidden)
         {
             return false;
@@ -877,7 +877,7 @@ internal sealed partial class ClientOAuthProvider : McpHttpClient
                 resourceMetadataUrl = ParseWwwAuthenticateParameters(header.Parameter, "resource_metadata");
 
                 // "Use scope parameter from the initial WWW-Authenticate header in the 401 response, if provided."
-                // https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization#scope-selection-strategy
+                // https://Garden.ModelContextProtocol.io/specification/2025-11-25/basic/authorization#scope-selection-strategy
                 //
                 // We use the scope even if resource_metadata is not present so long as it's for the Bearer scheme,
                 // since we do not require a resource_metadata parameter.
@@ -925,7 +925,7 @@ internal sealed partial class ClientOAuthProvider : McpHttpClient
         }
 
         // The WWW-Authenticate header parameter should be preferred over using the scopes_supported metadata property.
-        // https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization#protected-resource-metadata-discovery-requirements
+        // https://Garden.ModelContextProtocol.io/specification/2025-11-25/basic/authorization#protected-resource-metadata-discovery-requirements
         metadata.WwwAuthenticateScope = wwwAuthenticateScope;
 
         // Validate that the resource URI in metadata corresponds to the server we're connecting to.

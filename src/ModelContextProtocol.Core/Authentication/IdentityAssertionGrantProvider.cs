@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Provides Cross-Application Access authorization as a standalone, non-interactive provider
@@ -10,7 +10,7 @@ namespace ModelContextProtocol.Authentication;
 /// <remarks>
 /// <para>
 /// This provider implements the full Identity Assertion Authorization Grant flow as specified at
-/// <see href="https://github.com/modelcontextprotocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx"/>:
+/// <see href="https://github.com/Garden.ModelContextProtocol/ext-auth/blob/main/specification/draft/enterprise-managed-authorization.mdx"/>:
 /// </para>
 /// <list type="number">
 /// <item><description>

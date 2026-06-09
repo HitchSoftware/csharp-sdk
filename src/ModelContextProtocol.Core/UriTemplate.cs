@@ -1,4 +1,4 @@
-Ôªø#if NET
+#if NET
 using System.Buffers;
 #endif
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>Provides basic support for parsing and formatting URI templates.</summary>
 /// <remarks>
@@ -25,7 +25,7 @@ internal static partial class UriTemplate
                 (?:[A-Za-z0-9_]|%[0-9A-Fa-f]{2})                # varchar: letter, digit, underscore, or pct-encoded
                 (?:\.?(?:[A-Za-z0-9_]|%[0-9A-Fa-f]{2}))*        # optionally dot-separated subsequent varchars
             )
-            (?: :[1-9][0-9]{0,3} )?                             # optional prefix modifier (1‚Äì4 digits)
+            (?: :[1-9][0-9]{0,3} )?                             # optional prefix modifier (1ñ4 digits)
             \*?                                                 # optional explode
             (?:,                                                # comma separator, followed by the same as above
                 (?<varname>
@@ -111,7 +111,7 @@ internal static partial class UriTemplate
         // Appends a regex fragment to `pattern` that matches an optional query string starting
         // with the given `prefix` (? or &), and up to one occurrence of each name in
         // `paramNames`. Each parameter is made optional and captured by a named group
-        // of the form ‚ÄúparamName=value‚Äù.
+        // of the form ìparamName=valueî.
         static void AppendQueryExpression(ref DefaultInterpolatedStringHandler pattern, List<string> paramNames, char prefix)
         {
             Debug.Assert(prefix is '?' or '&');
@@ -142,7 +142,7 @@ internal static partial class UriTemplate
             pattern.AppendLiteral(")?");
         }
 
-        // Chooses a regex character‚Äêclass (`valueChars`) based on the initial `prefix` to define which
+        // Chooses a regex character-class (`valueChars`) based on the initial `prefix` to define which
         // characters make up a parameter value. Then, for each name in `paramNames`, it optionally
         // appends the escaped `prefix` (only on the first parameter, then switches to ','), and
         // adds an optional named capture group `(?<paramName>valueChars)` to match and capture that value.

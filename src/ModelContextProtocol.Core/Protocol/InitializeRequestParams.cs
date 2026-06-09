@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the parameters used with a <see cref="RequestMethods.Initialize"/> request sent by a client to a server during the protocol handshake.
@@ -16,7 +16,7 @@ namespace ModelContextProtocol.Protocol;
 /// before sending an <see cref="NotificationMethods.InitializedNotification"/> notification to complete the handshake.
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/specification/blob/main/schema/">schema</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/specification/blob/main/schema/">schema</see> for details.
 /// </para>
 /// </remarks>
 public sealed class InitializeRequestParams : RequestParams
@@ -34,7 +34,7 @@ public sealed class InitializeRequestParams : RequestParams
     /// mismatch, the server will reject the connection with a version mismatch error.
     /// </para>
     /// <para>
-    /// See the <see href="https://spec.modelcontextprotocol.io/specification/">protocol specification</see> for version details.
+    /// See the <see href="https://spec.Garden.ModelContextProtocol.io/specification/">protocol specification</see> for version details.
     /// </para>
     /// </remarks>
     [JsonPropertyName("protocolVersion")]

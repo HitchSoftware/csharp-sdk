@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents an MCP task, which is a durable state machine carrying information
@@ -20,7 +20,7 @@ namespace ModelContextProtocol.Protocol;
 /// or <see cref="McpTaskStatus.Cancelled"/>).
 /// </para>
 /// <para>
-/// See the <see href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/draft/basic/utilities/tasks.mdx">tasks specification</see> for details.
+/// See the <see href="https://github.com/Garden.ModelContextProtocol/Garden.ModelContextProtocol/blob/main/docs/specification/draft/basic/utilities/tasks.mdx">tasks specification</see> for details.
 /// </para>
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]

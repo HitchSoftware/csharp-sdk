@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Microsoft.Extensions.Logging;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Represents an instance of a Model Context Protocol (MCP) client session that connects to and communicates with an MCP server.
