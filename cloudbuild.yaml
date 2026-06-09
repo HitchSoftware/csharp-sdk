@@ -54,15 +54,15 @@ steps:
         EOF
 
         # Push Core first to test if the hang is Core-specific
-        CORE_PKG=$(ls ./.artifacts/*Core*.nupkg)
-        echo "=== Pushing Core FIRST: $CORE_PKG ==="
-        dotnet nuget push "$CORE_PKG" --source github --configfile /workspace/nuget.config --skip-duplicate
-        echo "=== Done Core: $CORE_PKG ==="
+        CORE_PKG=$$(ls ./.artifacts/*Core*.nupkg)
+        echo "=== Pushing Core FIRST: $$CORE_PKG ==="
+        dotnet nuget push "$$CORE_PKG" --source github --configfile /workspace/nuget.config --skip-duplicate
+        echo "=== Done Core: $$CORE_PKG ==="
 
-        for nupkg in $(ls ./.artifacts/*.nupkg | grep -v Core | sort); do
-          echo "=== Pushing: $nupkg ==="
-          dotnet nuget push "$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
-          echo "=== Done: $nupkg ==="
+        for nupkg in $$(ls ./.artifacts/*.nupkg | grep -v Core | sort); do
+          echo "=== Pushing: $$nupkg ==="
+          dotnet nuget push "$$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
+          echo "=== Done: $$nupkg ==="
         done
 
 options:
