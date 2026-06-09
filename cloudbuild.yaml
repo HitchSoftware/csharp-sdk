@@ -41,6 +41,10 @@ steps:
       - |
         set -euo pipefail
 
+        echo "=== Installing iproute2 and setting MTU ==="
+        apt-get update && apt-get install -y iproute2
+        ip link set dev eth0 mtu 1400 || true
+
         cat > /workspace/nuget.config <<EOF
         <configuration>
           <packageSources>
