@@ -1,12 +1,13 @@
 steps:
   - name: "mcr.microsoft.com/dotnet/sdk:10.0"
     id: restore
-    entrypoint: dotnet
+    entrypoint: bash
     args:
-      - restore
-      - src/ModelContextProtocol.Core/ModelContextProtocol.Core.csproj
-      - src/ModelContextProtocol/ModelContextProtocol.csproj
-      - src/ModelContextProtocol.AspNetCore/ModelContextProtocol.AspNetCore.csproj
+      - -c
+      - |
+        dotnet restore src/ModelContextProtocol.Core/ModelContextProtocol.Core.csproj
+        dotnet restore src/ModelContextProtocol/ModelContextProtocol.csproj
+        dotnet restore src/ModelContextProtocol.AspNetCore/ModelContextProtocol.AspNetCore.csproj
 
   - name: "mcr.microsoft.com/dotnet/sdk:10.0"
     id: build-and-pack
