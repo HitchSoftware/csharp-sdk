@@ -30,35 +30,25 @@ steps:
         done
 
   - name: "mcr.microsoft.com/dotnet/sdk:10.0"
-    id: push-core
+    id: push-core-curl
     entrypoint: bash
     secretEnv:
       - GITHUB_PACKAGES_PAT
-    env:
-      - 'DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0'
     args:
       - -c
       - |
         set -euo pipefail
 
-        cat > /workspace/nuget.config <<EOF
-        <configuration>
-          <packageSources>
-            <add key="github" value="https://nuget.pkg.github.com/HitchSoftware/index.json" />
-          </packageSources>
-          <packageSourceCredentials>
-            <github>
-              <add key="Username" value="HitchSoftware" />
-              <add key="ClearTextPassword" value="$$GITHUB_PACKAGES_PAT" />
-            </github>
-          </packageSourceCredentials>
-        </configuration>
-        EOF
-
         CORE_PKG=$$(ls ./.artifacts/Garden.ModelContextProtocol.Core.*.nupkg)
-        echo "=== Pushing Core FIRST ==="
-        dotnet nuget push "$$CORE_PKG" --source github --configfile /workspace/nuget.config --skip-duplicate
-        echo "=== Done Core ==="
+        echo "=== Pushing Core with curl ==="
+        curl -X PUT \
+          -H "Authorization: token $$GITHUB_PACKAGES_PAT" \
+          -T "$$CORE_PKG" \
+          "https://nuget.pkg.github.com/HitchSoftware/$$(basename $$CORE_PKG)" \
+          --fail \
+          --show-error \
+          --location
+        echo "=== Done Core curl ==="
 
   - name: "mcr.microsoft.com/dotnet/sdk:10.0"
     id: push-others
