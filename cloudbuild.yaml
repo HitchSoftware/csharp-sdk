@@ -19,12 +19,12 @@ steps:
         VERSION="${TAG_NAME}"
         mkdir -p ./.artifacts
 
-        for proj in $(find . -name "*.csproj" ! -name "*.Tests.csproj" ! -path "*/obj/*" | sort); do
+        for proj in $(find ./src -name "*.csproj" | sort); do
           echo "Building $proj"
           dotnet build "$proj" -c Release --no-restore
         done
 
-        for proj in $(find . -name "*.csproj" ! -name "*.Tests.csproj" ! -path "*/obj/*" | sort); do
+        for proj in $(find ./src -name "*.csproj" | sort); do
           echo "Packing $proj as ${TAG_NAME}"
           dotnet pack "$proj" -c Release --no-build --no-restore -p:PackageVersion="${TAG_NAME}" -o ./.artifacts
         done
