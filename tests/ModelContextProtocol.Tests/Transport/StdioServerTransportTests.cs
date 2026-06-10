@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Garden.ModelContextProtocol.Protocol;
 using Garden.ModelContextProtocol.Server;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 using System.IO.Pipelines;
 using System.Text;
 using System.Text.Json;

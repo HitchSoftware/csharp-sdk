@@ -1,6 +1,7 @@
+using Garden.ModelContextProtocol;
 using Garden.ModelContextProtocol.Protocol;
 using Garden.ModelContextProtocol.Server;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 

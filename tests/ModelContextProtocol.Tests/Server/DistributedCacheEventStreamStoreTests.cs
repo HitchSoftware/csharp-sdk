@@ -3,7 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Garden.ModelContextProtocol.Protocol;
 using Garden.ModelContextProtocol.Server;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 using System.Net.ServerSentEvents;
 
 namespace ModelContextProtocol.Tests;

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
 using Garden.ModelContextProtocol.Client;
-using Garden.ModelContextProtocol.Tests.Utils;
-using Garden.ModelContextProtocol.TestSseServer;
+using ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.TestsseServer;
 using System.Net;
 
 namespace ModelContextProtocol.AspNetCore.Tests;

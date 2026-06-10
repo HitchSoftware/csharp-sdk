@@ -1,6 +1,6 @@
 using Garden.ModelContextProtocol.Client;
 using Garden.ModelContextProtocol.Protocol;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 using System.Text.Json;
 using System.Threading.Channels;
 

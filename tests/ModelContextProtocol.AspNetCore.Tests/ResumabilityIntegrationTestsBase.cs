@@ -10,7 +10,7 @@ using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
 using Garden.ModelContextProtocol.Client;
 using Garden.ModelContextProtocol.Protocol;
 using Garden.ModelContextProtocol.Server;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 
 namespace ModelContextProtocol.AspNetCore.Tests;
 

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 
 namespace ModelContextProtocol.Tests;
 

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
 using Garden.ModelContextProtocol.Client;
 using Garden.ModelContextProtocol.Protocol;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 using System.Collections.Concurrent;
 using System.Text.Json;
 

@@ -1,7 +1,7 @@
 ﻿using Garden.ModelContextProtocol.Client;
 using Garden.ModelContextProtocol.Protocol;
 using Garden.ModelContextProtocol.Server;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 

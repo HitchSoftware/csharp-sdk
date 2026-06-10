@@ -1,9 +1,12 @@
 using Microsoft.Extensions.Time.Testing;
 using Garden.ModelContextProtocol.Protocol;
 using Garden.ModelContextProtocol.Server;
-using Garden.ModelContextProtocol.Tests.Utils;
+using ModelContextProtocol.Tests.Utils;
 using System.Text.Json;
-using TestInMemoryMcpTaskStore = ModelContextProtocol.Tests.Internal.InMemoryMcpTaskStore;
+using Garden.ModelContextProtocol.Tests.Internal;
+using Garden.ModelContextProtocol;
+using InMemoryMcpTaskStore = Garden.ModelContextProtocol.Tests.Internal.InMemoryMcpTaskStore;
+
 
 namespace ModelContextProtocol.Tests.Server;
 

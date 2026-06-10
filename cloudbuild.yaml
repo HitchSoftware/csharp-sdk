@@ -30,33 +30,10 @@ steps:
         done
 
   - name: "mcr.microsoft.com/dotnet/sdk:10.0"
-    id: push-core-curl
+    id: push-packages
     entrypoint: bash
     secretEnv:
       - GITHUB_PACKAGES_PAT
-    args:
-      - -c
-      - |
-        set -euo pipefail
-
-        CORE_PKG=$$(ls ./.artifacts/Garden.ModelContextProtocol.Core.*.nupkg)
-        echo "=== Pushing Core with curl ==="
-        curl -X PUT \
-          -H "Authorization: token $$GITHUB_PACKAGES_PAT" \
-          -T "$$CORE_PKG" \
-          "https://nuget.pkg.github.com/HitchSoftware/$$(basename $$CORE_PKG)" \
-          --fail \
-          --show-error \
-          --location
-        echo "=== Done Core curl ==="
-
-  - name: "mcr.microsoft.com/dotnet/sdk:10.0"
-    id: push-others
-    entrypoint: bash
-    secretEnv:
-      - GITHUB_PACKAGES_PAT
-    env:
-      - 'DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0'
     args:
       - -c
       - |
@@ -76,10 +53,9 @@ steps:
         </configuration>
         EOF
 
-        for nupkg in $$(ls ./.artifacts/*.nupkg | grep -v "ModelContextProtocol.Core" | sort); do
-          echo "=== Pushing: $$nupkg ==="
-          dotnet nuget push "$$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
-          echo "=== Done: $$nupkg ==="
+        for nupkg in ./.artifacts/*.nupkg; do
+          echo "Pushing $nupkg to GitHub Packages"
+          dotnet nuget push "$nupkg" --source github --configfile /workspace/nuget.config --skip-duplicate
         done
 
 options:
