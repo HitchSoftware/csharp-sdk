@@ -51,7 +51,7 @@ steps:
           curl -X PUT \
             -H "Authorization: token $$GITHUB_PACKAGES_PAT" \
             -T "$$nupkg" \
-            "https://nuget.pkg.github.com/HitchSoftware/" \
+            "https://nuget.pkg.github.com/HitchSoftware/$$(basename $$nupkg)" \
             --fail \
             --show-error \
             --location
