@@ -29,6 +29,7 @@
     <Compile Include="..\Common\McpHttpHeaders.cs" Link="McpHttpHeaders.cs" />
     <Compile Include="..\Common\HttpResponseMessageExtensions.cs" Link="HttpResponseMessageExtensions.cs" />
     <Compile Include="..\Common\ServerSentEvents\**\*.cs" Link="ServerSentEvents\%(RecursiveDir)%(FileName)%(Extension)" />
+    <Compile Include="..\Common\Polyfills\**\*.cs" />
   </ItemGroup>
 
   <!-- Dependencies only needed by netstandard2.0 -->
