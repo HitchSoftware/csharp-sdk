@@ -35,15 +35,26 @@ The root cause was traced to the modern `SocketsHttpHandler` in .NET 10 inside t
 
 This setting was added after 11 failed build attempts and should be considered **required** for reliable publishes until the underlying incompatibility is understood or resolved upstream.
 
-## Local Development Notes
+## Current Build Configuration (11.2.26+)
 
-- The solution currently restores cleanly after the changes made during the 11.2.x release series.
-- Package validation was disabled (`EnablePackageValidation` commented out in `src/Directory.Build.props`) because the baseline version (`1.3.0`) no longer exists under the new `Garden.*` package IDs.
-- Three `PackageVersion` entries for the Garden packages were added to `Directory.Packages.props` to satisfy Central Package Management during solution restore.
+- Only targets `net10.0` (netstandard2.0, net8.0, and net9.0 removed)
+- `src/Directory.Build.props` has been deleted
+- Root `nuget.config` has been deleted
+- `cloudbuild.yaml` only restores/builds/packs the three main projects under `src/`
+- Push logic is the simple vanilla loop (no Core-first ordering, no custom env vars)
+
+## When Pulling Changes from Upstream
+
+When merging changes from the original `modelcontextprotocol/csharp-sdk`:
+
+1. **Do not** restore `src/Directory.Build.props` or the root `nuget.config` without review.
+2. **Do not** re-add `netstandard2.0` / `net8.0` / `net9.0` target frameworks without testing the full publish flow.
+3. **Do not** re-introduce the old `push-packages` logic (Core-first, custom env vars, etc.).
+4. After any upstream merge, run a test tag (e.g. `11.2.99`) and verify that all three Garden packages build and push successfully.
 
 ## When Modifying cloudbuild.yaml
 
 If you need to change the `push-packages` step, please:
 1. Re-run a full publish cycle with a test tag (e.g. `11.2.99`).
-2. Confirm that **all three** packages (especially Core) publish successfully.
-3. Update this document if the environment variable is no longer needed.
+2. Confirm that **all three** packages publish successfully.
+3. Update this document with any new requirements.

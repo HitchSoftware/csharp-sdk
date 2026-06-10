@@ -444,14 +444,9 @@ public static class McpServerOptionsExtensions
         ArgumentNullException.ThrowIfNull(toolType);
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
-        var instance = serviceProvider.ResolveOrConstruct(toolType);
-        if (instance == null)
-        {
-            var args = serviceProvider.ResolveOrConstruct(toolType); // fallback with explicit args not supported here yet
-            // For now we keep simple path
-        }
-
-        return options.WithTools(toolType, _ => instance!);
+        var instance = serviceProvider.ResolveOrConstruct(toolType)
+            ?? throw new InvalidOperationException($"Failed to resolve/construct {toolType}");
+        return options.WithTools(toolType, _ => instance);
     }
 
     /// <summary>
@@ -469,8 +464,9 @@ public static class McpServerOptionsExtensions
         ArgumentNullException.ThrowIfNull(resourceType);
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
-        var instance = serviceProvider.ResolveOrConstruct(resourceType);
-        return options.WithResources(resourceType, _ => instance!);
+        var instance = serviceProvider.ResolveOrConstruct(resourceType)
+            ?? throw new InvalidOperationException($"Failed to resolve/construct {resourceType}");
+        return options.WithResources(resourceType, _ => instance);
     }
 
     /// <summary>
@@ -488,8 +484,9 @@ public static class McpServerOptionsExtensions
         ArgumentNullException.ThrowIfNull(promptType);
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
-        var instance = serviceProvider.ResolveOrConstruct(promptType);
-        return options.WithPrompts(promptType, _ => instance!);
+        var instance = serviceProvider.ResolveOrConstruct(promptType)
+            ?? throw new InvalidOperationException($"Failed to resolve/construct {promptType}");
+        return options.WithPrompts(promptType, _ => instance);
     }
 
     /// <summary>
