@@ -293,10 +293,10 @@ public sealed partial class StdioClientTransport : IClientTransport
     private static Regex ContainsWhitespaceRegex { get; } = new(@"\s", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 #endif
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} connecting.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} connecting.")]
     private static partial void LogTransportConnecting(ILogger logger, string endpointName);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} starting server process. Command: '{Command}'.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} starting server process. Command: '{Command}'.")]
     private static partial void LogCreateProcessForTransport(ILogger logger, string endpointName, string command);
 
     [LoggerMessage(Level = LogLevel.Trace, Message = "{EndpointName} starting server process. Command: '{Command}', Arguments: {Arguments}, Working directory: {WorkingDirectory}.")]
@@ -305,13 +305,13 @@ public sealed partial class StdioClientTransport : IClientTransport
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} failed to start server process.")]
     private static partial void LogTransportProcessStartFailed(ILogger logger, string endpointName);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} received stderr log: '{Data}'.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} received stderr log: '{Data}'.")]
     private static partial void LogReadStderr(ILogger logger, string endpointName, string data);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} StandardErrorLines callback failed.")]
     private static partial void LogStderrCallbackFailed(ILogger logger, string endpointName, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} started server process with PID {ProcessId}.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} started server process with PID {ProcessId}.")]
     private static partial void LogTransportProcessStarted(ILogger logger, string endpointName, int processId);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} connect failed.")]

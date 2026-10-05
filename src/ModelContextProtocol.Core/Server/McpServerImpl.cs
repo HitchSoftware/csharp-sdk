@@ -1597,19 +1597,19 @@ internal sealed partial class McpServerImpl : McpServer
     [LoggerMessage(Level = LogLevel.Error, Message = "\"{ToolName}\" threw an unhandled exception.")]
     private partial void ToolCallError(string toolName, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "\"{ToolName}\" completed. IsError = {IsError}.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "\"{ToolName}\" completed. IsError = {IsError}.")]
     private partial void ToolCallCompleted(string toolName, bool isError);
 
     [LoggerMessage(Level = LogLevel.Error, Message = "GetPrompt \"{PromptName}\" threw an unhandled exception.")]
     private partial void GetPromptError(string promptName, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "GetPrompt \"{PromptName}\" completed.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "GetPrompt \"{PromptName}\" completed.")]
     private partial void GetPromptCompleted(string promptName);
 
     [LoggerMessage(Level = LogLevel.Error, Message = "ReadResource \"{ResourceUri}\" threw an unhandled exception.")]
     private partial void ReadResourceError(string resourceUri, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "ReadResource \"{ResourceUri}\" completed.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "ReadResource \"{ResourceUri}\" completed.")]
     private partial void ReadResourceCompleted(string resourceUri);
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "Cancelled {Count} pending MRTR continuation(s) during session disposal.")]

@@ -815,7 +815,7 @@ public class StreamableHttpServerConformanceTests(ITestOutputHelper outputHelper
         await CallEchoAndValidateAsync();
 
         var idleLimitLogMessage = Assert.Single(mockLoggerProvider.LogMessages, m => m.EventId.Name == "LogIdleSessionLimit");
-        Assert.Equal(LogLevel.Information, idleLimitLogMessage.LogLevel);
+        Assert.Equal(LogLevel.Debug, idleLimitLogMessage.LogLevel);
         Assert.StartsWith("MaxIdleSessionCount of 2 exceeded. Closing idle session", idleLimitLogMessage.Message);
     }
 

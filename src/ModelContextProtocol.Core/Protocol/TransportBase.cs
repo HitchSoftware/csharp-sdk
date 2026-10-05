@@ -184,10 +184,10 @@ public abstract partial class TransportBase : ITransport
         }
     }
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} transport reading messages.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} transport reading messages.")]
     private protected partial void LogTransportEnteringReadMessagesLoop(string endpointName);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} transport completed reading messages.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} transport completed reading messages.")]
     private protected partial void LogTransportEndOfStream(string endpointName);
 
     [LoggerMessage(Level = LogLevel.Trace, Message = "{EndpointName} transport received message. Message: '{Message}'.")]
@@ -199,19 +199,19 @@ public abstract partial class TransportBase : ITransport
     [LoggerMessage(Level = LogLevel.Trace, Message = "{EndpointName} transport received unexpected message. Message: '{Message}'.")]
     private protected partial void LogTransportMessageParseUnexpectedTypeSensitive(string endpointName, string message);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} transport message parsing failed.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} transport message parsing failed.")]
     private protected partial void LogTransportMessageParseFailed(string endpointName, Exception exception);
 
     [LoggerMessage(Level = LogLevel.Trace, Message = "{EndpointName} transport message parsing failed. Message: '{Message}'.")]
     private protected partial void LogTransportMessageParseFailedSensitive(string endpointName, string message, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} transport message reading canceled.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} transport message reading canceled.")]
     private protected partial void LogTransportReadMessagesCancelled(string endpointName);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} transport message reading failed.")]
     private protected partial void LogTransportReadMessagesFailed(string endpointName, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} shutting down.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} shutting down.")]
     private protected partial void LogTransportShuttingDown(string endpointName);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} shutdown failed.")]
@@ -220,7 +220,7 @@ public abstract partial class TransportBase : ITransport
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} shutdown failed waiting for message reading completion.")]
     private protected partial void LogTransportCleanupReadTaskFailed(string endpointName, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} shut down.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} shut down.")]
     private protected partial void LogTransportShutDown(string endpointName);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} received message before connected.")]

@@ -19,7 +19,7 @@ public abstract class ClientServerTestBase : LoggedTest, IAsyncDisposable
     public ClientServerTestBase(ITestOutputHelper testOutputHelper, bool startServer = true)
         : base(testOutputHelper)
     {
-        ServiceCollection.AddLogging();
+        ServiceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug));
         ServiceCollection.AddSingleton(XunitLoggerProvider);
         ServiceCollection.AddSingleton<ILoggerProvider>(MockLoggerProvider);
         McpServerBuilder = ServiceCollection

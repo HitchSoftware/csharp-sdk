@@ -238,10 +238,10 @@ internal sealed partial class StatefulSessionManager(
         return (long)(idleTimeout.Ticks * timeProvider.TimestampFrequency / (double)TimeSpan.TicksPerSecond);
     }
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "IdleTimeout of {IdleTimeout} exceeded. Closing idle session {SessionId}.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "IdleTimeout of {IdleTimeout} exceeded. Closing idle session {SessionId}.")]
     private partial void LogIdleSessionTimeout(string sessionId, TimeSpan idleTimeout);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "MaxIdleSessionCount of {MaxIdleSessionCount} exceeded. Closing idle session {SessionId} despite it being active more recently than the configured IdleTimeout to make room for new sessions.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "MaxIdleSessionCount of {MaxIdleSessionCount} exceeded. Closing idle session {SessionId} despite it being active more recently than the configured IdleTimeout to make room for new sessions.")]
     private partial void LogIdleSessionLimit(string sessionId, int maxIdleSessionCount);
 
     [LoggerMessage(Level = LogLevel.Error, Message = "Error disposing session {SessionId}.")]

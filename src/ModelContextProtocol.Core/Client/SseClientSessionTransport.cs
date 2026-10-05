@@ -257,10 +257,10 @@ internal sealed partial class SseClientSessionTransport : TransportBase
         _connectionEstablished.TrySetResult(true);
     }
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} accepted SSE transport POST for message ID '{MessageId}'.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} accepted SSE transport POST for message ID '{MessageId}'.")]
     private partial void LogAcceptedPost(string endpointName, string messageId);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} rejected SSE transport POST for message ID '{MessageId}'.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} rejected SSE transport POST for message ID '{MessageId}'.")]
     private partial void LogRejectedPost(string endpointName, string messageId);
 
     [LoggerMessage(Level = LogLevel.Trace, Message = "{EndpointName} rejected SSE transport POST for message ID '{MessageId}'. Server response: '{responseContent}'.")]

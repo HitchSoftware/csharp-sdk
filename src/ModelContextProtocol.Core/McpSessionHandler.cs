@@ -1091,19 +1091,19 @@ internal sealed partial class McpSessionHandler : IAsyncDisposable
         return result?.Count > 0 ? result : null;
     }
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} message processing canceled.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} message processing canceled.")]
     private partial void LogEndpointMessageProcessingCanceled(string endpointName);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} method '{Method}' request handler called.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} method '{Method}' request handler called.")]
     private partial void LogRequestHandlerCalled(string endpointName, string method);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} method '{Method}' request handler completed in {ElapsedMilliseconds}ms.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} method '{Method}' request handler completed in {ElapsedMilliseconds}ms.")]
     private partial void LogRequestHandlerCompleted(string endpointName, string method, double elapsedMilliseconds);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} method '{Method}' request handler failed in {ElapsedMilliseconds}ms.")]
     private partial void LogRequestHandlerException(string endpointName, string method, double elapsedMilliseconds, Exception exception);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} received request for unknown request ID '{RequestId}'.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} received request for unknown request ID '{RequestId}'.")]
     private partial void LogNoRequestFoundForMessageWithId(string endpointName, RequestId requestId);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} request failed for method '{Method}': {ErrorMessage} ({ErrorCode}).")]
@@ -1118,7 +1118,7 @@ internal sealed partial class McpSessionHandler : IAsyncDisposable
     [LoggerMessage(Level = LogLevel.Trace, Message = "{EndpointName} sending method '{Method}' request. Request: '{Request}'.")]
     private partial void LogSendingRequestSensitive(string endpointName, string method, string request);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} canceled request '{RequestId}' per client notification. Reason: '{Reason}'.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} canceled request '{RequestId}' per client notification. Reason: '{Reason}'.")]
     private partial void LogRequestCanceled(string endpointName, RequestId requestId, string? reason);
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} Request response received for method {method}")]

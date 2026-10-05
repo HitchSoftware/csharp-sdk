@@ -966,7 +966,7 @@ internal sealed partial class McpClientImpl : McpClient
     [LoggerMessage(Level = LogLevel.Warning, Message = "{EndpointName} received InputRequiredResult for '{Method}' on session that did not negotiate MRTR (protocol version '{ProtocolVersion}'). The server may not be spec-compliant.")]
     private partial void LogInputRequiredResultOnNonMrtrSession(string endpointName, string method, string? protocolVersion);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} client received server '{ServerInfo}' capabilities: '{Capabilities}'.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} client received server '{ServerInfo}' capabilities: '{Capabilities}'.")]
     private partial void LogServerCapabilitiesReceived(string endpointName, string capabilities, string serverInfo);
 
     [LoggerMessage(Level = LogLevel.Error, Message = "{EndpointName} client initialization error.")]
@@ -978,10 +978,10 @@ internal sealed partial class McpClientImpl : McpClient
     [LoggerMessage(Level = LogLevel.Error, Message = "{EndpointName} client protocol version mismatch with server. Expected '{Expected}', received '{Received}'.")]
     private partial void LogServerProtocolVersionMismatch(string endpointName, string expected, string received);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} client created and connected.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} client created and connected.")]
     private partial void LogClientConnected(string endpointName);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} client resumed existing session.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} client resumed existing session.")]
     private partial void LogClientSessionResumed(string endpointName);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Tool '{ToolName}' not found in cache during tools/call. Mcp-Param-* headers will not be sent. Call AddKnownTools or ListToolsAsync to populate the cache.")]

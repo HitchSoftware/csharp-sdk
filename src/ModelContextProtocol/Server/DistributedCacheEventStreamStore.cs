@@ -268,7 +268,7 @@ public sealed partial class DistributedCacheEventStreamStore : ISseEventStreamSt
         [LoggerMessage(Level = LogLevel.Debug, Message = "Event written to session '{SessionId}', stream '{StreamId}' with ID '{EventId}' (sequence {Sequence}).")]
         private partial void LogEventWritten(string sessionId, string streamId, string eventId, long sequence);
 
-        [LoggerMessage(Level = LogLevel.Information, Message = "Stream writer disposed for session '{SessionId}', stream '{StreamId}'. Total events written: {TotalEvents}.")]
+        [LoggerMessage(Level = LogLevel.Debug, Message = "Stream writer disposed for session '{SessionId}', stream '{StreamId}'. Total events written: {TotalEvents}.")]
         private partial void LogStreamWriterDisposed(string sessionId, string streamId, long totalEvents);
     }
 
@@ -387,7 +387,7 @@ public sealed partial class DistributedCacheEventStreamStore : ISseEventStreamSt
         private partial void LogWaitingForNewEvents(string sessionId, string streamId, TimeSpan pollingInterval);
     }
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Stream created for session '{SessionId}', stream '{StreamId}' with mode {Mode}.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Stream created for session '{SessionId}', stream '{StreamId}' with mode {Mode}.")]
     private partial void LogStreamCreated(string sessionId, string streamId, SseEventStreamMode mode);
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "Stream reader created for session '{SessionId}', stream '{StreamId}' starting at sequence {StartSequence}. Last available sequence: {LastSequence}.")]

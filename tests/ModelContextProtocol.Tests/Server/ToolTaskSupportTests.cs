@@ -568,7 +568,7 @@ public class ToolTaskSupportTests : LoggedTest
         await fixture.Client.GetTaskResultAsync(mcpTask.TaskId, cancellationToken: TestContext.Current.CancellationToken);
 
         var infoLog = Assert.Single(MockLoggerProvider.LogMessages, m => m.Message == "\"task-success-tool\" completed. IsError = False.");
-        Assert.Equal(LogLevel.Information, infoLog.LogLevel);
+        Assert.Equal(LogLevel.Debug, infoLog.LogLevel);
     }
 
     [Fact]
@@ -611,7 +611,7 @@ public class ToolTaskSupportTests : LoggedTest
         await fixture.Client.GetTaskResultAsync(mcpTask.TaskId, cancellationToken: TestContext.Current.CancellationToken);
 
         var infoLog = Assert.Single(MockLoggerProvider.LogMessages, m => m.Message == "\"task-error-result-tool\" completed. IsError = True.");
-        Assert.Equal(LogLevel.Information, infoLog.LogLevel);
+        Assert.Equal(LogLevel.Debug, infoLog.LogLevel);
     }
 
     [Fact]
@@ -677,7 +677,7 @@ public class ToolTaskSupportTests : LoggedTest
             Action<IServiceCollection>? configureServices = null)
         {
             ServiceCollection sc = new();
-            sc.AddLogging();
+            sc.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug));
 
             var builder = sc
                 .AddMcpServer()

@@ -252,7 +252,7 @@ public partial class McpServerBuilderExtensionsResourcesTests : ClientServerTest
         Assert.NotNull(result);
 
         var infoLog = Assert.Single(MockLoggerProvider.LogMessages, m => m.Message == "ReadResource \"resource://mcp/some_neat_direct_resource\" completed.");
-        Assert.Equal(LogLevel.Information, infoLog.LogLevel);
+        Assert.Equal(LogLevel.Debug, infoLog.LogLevel);
     }
 
     [Fact]

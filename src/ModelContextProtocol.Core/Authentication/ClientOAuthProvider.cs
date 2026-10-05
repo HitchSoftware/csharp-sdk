@@ -1037,22 +1037,22 @@ internal sealed partial class ClientOAuthProvider : McpHttpClient
     private static void ThrowFailedToHandleUnauthorizedResponse(string message) =>
         throw new McpException($"Failed to handle unauthorized response with 'Bearer' scheme. {message}");
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Selected authorization server: {Server} from {Count} available servers")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Selected authorization server: {Server} from {Count} available servers")]
     partial void LogSelectedAuthorizationServer(Uri server, int count);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "OAuth authorization completed successfully")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "OAuth authorization completed successfully")]
     partial void LogOAuthAuthorizationCompleted();
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "OAuth token refresh completed successfully")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "OAuth token refresh completed successfully")]
     partial void LogOAuthTokenRefreshCompleted();
 
     [LoggerMessage(Level = LogLevel.Error, Message = "Error fetching auth server metadata from {Endpoint}")]
     partial void LogErrorFetchingAuthServerMetadata(Exception ex, Uri endpoint);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Performing dynamic client registration with {RegistrationEndpoint}")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Performing dynamic client registration with {RegistrationEndpoint}")]
     partial void LogPerformingDynamicClientRegistration(Uri registrationEndpoint);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Dynamic client registration successful. Client ID: {ClientId}")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Dynamic client registration successful. Client ID: {ClientId}")]
     partial void LogDynamicClientRegistrationSuccessful(string clientId);
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "Validating resource metadata against original server URL: {ServerUrl}")]

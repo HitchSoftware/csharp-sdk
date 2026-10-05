@@ -209,7 +209,7 @@ public partial class McpServerBuilderExtensionsPromptsTests : ClientServerTestBa
         Assert.NotNull(result);
 
         var infoLog = Assert.Single(MockLoggerProvider.LogMessages, m => m.Message == "GetPrompt \"returns_chat_messages\" completed.");
-        Assert.Equal(LogLevel.Information, infoLog.LogLevel);
+        Assert.Equal(LogLevel.Debug, infoLog.LogLevel);
     }
 
     [Fact]

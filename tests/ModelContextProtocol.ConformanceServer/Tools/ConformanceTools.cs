@@ -111,13 +111,13 @@ public class ConformanceTools
         ILoggerProvider loggerProvider = server.AsClientLoggerProvider();
         ILogger logger = loggerProvider.CreateLogger("ConformanceTools");
 
-        logger.LogInformation("Tool execution started");
+        logger.LogDebug("Tool execution started");
         await Task.Delay(50, cancellationToken);
 
-        logger.LogInformation("Tool processing data");
+        logger.LogDebug("Tool processing data");
         await Task.Delay(50, cancellationToken);
 
-        logger.LogInformation("Tool execution completed");
+        logger.LogDebug("Tool execution completed");
 
         return "Tool with logging executed successfully";
     }

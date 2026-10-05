@@ -136,15 +136,15 @@ internal sealed partial class AutoDetectingClientSessionTransport : ITransport
     [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} attempting to connect using Streamable HTTP transport.")]
     private partial void LogAttemptingStreamableHttp(string endpointName);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} streamable HTTP transport failed with status code {StatusCode}, falling back to SSE transport.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} streamable HTTP transport failed with status code {StatusCode}, falling back to SSE transport.")]
     private partial void LogStreamableHttpFailed(string endpointName, HttpStatusCode statusCode);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} using Streamable HTTP transport.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} using Streamable HTTP transport.")]
     private partial void LogUsingStreamableHttp(string endpointName);
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} attempting to connect using SSE transport.")]
     private partial void LogAttemptingSSE(string endpointName);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "{EndpointName} using SSE transport.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{EndpointName} using SSE transport.")]
     private partial void LogUsingSSE(string endpointName);
 }

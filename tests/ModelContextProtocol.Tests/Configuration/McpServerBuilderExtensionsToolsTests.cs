@@ -394,7 +394,7 @@ public partial class McpServerBuilderExtensionsToolsTests : ClientServerTestBase
         Assert.Equal("hello test", (result.Content[0] as TextContentBlock)?.Text);
 
         var infoLog = Assert.Single(MockLoggerProvider.LogMessages, m => m.Message == "\"echo\" completed. IsError = False.");
-        Assert.Equal(LogLevel.Information, infoLog.LogLevel);
+        Assert.Equal(LogLevel.Debug, infoLog.LogLevel);
     }
 
     [Fact]
@@ -410,7 +410,7 @@ public partial class McpServerBuilderExtensionsToolsTests : ClientServerTestBase
         Assert.Contains("Tool returned an error", (result.Content[0] as TextContentBlock)?.Text);
 
         var infoLog = Assert.Single(MockLoggerProvider.LogMessages, m => m.Message == "\"return_is_error\" completed. IsError = True.");
-        Assert.Equal(LogLevel.Information, infoLog.LogLevel);
+        Assert.Equal(LogLevel.Debug, infoLog.LogLevel);
     }
 
     [Fact]
