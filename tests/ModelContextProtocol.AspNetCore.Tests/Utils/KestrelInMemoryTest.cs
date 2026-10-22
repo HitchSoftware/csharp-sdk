@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Tests.Utils;
 
-namespace ModelContextProtocol.AspNetCore.Tests.Utils;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
 
 public abstract class KestrelInMemoryTest : LoggedTest
 {

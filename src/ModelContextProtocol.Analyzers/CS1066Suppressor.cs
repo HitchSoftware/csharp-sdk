@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 
-namespace ModelContextProtocol.Analyzers;
+namespace Garden.ModelContextProtocol.Analyzers;
 
 /// <summary>
 /// Suppresses CS1066 warnings for MCP server methods that have optional parameters.

@@ -4,11 +4,11 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 public class HttpMcpServerBuilderExtensionsTests(ITestOutputHelper testOutputHelper) : KestrelInMemoryTest(testOutputHelper)
 {

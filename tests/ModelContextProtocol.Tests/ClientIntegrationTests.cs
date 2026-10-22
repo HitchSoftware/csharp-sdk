@@ -1,12 +1,12 @@
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Tests.Utils;
 using OpenAI;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 public partial class ClientIntegrationTests : LoggedTest, IClassFixture<ClientIntegrationTestFixture>
 {

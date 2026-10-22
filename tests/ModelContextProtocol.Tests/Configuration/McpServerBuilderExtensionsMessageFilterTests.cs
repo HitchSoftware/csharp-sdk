@@ -1,13 +1,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.Security.Claims;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Tests.Configuration;
+namespace Garden.ModelContextProtocol.Tests.Configuration;
 
 public class McpServerBuilderExtensionsMessageFilterTests(ITestOutputHelper testOutputHelper) : ClientServerTestBase(testOutputHelper, startServer: false)
 {

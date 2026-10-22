@@ -1,10 +1,10 @@
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.Text.Json;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Tests.Protocol;
+namespace Garden.ModelContextProtocol.Tests.Protocol;
 
 /// <summary>
 /// Tests verifying that the client applies elicitation schema defaults independently of the server.

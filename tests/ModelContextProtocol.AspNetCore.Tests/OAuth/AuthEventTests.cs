@@ -1,11 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.AspNetCore.Authentication;
-using ModelContextProtocol.Authentication;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.AspNetCore.Authentication;
+using Garden.ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Client;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace ModelContextProtocol.AspNetCore.Tests.OAuth;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests.OAuth;
 
 /// <summary>
 /// Tests for MCP authentication when resource metadata is provided via events rather than static configuration.

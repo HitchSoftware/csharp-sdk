@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Options for requesting a JWT Authorization Grant from an Identity Provider via RFC 8693 Token Exchange.

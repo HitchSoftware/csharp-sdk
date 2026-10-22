@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Provides an <see cref="IClientTransport"/> implemented around a pair of input/output streams.

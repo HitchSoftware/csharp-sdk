@@ -1,5 +1,5 @@
-using ModelContextProtocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Globalization;
 using System.Text.Json;

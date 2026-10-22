@@ -6,15 +6,15 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 internal sealed class StreamableHttpHandler(
     IOptions<McpServerOptions> mcpServerOptionsSnapshot,
@@ -31,7 +31,7 @@ internal sealed class StreamableHttpHandler(
 
     /// <summary>
     /// All protocol versions supported by this implementation.
-    /// Keep in sync with McpSessionHandler.SupportedProtocolVersions in ModelContextProtocol.Core.
+    /// Keep in sync with McpSessionHandler.SupportedProtocolVersions in Garden.ModelContextProtocol.Core.
     /// </summary>
     private static readonly HashSet<string> s_supportedProtocolVersions =
     [
@@ -46,7 +46,7 @@ internal sealed class StreamableHttpHandler(
     private static readonly JsonTypeInfo<JsonRpcError> s_errorTypeInfo = GetRequiredJsonTypeInfo<JsonRpcError>();
 
     private static bool AllowNewSessionForNonInitializeRequests { get; } =
-        AppContext.TryGetSwitch("ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests", out var enabled) && enabled;
+        AppContext.TryGetSwitch("Garden.ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests", out var enabled) && enabled;
 
     private readonly ConcurrentDictionary<string, SemaphoreSlim> _migrationLocks = new(StringComparer.Ordinal);
 

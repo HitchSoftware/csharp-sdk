@@ -1,8 +1,8 @@
 using System.Net;
 using System.Text.Json.Nodes;
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Authentication;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 public sealed class IdentityAssertionGrantTests : IDisposable
 {

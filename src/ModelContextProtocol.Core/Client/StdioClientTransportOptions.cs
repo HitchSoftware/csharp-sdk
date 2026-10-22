@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides options for configuring <see cref="StdioClientTransport"/> instances.

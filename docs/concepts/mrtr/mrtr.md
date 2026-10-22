@@ -48,17 +48,17 @@ var clientOptions = new McpClientOptions
 };
 ```
 
-Under `DRAFT-2026-v1`, MRTR is the recommended way to obtain client input from a server handler. The spec removes the legacy server-to-client `elicitation/create`, `sampling/createMessage`, and `roots/list` request methods, so any code that needs to work on a `DRAFT-2026-v1` Streamable HTTP server (which will be stateless-only in a future revision) must use `InputRequiredException` rather than <xref:ModelContextProtocol.Server.McpServer.ElicitAsync*>, <xref:ModelContextProtocol.Server.McpServer.SampleAsync*>, or <xref:ModelContextProtocol.Server.McpServer.RequestRootsAsync*>. The legacy methods still work on stateful sessions — that's how stdio servers keep working under draft today — but they throw `InvalidOperationException("X is not supported in stateless mode.")` on any stateless session, current or draft.
+Under `DRAFT-2026-v1`, MRTR is the recommended way to obtain client input from a server handler. The spec removes the legacy server-to-client `elicitation/create`, `sampling/createMessage`, and `roots/list` request methods, so any code that needs to work on a `DRAFT-2026-v1` Streamable HTTP server (which will be stateless-only in a future revision) must use `InputRequiredException` rather than <xref:Garden.ModelContextProtocol.Server.McpServer.ElicitAsync*>, <xref:Garden.ModelContextProtocol.Server.McpServer.SampleAsync*>, or <xref:Garden.ModelContextProtocol.Server.McpServer.RequestRootsAsync*>. The legacy methods still work on stateful sessions — that's how stdio servers keep working under draft today — but they throw `InvalidOperationException("X is not supported in stateless mode.")` on any stateless session, current or draft.
 
 Under the current protocol revision (`2025-06-18` and earlier), `InputRequiredException` is still supported in stateful sessions via a backward-compatibility resolver — see [Compatibility](#compatibility) below.
 
 ## Authoring an MRTR tool
 
-A tool participates in MRTR by throwing <xref:ModelContextProtocol.Protocol.InputRequiredException> with an <xref:ModelContextProtocol.Protocol.InputRequiredResult> describing what it needs. On retry, the client's responses arrive on the request parameters and the tool inspects them to decide what to do next.
+A tool participates in MRTR by throwing <xref:Garden.ModelContextProtocol.Protocol.InputRequiredException> with an <xref:Garden.ModelContextProtocol.Protocol.InputRequiredResult> describing what it needs. On retry, the client's responses arrive on the request parameters and the tool inspects them to decide what to do next.
 
 ### Checking MRTR support
 
-Tools should check <xref:ModelContextProtocol.Server.McpServer.IsMrtrSupported> before throwing `InputRequiredException`. It returns `true` when either:
+Tools should check <xref:Garden.ModelContextProtocol.Server.McpServer.IsMrtrSupported> before throwing `InputRequiredException`. It returns `true` when either:
 
 - The negotiated protocol revision is `DRAFT-2026-v1` (MRTR is native), or
 - The session is stateful under the current protocol (the SDK can resolve input requests via legacy JSON-RPC and retry the handler).
@@ -81,7 +81,7 @@ public static string MyTool(
 
 ### Returning an incomplete result
 
-Throw <xref:ModelContextProtocol.Protocol.InputRequiredException> to return an incomplete result. The exception carries an <xref:ModelContextProtocol.Protocol.InputRequiredResult> containing `inputRequests` and/or `requestState`:
+Throw <xref:Garden.ModelContextProtocol.Protocol.InputRequiredException> to return an incomplete result. The exception carries an <xref:Garden.ModelContextProtocol.Protocol.InputRequiredResult> containing `inputRequests` and/or `requestState`:
 
 ```csharp
 [McpServerTool, Description("Tool managing its own MRTR flow")]
@@ -132,10 +132,10 @@ public static string AnswerTool(
 
 When the client retries a tool call, the retry data is available on the request parameters:
 
-- <xref:ModelContextProtocol.Protocol.RequestParams.InputResponses> — a dictionary of client responses keyed by the same keys used in `inputRequests`.
-- <xref:ModelContextProtocol.Protocol.RequestParams.RequestState> — the opaque state string echoed back by the client.
+- <xref:Garden.ModelContextProtocol.Protocol.RequestParams.InputResponses> — a dictionary of client responses keyed by the same keys used in `inputRequests`.
+- <xref:Garden.ModelContextProtocol.Protocol.RequestParams.RequestState> — the opaque state string echoed back by the client.
 
-Use <xref:ModelContextProtocol.Protocol.InputResponse.Deserialize*> with the `JsonTypeInfo<T>` matching the response type. The expected type follows from the matching <xref:ModelContextProtocol.Protocol.InputRequest.Method> in the original `inputRequests` map — there is no on-the-wire discriminator.
+Use <xref:Garden.ModelContextProtocol.Protocol.InputResponse.Deserialize*> with the `JsonTypeInfo<T>` matching the response type. The expected type follows from the matching <xref:Garden.ModelContextProtocol.Protocol.InputRequest.Method> in the original `inputRequests` map — there is no on-the-wire discriminator.
 
 - Elicitation — `response.Deserialize(InputResponse.ElicitResultJsonTypeInfo)`
 - Sampling — `response.Deserialize(InputResponse.CreateMessageResultJsonTypeInfo)`

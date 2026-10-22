@@ -18,9 +18,9 @@ When making code changes:
 ## Project Overview
 
 The SDK consists of three main packages:
-- **ModelContextProtocol.Core** - Client and low-level server APIs with minimal dependencies
-- **ModelContextProtocol** - The main package with hosting and dependency injection extensions and which references ModelContextProtocol.Core
-- **ModelContextProtocol.AspNetCore** - HTTP-based MCP server implementations for ASP.NET Core, referencing ModelContextProtocol
+- **Garden.ModelContextProtocol.Core** - Client and low-level server APIs with minimal dependencies
+- **Garden.ModelContextProtocol** - The main package with hosting and dependency injection extensions and which references Garden.ModelContextProtocol.Core
+- **Garden.ModelContextProtocol.AspNetCore** - HTTP-based MCP server implementations for ASP.NET Core, referencing Garden.ModelContextProtocol
 
 ## C# Coding Standards
 
@@ -34,7 +34,7 @@ The SDK consists of three main packages:
 - Follow the conventions in `.editorconfig`
 - Use clear, descriptive XML documentation comments for public APIs
 - Follow async/await patterns consistently
-- Use file-scoped namespaces: `namespace ModelContextProtocol.Client;`
+- Use file-scoped namespaces: `namespace Garden.ModelContextProtocol.Client;`
 
 ### Naming Conventions
 - Use `McpClient`, `McpServer`, `McpSession` for MCP-related classes (capitalize MCP)
@@ -154,7 +154,7 @@ Do not skip or defer building and testing. These are mandatory steps for every c
 The SDK is organized into distinct architectural layers, each with specific responsibilities:
 
 ### Protocol Layer (DTO Types)
-- Located in `ModelContextProtocol.Core/Protocol/`
+- Located in `Garden.ModelContextProtocol.Core/Protocol/`
 - Contains Data Transfer Objects (DTOs) for the MCP specification
 - All protocol types follow JSON-RPC 2.0 conventions
 - Key types:
@@ -232,7 +232,7 @@ Two primary transport implementations with different invariants:
 ## Architecture and Design Patterns
 
 ### Server Implementation Architecture
-- **McpServer** is the core server implementation in `ModelContextProtocol.Core/Server/`
+- **McpServer** is the core server implementation in `Garden.ModelContextProtocol.Core/Server/`
 - **IMcpServerBuilder** pattern provides fluent API for configuring servers via DI
 - Server primitives (tools, prompts, resources) are discovered via reflection using attributes
 - Support both attribute-based registration (`WithTools<T>()`) and instance-based (`WithTools(target)`)
@@ -336,8 +336,8 @@ public class LoggingFilter : McpRequestFilter
 ## OpenTelemetry Integration
 
 - The SDK includes built-in observability support
-- Use ActivitySource name: `"Experimental.ModelContextProtocol"`
-- Use Meter name: `"Experimental.ModelContextProtocol"`
+- Use ActivitySource name: `"Experimental.Garden.ModelContextProtocol"`
+- Use Meter name: `"Experimental.Garden.ModelContextProtocol"`
 - Export traces and metrics using OTLP when appropriate
 
 ## Documentation

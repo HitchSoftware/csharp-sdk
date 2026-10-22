@@ -1,9 +1,9 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Net.ServerSentEvents;
 using System.Security.Claims;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides an <see cref="ITransport"/> implementation using Server-Sent Events (SSE) for server-to-client communication.

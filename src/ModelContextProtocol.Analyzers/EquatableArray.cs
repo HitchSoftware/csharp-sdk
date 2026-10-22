@@ -3,7 +3,7 @@
 
 using System.Collections;
 
-namespace ModelContextProtocol.Analyzers;
+namespace Garden.ModelContextProtocol.Analyzers;
 
 /// <summary>An immutable, equatable array.</summary>
 /// <typeparam name="T">The type of values in the array.</typeparam>

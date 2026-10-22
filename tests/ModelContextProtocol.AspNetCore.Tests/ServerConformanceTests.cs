@@ -2,9 +2,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Tests.Utils;
 
-namespace ModelContextProtocol.ConformanceTests;
+namespace Garden.ModelContextProtocol.ConformanceTests;
 
 /// <summary>
 /// Shared fixture that starts a single ConformanceServer instance for all tests in

@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Tests.Utils;
 
-namespace ModelContextProtocol.ConformanceTests;
+namespace Garden.ModelContextProtocol.ConformanceTests;
 
 /// <summary>
 /// Runs the official MCP conformance tests against the ConformanceClient.
@@ -81,7 +81,7 @@ public class ClientConformanceTests
     {
         // Construct an absolute path to the conformance client executable
         var exeSuffix = OperatingSystem.IsWindows() ? ".exe" : "";
-        var conformanceClientPath = Path.GetFullPath($"./ModelContextProtocol.ConformanceClient{exeSuffix}");
+        var conformanceClientPath = Path.GetFullPath($"./Garden.ModelContextProtocol.ConformanceClient{exeSuffix}");
         // Replace AspNetCore.Tests with ConformanceClient in the path
         conformanceClientPath = conformanceClientPath.Replace("AspNetCore.Tests", "ConformanceClient");
 

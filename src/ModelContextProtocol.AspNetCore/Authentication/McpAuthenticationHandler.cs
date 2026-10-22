@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Authentication;
 using System.Text.Encodings.Web;
 
-namespace ModelContextProtocol.AspNetCore.Authentication;
+namespace Garden.ModelContextProtocol.AspNetCore.Authentication;
 
 /// <summary>
 /// Represents an authentication handler for MCP protocol that adds resource metadata to challenge responses

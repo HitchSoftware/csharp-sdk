@@ -45,9 +45,9 @@ When intentional breaking changes are confirmed, create or update `Compatibility
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:ModelContextProtocol.SomeType.SomeMethod(System.String)</Target>
-    <Left>lib/net10.0/ModelContextProtocol.Core.dll</Left>
-    <Right>lib/net10.0/ModelContextProtocol.Core.dll</Right>
+    <Target>M:Garden.ModelContextProtocol.SomeType.SomeMethod(System.String)</Target>
+    <Left>lib/net10.0/Garden.ModelContextProtocol.Core.dll</Left>
+    <Right>lib/net10.0/Garden.ModelContextProtocol.Core.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
 </Suppressions>
@@ -116,28 +116,28 @@ If the tool is already installed, update it with `dotnet tool update` using the 
    ```sh
    mkdir api-diff-temp && cd api-diff-temp
    dotnet new console
-   dotnet add package ModelContextProtocol.Core --version {baseline-version}
-   dotnet add package ModelContextProtocol --version {baseline-version}
-   dotnet add package ModelContextProtocol.AspNetCore --version {baseline-version}
+   dotnet add package Garden.ModelContextProtocol.Core --version {baseline-version}
+   dotnet add package Garden.ModelContextProtocol --version {baseline-version}
+   dotnet add package Garden.ModelContextProtocol.AspNetCore --version {baseline-version}
    dotnet restore
    ```
 
 3. **Run the diff** for each package, comparing the baseline assembly against the current build. Use `dotnet apidiff` with `-l` (left/baseline) and `-r` (right/current):
    ```sh
-   # ModelContextProtocol.Core
+   # Garden.ModelContextProtocol.Core
    dotnet apidiff \
-     -l ~/.nuget/packages/modelcontextprotocol.core/{baseline-version}/lib/net10.0/ModelContextProtocol.Core.dll \
-     -r ../artifacts/bin/ModelContextProtocol.Core/Release/net10.0/ModelContextProtocol.Core.dll
+     -l ~/.nuget/packages/modelcontextprotocol.core/{baseline-version}/lib/net10.0/Garden.ModelContextProtocol.Core.dll \
+     -r ../artifacts/bin/Garden.ModelContextProtocol.Core/Release/net10.0/Garden.ModelContextProtocol.Core.dll
 
-   # ModelContextProtocol
+   # Garden.ModelContextProtocol
    dotnet apidiff \
-     -l ~/.nuget/packages/modelcontextprotocol/{baseline-version}/lib/net10.0/ModelContextProtocol.dll \
-     -r ../artifacts/bin/ModelContextProtocol/Release/net10.0/ModelContextProtocol.dll
+     -l ~/.nuget/packages/modelcontextprotocol/{baseline-version}/lib/net10.0/Garden.ModelContextProtocol.dll \
+     -r ../artifacts/bin/Garden.ModelContextProtocol/Release/net10.0/Garden.ModelContextProtocol.dll
 
-   # ModelContextProtocol.AspNetCore
+   # Garden.ModelContextProtocol.AspNetCore
    dotnet apidiff \
-     -l ~/.nuget/packages/modelcontextprotocol.aspnetcore/{baseline-version}/lib/net10.0/ModelContextProtocol.AspNetCore.dll \
-     -r ../artifacts/bin/ModelContextProtocol.AspNetCore/Release/net10.0/ModelContextProtocol.AspNetCore.dll
+     -l ~/.nuget/packages/modelcontextprotocol.aspnetcore/{baseline-version}/lib/net10.0/Garden.ModelContextProtocol.AspNetCore.dll \
+     -r ../artifacts/bin/Garden.ModelContextProtocol.AspNetCore/Release/net10.0/Garden.ModelContextProtocol.AspNetCore.dll
    ```
 
    > **Note:** The exact CLI flags may vary by version. Run `dotnet apidiff --help` to confirm the available options. If the tool uses different argument names (e.g., `--left`/`--right`, `--before`/`--after`, or positional arguments), adapt accordingly.
@@ -149,9 +149,9 @@ If the tool is already installed, update it with `dotnet tool update` using the 
 ### Per-Package Reports
 
 Generate separate reports for each SDK package:
-- **ModelContextProtocol.Core** — the core library with minimal dependencies
-- **ModelContextProtocol** — the main package with hosting and DI extensions
-- **ModelContextProtocol.AspNetCore** — HTTP-based server implementations
+- **Garden.ModelContextProtocol.Core** — the core library with minimal dependencies
+- **Garden.ModelContextProtocol** — the main package with hosting and DI extensions
+- **Garden.ModelContextProtocol.AspNetCore** — HTTP-based server implementations
 
 ### Cleanup
 
@@ -178,15 +178,15 @@ _or_
 
 ## API Diff Report
 
-### ModelContextProtocol.Core
+### Garden.ModelContextProtocol.Core
 
 [Diff or table of changes]
 
-### ModelContextProtocol
+### Garden.ModelContextProtocol
 
 [Diff or table of changes]
 
-### ModelContextProtocol.AspNetCore
+### Garden.ModelContextProtocol.AspNetCore
 
 [Diff or table of changes]
 ```

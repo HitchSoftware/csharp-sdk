@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.IO.Pipelines;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 public abstract class ClientServerTestBase : LoggedTest, IAsyncDisposable
 {

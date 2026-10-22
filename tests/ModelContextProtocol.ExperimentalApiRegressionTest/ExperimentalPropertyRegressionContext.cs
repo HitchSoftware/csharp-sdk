@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.ExperimentalApiRegressionTest;
+namespace Garden.ModelContextProtocol.ExperimentalApiRegressionTest;
 
 /// <summary>
 /// This file validates that the System.Text.Json source generator does not produce

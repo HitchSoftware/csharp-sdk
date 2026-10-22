@@ -1,12 +1,12 @@
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.IO.Pipelines;
 using System.Text.Json;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Tests.Client;
+namespace Garden.ModelContextProtocol.Tests.Client;
 
 public class McpClientCreationTests(ITestOutputHelper testOutputHelper) : LoggedTest(testOutputHelper)
 {

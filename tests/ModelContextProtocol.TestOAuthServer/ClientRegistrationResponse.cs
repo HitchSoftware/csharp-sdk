@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.TestOAuthServer;
+namespace Garden.ModelContextProtocol.TestOAuthServer;
 
 /// <summary>
 /// Represents a client registration response as defined in RFC 7591.

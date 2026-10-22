@@ -9,7 +9,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <RootNamespace>ModelContextProtocol.Tests</RootNamespace>
+    <RootNamespace>Garden.ModelContextProtocol.Tests</RootNamespace>
     <!-- https://github.com/dotnet/sdk/issues/51060 -->
     <NoWarn>$(NoWarn);NU1903;NU1902</NoWarn>
     <!-- Define for conditional TimeProvider support in InMemoryMcpTaskStore -->

@@ -106,7 +106,7 @@ Breaking changes necessitated by MCP specification evolution should be flagged a
 When a breaking change includes an `AppContext` switch or other opt-in/opt-out mechanism, always note it in the migration guidance. Search for `AppContext.TryGetSwitch`, `DOTNET_` environment variables, and similar compat patterns in the diff. Include the switch name and the value that alters the behavior:
 
 ```
-* Compat switch: `ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests` = `true` restores previous behavior
+* Compat switch: `Garden.ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests` = `true` restores previous behavior
 ```
 
 ## Dismissing Potential Breaking Changes

@@ -23,7 +23,7 @@ The Protected MCP Client sample shows how to:
 First, you need to start the TestOAuthServer which provides OAuth authentication:
 
 ```bash
-cd tests\ModelContextProtocol.TestOAuthServer
+cd tests\Garden.ModelContextProtocol.TestOAuthServer
 dotnet run --framework net9.0
 ```
 

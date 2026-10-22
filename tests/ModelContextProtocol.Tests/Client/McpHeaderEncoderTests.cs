@@ -1,6 +1,6 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Tests.Client;
+namespace Garden.ModelContextProtocol.Tests.Client;
 
 public class McpHeaderEncoderTests
 {

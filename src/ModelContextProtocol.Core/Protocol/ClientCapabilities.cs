@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the capabilities that a client supports.

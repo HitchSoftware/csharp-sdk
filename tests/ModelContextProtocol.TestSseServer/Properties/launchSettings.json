@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ModelContextProtocol.TestSseServer": {
+    "Garden.ModelContextProtocol.TestSseServer": {
       "commandName": "Project",
       "launchBrowser": false,
       "environmentVariables": {

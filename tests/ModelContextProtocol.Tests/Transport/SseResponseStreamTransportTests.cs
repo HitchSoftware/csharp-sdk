@@ -1,8 +1,8 @@
-﻿using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+﻿using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.IO.Pipelines;
 
-namespace ModelContextProtocol.Tests.Transport;
+namespace Garden.ModelContextProtocol.Tests.Transport;
 
 public class SseResponseStreamTransportTests(ITestOutputHelper testOutputHelper) : LoggedTest(testOutputHelper)
 {

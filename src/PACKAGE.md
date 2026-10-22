@@ -1,24 +1,24 @@
 # MCP C# SDK
 
-[![NuGet version](https://img.shields.io/nuget/v/ModelContextProtocol.svg)](https://www.nuget.org/packages/ModelContextProtocol)
+[![NuGet version](https://img.shields.io/nuget/v/Garden.ModelContextProtocol.svg)](https://www.nuget.org/packages/Garden.ModelContextProtocol)
 
-The official C# SDK for the [Model Context Protocol](https://modelcontextprotocol.io/), enabling .NET applications, services, and libraries to implement and interact with MCP clients and servers. Please visit the [API documentation](https://csharp.sdk.modelcontextprotocol.io/api/ModelContextProtocol.html) for more details on available functionality.
+The official C# SDK for the [Model Context Protocol](https://modelcontextprotocol.io/), enabling .NET applications, services, and libraries to implement and interact with MCP clients and servers. Please visit the [API documentation](https://csharp.sdk.modelcontextprotocol.io/api/Garden.ModelContextProtocol.html) for more details on available functionality.
 
 ## Packages
 
 This SDK consists of three main packages:
 
-- **[ModelContextProtocol.Core](https://www.nuget.org/packages/ModelContextProtocol.Core)** [![NuGet version](https://img.shields.io/nuget/v/ModelContextProtocol.Core.svg)](https://www.nuget.org/packages/ModelContextProtocol.Core) - For projects that only need to use the client or low-level server APIs and want the minimum number of dependencies.
+- **[Garden.ModelContextProtocol.Core](https://www.nuget.org/packages/Garden.ModelContextProtocol.Core)** [![NuGet version](https://img.shields.io/nuget/v/Garden.ModelContextProtocol.Core.svg)](https://www.nuget.org/packages/Garden.ModelContextProtocol.Core) - For projects that only need to use the client or low-level server APIs and want the minimum number of dependencies.
 
-- **[ModelContextProtocol](https://www.nuget.org/packages/ModelContextProtocol)** [![NuGet version](https://img.shields.io/nuget/v/ModelContextProtocol.svg)](https://www.nuget.org/packages/ModelContextProtocol) - The main package with hosting and dependency injection extensions. References `ModelContextProtocol.Core`. This is the right fit for most projects that don't need HTTP server capabilities.
+- **[Garden.ModelContextProtocol](https://www.nuget.org/packages/Garden.ModelContextProtocol)** [![NuGet version](https://img.shields.io/nuget/v/Garden.ModelContextProtocol.svg)](https://www.nuget.org/packages/Garden.ModelContextProtocol) - The main package with hosting and dependency injection extensions. References `Garden.ModelContextProtocol.Core`. This is the right fit for most projects that don't need HTTP server capabilities.
 
-- **[ModelContextProtocol.AspNetCore](https://www.nuget.org/packages/ModelContextProtocol.AspNetCore)** [![NuGet version](https://img.shields.io/nuget/v/ModelContextProtocol.AspNetCore.svg)](https://www.nuget.org/packages/ModelContextProtocol.AspNetCore) - The library for HTTP-based MCP servers. References `ModelContextProtocol`.
+- **[Garden.ModelContextProtocol.AspNetCore](https://www.nuget.org/packages/Garden.ModelContextProtocol.AspNetCore)** [![NuGet version](https://img.shields.io/nuget/v/Garden.ModelContextProtocol.AspNetCore.svg)](https://www.nuget.org/packages/Garden.ModelContextProtocol.AspNetCore) - The library for HTTP-based MCP servers. References `Garden.ModelContextProtocol`.
 
 ## Getting Started
 
 To get started, see the [Getting Started](https://csharp.sdk.modelcontextprotocol.io/concepts/getting-started.html) guide for installation instructions, package-selection guidance, and complete examples for both clients and servers.
 
-You can also browse the [samples](https://github.com/modelcontextprotocol/csharp-sdk/tree/main/samples) directory and the [API documentation](https://csharp.sdk.modelcontextprotocol.io/api/ModelContextProtocol.html) for more details on available functionality.
+You can also browse the [samples](https://github.com/modelcontextprotocol/csharp-sdk/tree/main/samples) directory and the [API documentation](https://csharp.sdk.modelcontextprotocol.io/api/Garden.ModelContextProtocol.html) for more details on available functionality.
 
 ## About MCP
 

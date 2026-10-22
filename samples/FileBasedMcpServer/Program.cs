@@ -1,11 +1,11 @@
 #!/usr/bin/env dotnet
 #:package Microsoft.Extensions.Hosting
-#:project ../../src/ModelContextProtocol/ModelContextProtocol.csproj
+#:project ../../src/Garden.ModelContextProtocol/Garden.ModelContextProtocol.csproj
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 
 var builder = Host.CreateApplicationBuilder(args);

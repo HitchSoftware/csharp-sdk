@@ -1,6 +1,6 @@
-﻿using ModelContextProtocol.Client;
+﻿using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 public class StatelessServerIntegrationTests(SseServerIntegrationTestFixture fixture, ITestOutputHelper testOutputHelper)
     : StreamableHttpServerIntegrationTests(fixture, testOutputHelper)

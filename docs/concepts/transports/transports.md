@@ -17,7 +17,7 @@ The stdio transport communicates over standard input and output streams. It is b
 
 #### stdio client
 
-Use <xref:ModelContextProtocol.Client.StdioClientTransport> to launch a server process and communicate over its stdin/stdout. This example connects to the [NuGet MCP Server]:
+Use <xref:Garden.ModelContextProtocol.Client.StdioClientTransport> to launch a server process and communicate over its stdin/stdout. This example connects to the [NuGet MCP Server]:
 
 [NuGet MCP Server]: https://learn.microsoft.com/nuget/concepts/nuget-mcp-server
 
@@ -32,7 +32,7 @@ var transport = new StdioClientTransport(new StdioClientTransportOptions
 await using var client = await McpClient.CreateAsync(transport);
 ```
 
-Key <xref:ModelContextProtocol.Client.StdioClientTransportOptions> properties:
+Key <xref:Garden.ModelContextProtocol.Client.StdioClientTransportOptions> properties:
 
 | Property | Description |
 |----------|-------------|
@@ -98,7 +98,7 @@ var transport = new StdioClientTransport(new StdioClientTransportOptions
 
 #### stdio server
 
-Use <xref:ModelContextProtocol.Server.StdioServerTransport> for servers that communicate over stdin/stdout:
+Use <xref:Garden.ModelContextProtocol.Server.StdioServerTransport> for servers that communicate over stdin/stdout:
 
 ```csharp
 var builder = Host.CreateApplicationBuilder(args);
@@ -118,7 +118,7 @@ The [Streamable HTTP] transport uses HTTP for bidirectional communication with o
 
 #### Streamable HTTP client
 
-Use <xref:ModelContextProtocol.Client.HttpClientTransport> with <xref:ModelContextProtocol.Client.HttpTransportMode.StreamableHttp>:
+Use <xref:Garden.ModelContextProtocol.Client.HttpClientTransport> with <xref:Garden.ModelContextProtocol.Client.HttpTransportMode.StreamableHttp>:
 
 ```csharp
 var transport = new HttpClientTransport(new HttpClientTransportOptions
@@ -135,7 +135,7 @@ var transport = new HttpClientTransport(new HttpClientTransportOptions
 await using var client = await McpClient.CreateAsync(transport);
 ```
 
-The client also supports automatic transport detection with <xref:ModelContextProtocol.Client.HttpTransportMode.AutoDetect> (the default), which tries Streamable HTTP first and falls back to SSE if the server does not support it:
+The client also supports automatic transport detection with <xref:Garden.ModelContextProtocol.Client.HttpTransportMode.AutoDetect> (the default), which tries Streamable HTTP first and falls back to SSE if the server does not support it:
 
 ```csharp
 var transport = new HttpClientTransport(new HttpClientTransportOptions
@@ -147,7 +147,7 @@ var transport = new HttpClientTransport(new HttpClientTransportOptions
 
 #### Resuming sessions
 
-Streamable HTTP supports session resumption. Save the session ID, server capabilities, and server info from the original session, then use <xref:ModelContextProtocol.Client.McpClient.ResumeSessionAsync*> to reconnect:
+Streamable HTTP supports session resumption. Save the session ID, server capabilities, and server info from the original session, then use <xref:Garden.ModelContextProtocol.Client.McpClient.ResumeSessionAsync*> to reconnect:
 
 ```csharp
 var transport = new HttpClientTransport(new HttpClientTransportOptions
@@ -165,7 +165,7 @@ await using var client = await McpClient.ResumeSessionAsync(transport, new Resum
 
 #### Streamable HTTP server (ASP.NET Core)
 
-Use the `ModelContextProtocol.AspNetCore` package to host an MCP server over HTTP. The <xref:Microsoft.AspNetCore.Builder.McpEndpointRouteBuilderExtensions.MapMcp*> method maps the Streamable HTTP endpoint at the specified route (root by default).
+Use the `Garden.ModelContextProtocol.AspNetCore` package to host an MCP server over HTTP. The <xref:Microsoft.AspNetCore.Builder.McpEndpointRouteBuilderExtensions.MapMcp*> method maps the Streamable HTTP endpoint at the specified route (root by default).
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -271,7 +271,7 @@ The [SSE (Server-Sent Events)] transport is a legacy mechanism that uses unidire
 
 #### SSE client
 
-Use <xref:ModelContextProtocol.Client.HttpClientTransport> with <xref:ModelContextProtocol.Client.HttpTransportMode.Sse>:
+Use <xref:Garden.ModelContextProtocol.Client.HttpClientTransport> with <xref:Garden.ModelContextProtocol.Client.HttpTransportMode.Sse>:
 
 ```csharp
 var transport = new HttpClientTransport(new HttpClientTransportOptions
@@ -294,7 +294,7 @@ SSE-specific configuration options:
 
 #### SSE server (ASP.NET Core)
 
-The ASP.NET Core integration supports SSE transport alongside Streamable HTTP. Legacy SSE endpoints (`/sse` and `/message`) are **disabled by default** and <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> is marked `[Obsolete]` (diagnostic `MCP9004`). SSE always requires stateful mode; legacy SSE endpoints are never mapped when `Stateless = true`.
+The ASP.NET Core integration supports SSE transport alongside Streamable HTTP. Legacy SSE endpoints (`/sse` and `/message`) are **disabled by default** and <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> is marked `[Obsolete]` (diagnostic `MCP9004`). SSE always requires stateful mode; legacy SSE endpoints are never mapped when `Stateless = true`.
 
 **Why SSE is disabled by default.** The SSE transport separates request and response channels: clients POST JSON-RPC messages to `/message` and receive all responses through a long-lived GET SSE stream on `/sse`. Because the POST endpoint returns `202 Accepted` immediately — before the handler even runs — there is **no HTTP-level backpressure** on handler concurrency. A client (or attacker) can flood the server with tool calls without waiting for prior requests to complete. In contrast, Streamable HTTP holds each POST response open until the handler finishes, providing natural backpressure. See [Request backpressure](xref:stateless#request-backpressure) for a detailed comparison and mitigations if you must use SSE.
 
@@ -346,14 +346,14 @@ For a detailed comparison of stateless vs. stateful mode — including deploymen
 
 ### In-memory transport
 
-The <xref:ModelContextProtocol.Server.StreamServerTransport> and <xref:ModelContextProtocol.Protocol.StreamClientTransport> types work with any `Stream`, including in-memory pipes. This is useful for testing, embedding an MCP server in a larger application, or running a client and server in the same process without network overhead.
+The <xref:Garden.ModelContextProtocol.Server.StreamServerTransport> and <xref:Garden.ModelContextProtocol.Protocol.StreamClientTransport> types work with any `Stream`, including in-memory pipes. This is useful for testing, embedding an MCP server in a larger application, or running a client and server in the same process without network overhead.
 
 The following example creates a client and server connected via `System.IO.Pipelines` (from the [InMemoryTransport sample](https://github.com/modelcontextprotocol/csharp-sdk/blob/51a4fde4d9cfa12ef9430deef7daeaac36625be8/samples/InMemoryTransport/Program.cs)):
 
 ```csharp
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.IO.Pipelines;
 
 Pipe clientToServerPipe = new(), serverToClientPipe = new();
@@ -390,7 +390,7 @@ The flow consists of two steps:
 ### Usage
 
 ```csharp
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Authentication;
 
 // The caller owns the HttpClient lifetime.
 var httpClient = new HttpClient();

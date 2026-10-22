@@ -1,5 +1,5 @@
 using AspNetCoreMcpPerSessionTools.Tools;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.Collections.Concurrent;
 using System.Reflection;
 

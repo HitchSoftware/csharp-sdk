@@ -1,11 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 /// <summary>
 /// Tests for McpProtocolException.Data propagation to JSON-RPC error responses.

@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>TestServer</AssemblyName>
-    <RootNamespace>ModelContextProtocol.TestServer</RootNamespace>
+    <RootNamespace>Garden.ModelContextProtocol.TestServer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

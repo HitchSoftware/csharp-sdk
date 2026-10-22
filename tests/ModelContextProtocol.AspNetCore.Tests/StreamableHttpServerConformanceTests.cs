@@ -3,10 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Time.Testing;
 using Microsoft.Net.Http.Headers;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.Net;
 using System.Net.ServerSentEvents;
 using System.Text;
@@ -14,7 +14,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 public class StreamableHttpServerConformanceTests(ITestOutputHelper outputHelper) : KestrelInMemoryTest(outputHelper), IAsyncDisposable
 {

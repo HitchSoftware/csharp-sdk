@@ -1,18 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Security.Claims;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 public abstract partial class MapMcpTests(ITestOutputHelper testOutputHelper) : KestrelInMemoryTest(testOutputHelper)
 {
@@ -192,11 +192,11 @@ public abstract partial class MapMcpTests(ITestOutputHelper testOutputHelper) : 
         // Verify that the tool call and the sampling request both used the same ID to ensure we cover against regressions.
         // https://github.com/modelcontextprotocol/csharp-sdk/issues/464
         Assert.Single(MockLoggerProvider.LogMessages, m =>
-            m.Category == "ModelContextProtocol.Client.McpClient" &&
+            m.Category == "Garden.ModelContextProtocol.Client.McpClient" &&
             m.Message.Contains("request '2' for method 'tools/call'"));
 
         Assert.Single(MockLoggerProvider.LogMessages, m =>
-            m.Category == "ModelContextProtocol.Server.McpServer" &&
+            m.Category == "Garden.ModelContextProtocol.Server.McpServer" &&
             m.Message.Contains("request '2' for method 'sampling/createMessage'"));
     }
 

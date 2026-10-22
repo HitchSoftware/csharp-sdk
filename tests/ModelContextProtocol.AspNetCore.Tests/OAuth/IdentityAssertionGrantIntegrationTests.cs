@@ -1,9 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Authentication;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Client;
 using System.Net.Http.Headers;
 
-namespace ModelContextProtocol.AspNetCore.Tests.OAuth;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests.OAuth;
 
 /// <summary>
 /// Integration tests for Cross-Application Access authorization using the in-memory

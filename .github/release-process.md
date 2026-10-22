@@ -33,4 +33,4 @@ For the agent-facing, structured version of these rules, see [release-branches.m
 
 - After publishing, a workflow will produce build artifacts and publish the NuGet packages to NuGet.org
 - If the job fails, troubleshoot and re-run the workflow as needed
-- Verify the package version becomes listed at [nuget.org/packages/ModelContextProtocol](https://www.nuget.org/packages/ModelContextProtocol)
+- Verify the package version becomes listed at [nuget.org/packages/Garden.ModelContextProtocol](https://www.nuget.org/packages/Garden.ModelContextProtocol)

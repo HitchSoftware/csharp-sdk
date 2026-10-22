@@ -7,7 +7,7 @@ uid: stateless
 
 # Stateless and stateful mode
 
-The MCP [Streamable HTTP transport] uses an `Mcp-Session-Id` HTTP header to associate multiple requests with a single logical session. However, **we recommend most servers disable sessions entirely by setting <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> to `true`**. Stateless mode avoids the complexity, memory overhead, and deployment constraints that come with sessions. Sessions are only necessary when the server needs to send requests _to_ the client, push [unsolicited notifications](#how-streamable-http-delivers-messages), or maintain per-client state across requests.
+The MCP [Streamable HTTP transport] uses an `Mcp-Session-Id` HTTP header to associate multiple requests with a single logical session. However, **we recommend most servers disable sessions entirely by setting <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> to `true`**. Stateless mode avoids the complexity, memory overhead, and deployment constraints that come with sessions. Sessions are only necessary when the server needs to send requests _to_ the client, push [unsolicited notifications](#how-streamable-http-delivers-messages), or maintain per-client state across requests.
 
 When sessions are enabled (the current C# SDK default), the server creates and tracks an in-memory session for each client, while the client automatically includes the session ID in subsequent requests. The [MCP specification requires](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) that clients use sessions when a server's `initialize` response includes an `Mcp-Session-Id` header — this is not optional for the client. Session expiry detection and reconnection are the responsibility of the application using the client SDK (see [Client-side session behavior](#client-side-session-behavior)).
 
@@ -17,7 +17,7 @@ When sessions are enabled (the current C# SDK default), the server creates and t
 
 - Does your server need to send requests _to_ the client (sampling, elicitation, roots)?  → **Use stateful.**
 - Does your server send [unsolicited notifications](#how-streamable-http-delivers-messages) or support resource subscriptions?  → **Use stateful.**
-- Do you need to support clients that only speak the [legacy SSE transport](#legacy-sse-transport)?  → **Use stateful** with <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> (disabled by default due to [backpressure concerns](#request-backpressure)).
+- Do you need to support clients that only speak the [legacy SSE transport](#legacy-sse-transport)?  → **Use stateful** with <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> (disabled by default due to [backpressure concerns](#request-backpressure)).
 - Does your server manage per-client state that concurrent agents must not share (isolated environments, parallel workspaces)?  → **Use stateful.**
 - Are you debugging a typically-stdio server over HTTP and want editors to be able to reset state by reconnecting?  → **Use stateful.**
 - Otherwise → **Use stateless** (`options.Stateless = true`).
@@ -40,7 +40,7 @@ The `Stateless` property is the single most important setting for forward-proofi
 
 ### Migrating from legacy SSE
 
-If your clients connect to a `/sse` endpoint (e.g., `https://my-server.example.com/sse`), they are using the [legacy SSE transport](#legacy-sse-transport) — regardless of any `Stateless` or session settings on the server. The `/sse` and `/message` endpoints are now **disabled by default** (<xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> is `false` and marked `[Obsolete]` with diagnostic `MCP9004`). Upgrading the server SDK without updating clients will break SSE connections.
+If your clients connect to a `/sse` endpoint (e.g., `https://my-server.example.com/sse`), they are using the [legacy SSE transport](#legacy-sse-transport) — regardless of any `Stateless` or session settings on the server. The `/sse` and `/message` endpoints are now **disabled by default** (<xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> is `false` and marked `[Obsolete]` with diagnostic `MCP9004`). Upgrading the server SDK without updating clients will break SSE connections.
 
 **Client-side migration.** Change the client `Endpoint` from the `/sse` path to the root MCP endpoint — the same URL your server passes to `MapMcp()`. For example:
 
@@ -52,7 +52,7 @@ Endpoint = new Uri("https://my-server.example.com/sse")
 Endpoint = new Uri("https://my-server.example.com/")
 ```
 
-With the default <xref:ModelContextProtocol.Client.HttpTransportMode.AutoDetect> transport mode, the client automatically tries Streamable HTTP first. You can also set `TransportMode = HttpTransportMode.StreamableHttp` explicitly if you know the server supports it.
+With the default <xref:Garden.ModelContextProtocol.Client.HttpTransportMode.AutoDetect> transport mode, the client automatically tries Streamable HTTP first. You can also set `TransportMode = HttpTransportMode.StreamableHttp` explicitly if you know the server supports it.
 
 **Server-side migration.** If you previously relied on `/sse` being mapped automatically, you now need `EnableLegacySse = true` (suppressing the `MCP9004` warning) to keep serving those endpoints. The recommended path is to migrate all clients to Streamable HTTP and then remove `EnableLegacySse`.
 
@@ -81,11 +81,11 @@ app.Run();
 
 ### What stateless mode changes
 
-When <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> is `true`:
+When <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> is `true`:
 
-- <xref:ModelContextProtocol.McpSession.SessionId> is `null`, and the `Mcp-Session-Id` header is not sent or expected
+- <xref:Garden.ModelContextProtocol.McpSession.SessionId> is `null`, and the `Mcp-Session-Id` header is not sent or expected
 - Each HTTP request creates a fresh server context — no state carries over between requests
-- <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> still works, but is called **per HTTP request** rather than once per session (see [Per-request configuration in stateless mode](#per-request-configuration-in-stateless-mode))
+- <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> still works, but is called **per HTTP request** rather than once per session (see [Per-request configuration in stateless mode](#per-request-configuration-in-stateless-mode))
 - The `GET` and `DELETE` MCP endpoints are not mapped, and [legacy SSE endpoints](#legacy-sse-transport) (`/sse` and `/message`) are always disabled in stateless mode — clients that only support the legacy SSE transport cannot connect
 - **Server-to-client requests are disabled**, including:
   - [Sampling](xref:sampling) (`SampleAsync`)
@@ -125,7 +125,7 @@ This means servers that need user confirmation, LLM reasoning, or other client i
 
 ## Stateful mode (sessions)
 
-When <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> is `false` (the default), the server assigns an `Mcp-Session-Id` to each client during the `initialize` handshake. The client must include this header in all subsequent requests. The server maintains an in-memory session for each connected client, enabling:
+When <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> is `false` (the default), the server assigns an `Mcp-Session-Id` to each client during the `initialize` handshake. The client must include this header in all subsequent requests. The server maintains an in-memory session for each connected client, enabling:
 
 - Server-to-client requests (sampling, elicitation, roots) via an open HTTP response stream
 - [Unsolicited notifications](#how-streamable-http-delivers-messages) (resource updates, logging messages) via the GET stream
@@ -139,7 +139,7 @@ Use stateful mode when your server needs one or more of:
 - **Server-to-client requests**: Tools that call `ElicitAsync`, `SampleAsync`, or `RequestRootsAsync` to interact with the client
 - **[Unsolicited notifications](#how-streamable-http-delivers-messages)**: Sending resource-changed notifications or log messages outside the context of any active request handler — these require the [GET stream](#how-streamable-http-delivers-messages)
 - **Resource subscriptions**: Clients subscribing to resource changes and receiving updates
-- **Legacy SSE client support**: Clients that only speak the [legacy SSE transport](#legacy-sse-transport) — requires <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> (disabled by default)
+- **Legacy SSE client support**: Clients that only speak the [legacy SSE transport](#legacy-sse-transport) — requires <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> (disabled by default)
 - **Session-scoped state**: Logic that must persist across multiple requests within the same session
 - **Concurrent client isolation**: Multiple agents or editor instances connecting simultaneously, where per-client state must not leak between users — separate working environments, independent scratch state, or parallel simulations where each participant needs its own context. The server — not the model — controls when sessions are created, so the harness decides the boundaries of isolation.
 - **Local development and debugging**: Testing a typically-stdio server over HTTP where you want to attach a debugger, see log output on stdout, and have editors like Claude Code, GitHub Copilot in VS Code, and Cursor reset the server's state by starting a new session — without requiring a process restart. This closely mirrors the stdio experience where restarting the server process gives the client a clean slate.
@@ -157,7 +157,7 @@ The [deployment considerations](#deployment-considerations) below are real conce
 | **Server-to-client requests** | Not supported (see [MRTR proposal](https://github.com/modelcontextprotocol/csharp-sdk/pull/1458) for a stateless alternative) | Supported (sampling, elicitation, roots) |
 | **[Unsolicited notifications](#how-streamable-http-delivers-messages)** | Not supported | Supported (resource updates, logging) |
 | **Resource subscriptions** | Not supported | Supported |
-| **Client compatibility** | Works with all Streamable HTTP clients | Also supports legacy SSE-only clients via <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> (disabled by default), but some Streamable HTTP clients [may not send `Mcp-Session-Id` correctly](#deployment-considerations) |
+| **Client compatibility** | Works with all Streamable HTTP clients | Also supports legacy SSE-only clients via <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> (disabled by default), but some Streamable HTTP clients [may not send `Mcp-Session-Id` correctly](#deployment-considerations) |
 | **Local development** | Works, but no way to reset server state from the editor | Editors can reset state by starting a new session without restarting the process |
 | **Concurrent client isolation** | No distinction between clients — all requests are independent | Each client gets its own session with isolated state |
 | **State reset on reconnect** | No concept of reconnection — every request stands alone | Client reconnection starts a new session with a clean slate |
@@ -190,7 +190,7 @@ These messages are "unsolicited" because no client POST solicited them. There is
 A session begins when a client sends an `initialize` JSON-RPC request without an `Mcp-Session-Id` header. The server:
 
 1. Creates a new session with a unique session ID
-2. Calls <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> (if configured) to customize the session's `McpServerOptions`
+2. Calls <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> (if configured) to customize the session's `McpServerOptions`
 3. Starts the MCP server for the session
 4. Returns the session ID in the `Mcp-Session-Id` response header along with the `InitializeResult`
 
@@ -205,7 +205,7 @@ The server tracks the last activity time for each Streamable HTTP session. Activ
 
 #### Idle timeout
 
-Streamable HTTP sessions that have no activity for the duration of <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.IdleTimeout> (default: **2 hours**) are automatically closed. The idle timeout is checked in the background every 5 seconds.
+Streamable HTTP sessions that have no activity for the duration of <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.IdleTimeout> (default: **2 hours**) are automatically closed. The idle timeout is checked in the background every 5 seconds.
 
 A client can keep its session alive by maintaining any open HTTP request (e.g., a long-running POST with a streamed response or an open `GET` for unsolicited messages). Sessions with active requests are never considered idle.
 
@@ -219,7 +219,7 @@ You can disable idle timeout by setting it to `Timeout.InfiniteTimeSpan`, though
 
 #### Maximum idle session count
 
-<xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.MaxIdleSessionCount> (default: **10,000**) limits how many idle Streamable HTTP sessions can exist simultaneously. If this limit is exceeded:
+<xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.MaxIdleSessionCount> (default: **10,000**) limits how many idle Streamable HTTP sessions can exist simultaneously. If this limit is exceeded:
 
 - A critical error is logged
 - The oldest idle sessions are terminated (even if they haven't reached their idle timeout)
@@ -242,13 +242,13 @@ Stateful sessions introduce several challenges for production, internet-facing s
 
 **Session affinity required.** All requests for a given session must reach the same server instance, because sessions live in memory. If you deploy behind a load balancer, you must configure session affinity (sticky sessions) to route requests to the correct instance. Without session affinity, clients will receive `404 Session not found` errors.
 
-**Memory consumption.** Each session consumes memory on the server for the lifetime of the session. The default idle timeout is **2 hours**, and the default maximum idle session count is **10,000**. A server with many concurrent clients can accumulate significant memory usage. Monitor your idle session count and tune <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.IdleTimeout> and <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.MaxIdleSessionCount> to match your workload.
+**Memory consumption.** Each session consumes memory on the server for the lifetime of the session. The default idle timeout is **2 hours**, and the default maximum idle session count is **10,000**. A server with many concurrent clients can accumulate significant memory usage. Monitor your idle session count and tune <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.IdleTimeout> and <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.MaxIdleSessionCount> to match your workload.
 
-**Server restarts lose all sessions.** Sessions are stored in memory by default. When the server restarts (for deployments, crashes, or scaling events), all sessions are lost. Clients must reinitialize their sessions, which some clients may not handle gracefully. You can mitigate this with <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.SessionMigrationHandler>, but this adds complexity. See [Session migration](#session-migration) for details.
+**Server restarts lose all sessions.** Sessions are stored in memory by default. When the server restarts (for deployments, crashes, or scaling events), all sessions are lost. Clients must reinitialize their sessions, which some clients may not handle gracefully. You can mitigate this with <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.SessionMigrationHandler>, but this adds complexity. See [Session migration](#session-migration) for details.
 
 **Clients that don't send Mcp-Session-Id.** Some MCP clients may not send the `Mcp-Session-Id` header on every request. When this happens, the server responds with an error: `"Bad Request: A new session can only be created by an initialize request."` This can happen after a server restart, when a client loses its session ID, or when a client simply doesn't support sessions. If you see this error, consider whether your server actually needs sessions — and if not, switch to stateless mode.
 
-**No built-in backpressure on advanced features.** By default, each JSON-RPC request holds its HTTP POST open until the handler responds — providing natural HTTP/2 backpressure. However, advanced features like <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore> and [Tasks](xref:tasks) can decouple handler execution from the HTTP request, removing this protection. See [Request backpressure](#request-backpressure) for details and mitigations.
+**No built-in backpressure on advanced features.** By default, each JSON-RPC request holds its HTTP POST open until the handler responds — providing natural HTTP/2 backpressure. However, advanced features like <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore> and [Tasks](xref:tasks) can decouple handler execution from the HTTP request, removing this protection. See [Request backpressure](#request-backpressure) for details and mitigations.
 
 ### stdio transport
 
@@ -260,30 +260,30 @@ However, stdio servers cannot be shared between multiple clients. Each client ne
 
 ## Client-side session behavior
 
-The SDK's MCP client (<xref:ModelContextProtocol.Client.McpClient>) participates in sessions automatically. The **server controls session creation and destruction** — the client has no say in when a session ends. This section describes how the client manages session state, detects failures, and reconnects.
+The SDK's MCP client (<xref:Garden.ModelContextProtocol.Client.McpClient>) participates in sessions automatically. The **server controls session creation and destruction** — the client has no say in when a session ends. This section describes how the client manages session state, detects failures, and reconnects.
 
 ### Session lifecycle
 
 #### Joining a session
 
-When you call <xref:ModelContextProtocol.Client.McpClient.CreateAsync*>, the client:
+When you call <xref:Garden.ModelContextProtocol.Client.McpClient.CreateAsync*>, the client:
 
 1. Connects to the server via the configured transport
 2. Sends an `initialize` JSON-RPC request (without an `Mcp-Session-Id` header)
 3. Receives the server's `InitializeResult` — if the response includes an `Mcp-Session-Id` header, the client stores it
 4. Automatically includes the session ID in all subsequent requests (POST, GET, DELETE)
 
-This is entirely automatic — you don't need to manage the session ID yourself. The <xref:ModelContextProtocol.McpSession.SessionId> property exposes the current session ID (or `null` for transports that don't support sessions, like stdio).
+This is entirely automatic — you don't need to manage the session ID yourself. The <xref:Garden.ModelContextProtocol.McpSession.SessionId> property exposes the current session ID (or `null` for transports that don't support sessions, like stdio).
 
 #### Session expiry
 
 The server can terminate a session at any time — due to idle timeout, max session count exceeded, explicit shutdown, or any server-side policy. When this happens, subsequent requests with that session ID receive HTTP `404`. The client detects this and:
 
-1. Wraps the failure in a <xref:ModelContextProtocol.Client.ClientTransportClosedException> with <xref:ModelContextProtocol.Client.HttpClientCompletionDetails> containing the HTTP status code
+1. Wraps the failure in a <xref:Garden.ModelContextProtocol.Client.ClientTransportClosedException> with <xref:Garden.ModelContextProtocol.Client.HttpClientCompletionDetails> containing the HTTP status code
 2. Cancels all in-flight operations
-3. Completes the <xref:ModelContextProtocol.Client.McpClient.Completion> task
+3. Completes the <xref:Garden.ModelContextProtocol.Client.McpClient.Completion> task
 
-**There is no automatic reconnection after session expiry.** Your application must handle this. You can either create a fresh session with <xref:ModelContextProtocol.Client.McpClient.CreateAsync*>, or attempt to resume the existing session with <xref:ModelContextProtocol.Client.McpClient.ResumeSessionAsync*> if the server supports it.
+**There is no automatic reconnection after session expiry.** Your application must handle this. You can either create a fresh session with <xref:Garden.ModelContextProtocol.Client.McpClient.CreateAsync*>, or attempt to resume the existing session with <xref:Garden.ModelContextProtocol.Client.McpClient.ResumeSessionAsync*> if the server supports it.
 
 The following example demonstrates how to detect session expiry and reconnect:
 
@@ -320,17 +320,17 @@ async Task<McpClient> ConnectWithRetryAsync(
 
 The Streamable HTTP client automatically reconnects its SSE event stream when the connection drops. This only applies to **stateful sessions** — the GET event stream is how the server sends unsolicited messages to the client, and it requires an active session. Stream reconnection is separate from session expiry: reconnection recovers the event stream within an existing session, while the example above handles creating a new session after the server has terminated the old one.
 
-If the server has an [event store](#session-resumability) configured, the client sends `Last-Event-ID` on reconnection so the server can replay missed events. See [Transports](xref:transports) for details on reconnection intervals and retry limits (<xref:ModelContextProtocol.Client.HttpClientTransportOptions.MaxReconnectionAttempts>, <xref:ModelContextProtocol.Client.HttpClientTransportOptions.DefaultReconnectionInterval>). If all reconnection attempts are exhausted, the transport closes and `McpClient.Completion` resolves.
+If the server has an [event store](#session-resumability) configured, the client sends `Last-Event-ID` on reconnection so the server can replay missed events. See [Transports](xref:transports) for details on reconnection intervals and retry limits (<xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions.MaxReconnectionAttempts>, <xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions.DefaultReconnectionInterval>). If all reconnection attempts are exhausted, the transport closes and `McpClient.Completion` resolves.
 
 #### Resuming a session
 
-If the server is still tracking the session (or supports [session migration](#session-migration)), you can reconnect without re-initializing. Save the session metadata from the original client and pass it to <xref:ModelContextProtocol.Client.McpClient.ResumeSessionAsync*>:
+If the server is still tracking the session (or supports [session migration](#session-migration)), you can reconnect without re-initializing. Save the session metadata from the original client and pass it to <xref:Garden.ModelContextProtocol.Client.McpClient.ResumeSessionAsync*>:
 
-- <xref:ModelContextProtocol.McpSession.SessionId> — set via <xref:ModelContextProtocol.Client.HttpClientTransportOptions.KnownSessionId>
-- <xref:ModelContextProtocol.Client.McpClient.ServerCapabilities>
-- <xref:ModelContextProtocol.Client.McpClient.ServerInfo>
-- <xref:ModelContextProtocol.Client.McpClient.ServerInstructions> (optional)
-- <xref:ModelContextProtocol.McpSession.NegotiatedProtocolVersion> (optional)
+- <xref:Garden.ModelContextProtocol.McpSession.SessionId> — set via <xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions.KnownSessionId>
+- <xref:Garden.ModelContextProtocol.Client.McpClient.ServerCapabilities>
+- <xref:Garden.ModelContextProtocol.Client.McpClient.ServerInfo>
+- <xref:Garden.ModelContextProtocol.Client.McpClient.ServerInstructions> (optional)
+- <xref:Garden.ModelContextProtocol.McpSession.NegotiatedProtocolVersion> (optional)
 
 See the [Resuming sessions](xref:transports#resuming-sessions) section in the Transports guide for a code example.
 
@@ -344,17 +344,17 @@ Session resumption is useful when:
 
 When you dispose an `McpClient` (via `await using` or explicit `DisposeAsync`), the client sends an HTTP `DELETE` request to the session endpoint with the `Mcp-Session-Id` header. This tells the server to clean up the session immediately rather than waiting for the idle timeout.
 
-The <xref:ModelContextProtocol.Client.HttpClientTransportOptions.OwnsSession> property (default: `true`) controls this behavior. Set it to `false` when you're creating a transport purely to bootstrap session information (e.g., reading capabilities) without intending to own the session's lifetime.
+The <xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions.OwnsSession> property (default: `true`) controls this behavior. Set it to `false` when you're creating a transport purely to bootstrap session information (e.g., reading capabilities) without intending to own the session's lifetime.
 
 ### Client transport options
 
-The following <xref:ModelContextProtocol.Client.HttpClientTransportOptions> properties affect client-side session behavior:
+The following <xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions> properties affect client-side session behavior:
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| <xref:ModelContextProtocol.Client.HttpClientTransportOptions.KnownSessionId> | `null` | Pre-existing session ID for use with <xref:ModelContextProtocol.Client.McpClient.ResumeSessionAsync*>. When set, the client includes this session ID immediately and starts listening for unsolicited messages. |
-| <xref:ModelContextProtocol.Client.HttpClientTransportOptions.OwnsSession> | `true` | Whether to send a DELETE request when the client is disposed. Set to `false` when you don't want disposal to terminate the server session. |
-| <xref:ModelContextProtocol.Client.HttpClientTransportOptions.AdditionalHeaders> | `null` | Custom headers included in all requests (e.g., for authentication). These are sent alongside the automatic `Mcp-Session-Id` header. |
+| <xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions.KnownSessionId> | `null` | Pre-existing session ID for use with <xref:Garden.ModelContextProtocol.Client.McpClient.ResumeSessionAsync*>. When set, the client includes this session ID immediately and starts listening for unsolicited messages. |
+| <xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions.OwnsSession> | `true` | Whether to send a DELETE request when the client is disposed. Set to `false` when you don't want disposal to terminate the server session. |
+| <xref:Garden.ModelContextProtocol.Client.HttpClientTransportOptions.AdditionalHeaders> | `null` | Custom headers included in all requests (e.g., for authentication). These are sent alongside the automatic `Mcp-Session-Id` header. |
 
 For transport-level options like reconnection intervals and transport mode, see [Transports](xref:transports).
 
@@ -362,7 +362,7 @@ For transport-level options like reconnection intervals and transport mode, see 
 
 ### Configuration reference
 
-All session-related configuration is on <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions>, configured via `WithHttpTransport`:
+All session-related configuration is on <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions>, configured via `WithHttpTransport`:
 
 ```csharp
 builder.Services.AddMcpServer()
@@ -396,18 +396,18 @@ builder.Services.AddMcpServer()
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> | `bool` | `false` | Enables stateless mode. No sessions, no `Mcp-Session-Id` header, no server-to-client requests. |
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.IdleTimeout> | `TimeSpan` | 2 hours | Duration of inactivity before a session is closed. Checked every 5 seconds. |
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.MaxIdleSessionCount> | `int` | 10,000 | Maximum idle sessions before the oldest are forcibly terminated. |
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> | `Func<HttpContext, McpServerOptions, CancellationToken, Task>?` | `null` | Per-session callback to customize `McpServerOptions` with access to `HttpContext`. In stateless mode, this runs on every HTTP request. |
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.RunSessionHandler> | `Func<HttpContext, McpServer, CancellationToken, Task>?` | `null` | *(Experimental)* Custom session lifecycle handler. Consider `ConfigureSessionOptions` instead. |
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.SessionMigrationHandler> | `ISessionMigrationHandler?` | `null` | Enables cross-instance session migration. Can also be registered in DI. |
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore> | `ISseEventStreamStore?` | `null` | Stores SSE events for session resumability via `Last-Event-ID`. Can also be registered in DI. |
-| <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.PerSessionExecutionContext> | `bool` | `false` | Uses a single `ExecutionContext` for the entire session instead of per-request. Enables session-scoped `AsyncLocal<T>` values but prevents `IHttpContextAccessor` from working in handlers. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.Stateless> | `bool` | `false` | Enables stateless mode. No sessions, no `Mcp-Session-Id` header, no server-to-client requests. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.IdleTimeout> | `TimeSpan` | 2 hours | Duration of inactivity before a session is closed. Checked every 5 seconds. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.MaxIdleSessionCount> | `int` | 10,000 | Maximum idle sessions before the oldest are forcibly terminated. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> | `Func<HttpContext, McpServerOptions, CancellationToken, Task>?` | `null` | Per-session callback to customize `McpServerOptions` with access to `HttpContext`. In stateless mode, this runs on every HTTP request. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.RunSessionHandler> | `Func<HttpContext, McpServer, CancellationToken, Task>?` | `null` | *(Experimental)* Custom session lifecycle handler. Consider `ConfigureSessionOptions` instead. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.SessionMigrationHandler> | `ISessionMigrationHandler?` | `null` | Enables cross-instance session migration. Can also be registered in DI. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore> | `ISseEventStreamStore?` | `null` | Stores SSE events for session resumability via `Last-Event-ID`. Can also be registered in DI. |
+| <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.PerSessionExecutionContext> | `bool` | `false` | Uses a single `ExecutionContext` for the entire session instead of per-request. Enables session-scoped `AsyncLocal<T>` values but prevents `IHttpContextAccessor` from working in handlers. |
 
 ### ConfigureSessionOptions
 
-<xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> is called when the server creates a new MCP server context, before the server starts processing requests. It receives the `HttpContext` from the `initialize` request, allowing you to customize the server based on the request (authentication, headers, route parameters, etc.).
+<xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> is called when the server creates a new MCP server context, before the server starts processing requests. It receives the `HttpContext` from the `initialize` request, allowing you to customize the server based on the request (authentication, headers, route parameters, etc.).
 
 In **stateful mode**, this callback runs once per session — when the client's initial `initialize` request creates the session.
 
@@ -467,11 +467,11 @@ This binding is automatic — no configuration is needed. If no authentication m
 
 ## Service lifetimes and DI scopes
 
-How the server resolves scoped services depends on the transport and session mode. The <xref:ModelContextProtocol.Server.McpServerOptions.ScopeRequests> property controls whether the server creates a new `IServiceProvider` scope for each handler invocation.
+How the server resolves scoped services depends on the transport and session mode. The <xref:Garden.ModelContextProtocol.Server.McpServerOptions.ScopeRequests> property controls whether the server creates a new `IServiceProvider` scope for each handler invocation.
 
 ### Stateful HTTP
 
-In stateful mode, the server's <xref:ModelContextProtocol.Server.McpServer.Services> is the application-level `IServiceProvider` — not a per-request scope. Because the server outlives individual HTTP requests, <xref:ModelContextProtocol.Server.McpServerOptions.ScopeRequests> defaults to `true`: each handler invocation (tool call, resource read, etc.) creates a new scope.
+In stateful mode, the server's <xref:Garden.ModelContextProtocol.Server.McpServer.Services> is the application-level `IServiceProvider` — not a per-request scope. Because the server outlives individual HTTP requests, <xref:Garden.ModelContextProtocol.Server.McpServerOptions.ScopeRequests> defaults to `true`: each handler invocation (tool call, resource read, etc.) creates a new scope.
 
 This means:
 
@@ -481,7 +481,7 @@ This means:
 
 ### Stateless HTTP
 
-In stateless mode, the server uses ASP.NET Core's per-request `HttpContext.RequestServices` as its service provider, and <xref:ModelContextProtocol.Server.McpServerOptions.ScopeRequests> is automatically set to `false`. No additional scopes are created — handlers share the same HTTP request scope that middleware and other ASP.NET Core components use.
+In stateless mode, the server uses ASP.NET Core's per-request `HttpContext.RequestServices` as its service provider, and <xref:Garden.ModelContextProtocol.Server.McpServerOptions.ScopeRequests> is automatically set to `false`. No additional scopes are created — handlers share the same HTTP request scope that middleware and other ASP.NET Core components use.
 
 This means:
 
@@ -490,11 +490,11 @@ This means:
 
 ### stdio
 
-The stdio transport creates a single server for the lifetime of the process. The server's <xref:ModelContextProtocol.Server.McpServer.Services> is the application-level `IServiceProvider`. By default, <xref:ModelContextProtocol.Server.McpServerOptions.ScopeRequests> is `true`, so each handler invocation gets its own scope — the same behavior as stateful HTTP.
+The stdio transport creates a single server for the lifetime of the process. The server's <xref:Garden.ModelContextProtocol.Server.McpServer.Services> is the application-level `IServiceProvider`. By default, <xref:Garden.ModelContextProtocol.Server.McpServerOptions.ScopeRequests> is `true`, so each handler invocation gets its own scope — the same behavior as stateful HTTP.
 
 ### McpServer.Create (custom transports)
 
-When you create a server directly with <xref:ModelContextProtocol.Server.McpServer.Create*>, you control the `IServiceProvider` and transport yourself. If you pass an already-scoped provider, you can set <xref:ModelContextProtocol.Server.McpServerOptions.ScopeRequests> to `false` to avoid creating redundant nested scopes. The [InMemoryTransport sample](https://github.com/modelcontextprotocol/csharp-sdk/blob/51a4fde4d9cfa12ef9430deef7daeaac36625be8/samples/InMemoryTransport/Program.cs#L6-L14) shows a minimal example of using `McpServer.Create` with in-memory pipes:
+When you create a server directly with <xref:Garden.ModelContextProtocol.Server.McpServer.Create*>, you control the `IServiceProvider` and transport yourself. If you pass an already-scoped provider, you can set <xref:Garden.ModelContextProtocol.Server.McpServerOptions.ScopeRequests> to `false` to avoid creating redundant nested scopes. The [InMemoryTransport sample](https://github.com/modelcontextprotocol/csharp-sdk/blob/51a4fde4d9cfa12ef9430deef7daeaac36625be8/samples/InMemoryTransport/Program.cs#L6-L14) shows a minimal example of using `McpServer.Create` with in-memory pipes:
 
 ```csharp
 Pipe clientToServerPipe = new(), serverToClientPipe = new();
@@ -568,7 +568,7 @@ In stateless mode, each HTTP request creates and disposes a short-lived `McpServ
 
 ## Tasks and session modes
 
-[Tasks](xref:tasks) enable a "call-now, fetch-later" pattern for long-running tool calls. Task support depends on having an <xref:ModelContextProtocol.IMcpTaskStore> configured (`McpServerOptions.TaskStore`), and behavior differs between session modes.
+[Tasks](xref:tasks) enable a "call-now, fetch-later" pattern for long-running tool calls. Task support depends on having an <xref:Garden.ModelContextProtocol.IMcpTaskStore> configured (`McpServerOptions.TaskStore`), and behavior differs between session modes.
 
 ### Stateless mode
 
@@ -578,9 +578,9 @@ In stateless mode, there is no `SessionId`, so the task store does not apply ses
 
 ### Stateful mode
 
-In stateful mode, the `IMcpTaskStore` receives the session's `SessionId` on every operation — `CreateTaskAsync`, `GetTaskAsync`, `ListTasksAsync`, `CancelTaskAsync`, etc. The built-in <xref:ModelContextProtocol.InMemoryMcpTaskStore> enforces session isolation: tasks created in one session cannot be accessed from another.
+In stateful mode, the `IMcpTaskStore` receives the session's `SessionId` on every operation — `CreateTaskAsync`, `GetTaskAsync`, `ListTasksAsync`, `CancelTaskAsync`, etc. The built-in <xref:Garden.ModelContextProtocol.InMemoryMcpTaskStore> enforces session isolation: tasks created in one session cannot be accessed from another.
 
-Tasks can outlive individual HTTP requests because the tool executes in the background after returning the initial `CreateTaskResult`. Task cleanup is governed by the task's TTL (time-to-live), not by session termination. However, the `InMemoryMcpTaskStore` loses all tasks if the server process restarts. For durable tasks, implement a custom <xref:ModelContextProtocol.IMcpTaskStore> backed by an external store. See [Fault-tolerant task implementations](xref:tasks#fault-tolerant-task-implementations) for guidance.
+Tasks can outlive individual HTTP requests because the tool executes in the background after returning the initial `CreateTaskResult`. Task cleanup is governed by the task's TTL (time-to-live), not by session termination. However, the `InMemoryMcpTaskStore` loses all tasks if the server process restarts. For durable tasks, implement a custom <xref:Garden.ModelContextProtocol.IMcpTaskStore> backed by an external store. See [Fault-tolerant task implementations](xref:tasks#fault-tolerant-task-implementations) for guidance.
 
 ### Task cancellation vs request cancellation
 
@@ -609,7 +609,7 @@ For comparison, ASP.NET Core SignalR limits concurrent hub invocations per clien
 
 ### SSE (legacy — opt-in only)
 
-Legacy SSE endpoints are [disabled by default](#legacy-sse-transport) and must be explicitly enabled via <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse>. This is the primary reason they are disabled — the SSE transport has no built-in HTTP-level backpressure.
+Legacy SSE endpoints are [disabled by default](#legacy-sse-transport) and must be explicitly enabled via <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse>. This is the primary reason they are disabled — the SSE transport has no built-in HTTP-level backpressure.
 
 The legacy SSE transport separates the request and response channels: clients POST JSON-RPC messages to `/message` and receive responses through a long-lived GET SSE stream on `/sse`. The POST endpoint returns **202 Accepted immediately** after queuing the message — it does not wait for the handler to complete. This means there is **no HTTP-level backpressure** on handler concurrency, because each POST frees its connection immediately regardless of how long the handler runs.
 
@@ -619,7 +619,7 @@ The GET stream does provide **session lifetime bounds**: handler cancellation to
 
 ### With EventStreamStore
 
-<xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore> is an advanced API that enables session resumability — storing SSE events so clients can reconnect and replay missed messages using the `Last-Event-ID` header. When configured, handlers gain the ability to call `EnablePollingAsync()`, which closes the POST response early and switches the client to polling mode.
+<xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore> is an advanced API that enables session resumability — storing SSE events so clients can reconnect and replay missed messages using the `Last-Event-ID` header. When configured, handlers gain the ability to call `EnablePollingAsync()`, which closes the POST response early and switches the client to polling mode.
 
 When a handler calls `EnablePollingAsync()`:
 
@@ -632,7 +632,7 @@ The `EventStreamStore` itself has TTL-based limits (default: 2-hour event expira
 
 ### With tasks (experimental)
 
-[Tasks](xref:tasks) are an experimental feature that enables a "call-now, fetch-later" pattern for long-running tool calls. When a client sends a task-augmented `tools/call` request, the server creates a task record in the <xref:ModelContextProtocol.IMcpTaskStore>, starts the tool handler as a fire-and-forget background task, and returns the task ID immediately — the POST response completes **before the handler starts its real work**.
+[Tasks](xref:tasks) are an experimental feature that enables a "call-now, fetch-later" pattern for long-running tool calls. When a client sends a task-augmented `tools/call` request, the server creates a task record in the <xref:Garden.ModelContextProtocol.IMcpTaskStore>, starts the tool handler as a fire-and-forget background task, and returns the task ID immediately — the POST response completes **before the handler starts its real work**.
 
 This means:
 
@@ -664,7 +664,7 @@ The SDK's tracing and metrics work in **all modes** — stateful, stateless, and
 
 ### The `mcp.session.id` activity tag
 
-Every request `Activity` is tagged with `mcp.session.id` — a unique identifier generated independently by each <xref:ModelContextProtocol.Client.McpClient> and <xref:ModelContextProtocol.Server.McpServer> instance. **Despite the name, this is not the transport session ID** (`Mcp-Session-Id` header). It is a per-instance GUID that tracks the lifetime of that specific client or server object.
+Every request `Activity` is tagged with `mcp.session.id` — a unique identifier generated independently by each <xref:Garden.ModelContextProtocol.Client.McpClient> and <xref:Garden.ModelContextProtocol.Server.McpServer> instance. **Despite the name, this is not the transport session ID** (`Mcp-Session-Id` header). It is a per-instance GUID that tracks the lifetime of that specific client or server object.
 
 - **Stateful mode**: The server's `mcp.session.id` is stable for the lifetime of the session. This makes it useful for correlating all operations handled by a single long-lived `McpServer` instance — you can filter your observability platform to see every tool call, notification, and request within one session.
 - **Stateless mode**: Each HTTP request creates a new `McpServer` instance with its own `mcp.session.id`, so the tag effectively identifies individual requests. This is simpler — the HTTP request's own `Activity` is the natural parent, and there's no long-lived session to correlate.
@@ -672,7 +672,7 @@ Every request `Activity` is tagged with `mcp.session.id` — a unique identifier
 
 ### Correlating with the transport session ID
 
-The transport session ID (<xref:ModelContextProtocol.McpSession.SessionId>, the `Mcp-Session-Id` header value) and the `mcp.session.id` activity tag are not automatically correlated by the SDK. You can bridge this gap by tagging the ASP.NET Core request `Activity` with the transport session ID using an [endpoint filter](https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/min-api-filters) on `MapMcp()`:
+The transport session ID (<xref:Garden.ModelContextProtocol.McpSession.SessionId>, the `Mcp-Session-Id` header value) and the `mcp.session.id` activity tag are not automatically correlated by the SDK. You can bridge this gap by tagging the ASP.NET Core request `Activity` with the transport session ID using an [endpoint filter](https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/min-api-filters) on `MapMcp()`:
 
 ```csharp
 app.MapMcp().AddEndpointFilter(async (context, next) =>
@@ -699,7 +699,7 @@ app.MapMcp().AddEndpointFilter(async (context, next) =>
 
 <!-- mlc-disable-next-line -->
 > [!NOTE]
-> The `AllowNewSessionForNonInitializeRequests` AppContext switch (`ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests`) is a back-compat escape hatch that allows creating new sessions from non-initialize POST requests that arrive without an `Mcp-Session-Id` header. When enabled, the server creates a **brand-new session** for each such request rather than rejecting it — the response still carries the `Mcp-Session-Id` header with the new session's ID. This is **non-compliant with the [Streamable HTTP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http)**, which requires that only `initialize` requests create sessions. Use it only as a temporary workaround for clients that don't implement the session protocol correctly.
+> The `AllowNewSessionForNonInitializeRequests` AppContext switch (`Garden.ModelContextProtocol.AspNetCore.AllowNewSessionForNonInitializeRequests`) is a back-compat escape hatch that allows creating new sessions from non-initialize POST requests that arrive without an `Mcp-Session-Id` header. When enabled, the server creates a **brand-new session** for each such request rather than rejecting it — the response still carries the `Mcp-Session-Id` header with the new session's ID. This is **non-compliant with the [Streamable HTTP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http)**, which requires that only `initialize` requests create sessions. Use it only as a temporary workaround for clients that don't implement the session protocol correctly.
 
 ### Other activity tags
 
@@ -707,7 +707,7 @@ Other tags include `mcp.method.name`, `mcp.protocol.version`, `jsonrpc.request.i
 
 ### Metrics
 
-The SDK records histograms under the `Experimental.ModelContextProtocol` meter:
+The SDK records histograms under the `Experimental.Garden.ModelContextProtocol` meter:
 
 | Metric | Description |
 |--------|-------------|
@@ -720,7 +720,7 @@ In stateless mode, each HTTP request is its own "session", so `mcp.server.sessio
 
 ## Legacy SSE transport
 
-The legacy [SSE (Server-Sent Events)](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transport is also supported by `MapMcp()` and always uses stateful mode. Legacy SSE endpoints (`/sse` and `/message`) are **disabled by default** due to [backpressure concerns](#request-backpressure). To enable them, set <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> to `true` — this property is marked `[Obsolete]` with a diagnostic warning (`MCP9004`) to signal that it should only be used when you need to support legacy SSE-only clients and understand the backpressure implications. Alternatively, set the `ModelContextProtocol.AspNetCore.EnableLegacySse` [AppContext switch](https://learn.microsoft.com/dotnet/api/system.appcontext) to `true`.
+The legacy [SSE (Server-Sent Events)](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transport is also supported by `MapMcp()` and always uses stateful mode. Legacy SSE endpoints (`/sse` and `/message`) are **disabled by default** due to [backpressure concerns](#request-backpressure). To enable them, set <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EnableLegacySse> to `true` — this property is marked `[Obsolete]` with a diagnostic warning (`MCP9004`) to signal that it should only be used when you need to support legacy SSE-only clients and understand the backpressure implications. Alternatively, set the `Garden.ModelContextProtocol.AspNetCore.EnableLegacySse` [AppContext switch](https://learn.microsoft.com/dotnet/api/system.appcontext) to `true`.
 
 > [!NOTE]
 > Setting `EnableLegacySse = true` while `Stateless = true` throws an `InvalidOperationException` at startup, because SSE requires in-memory session state shared between the GET and POST requests.
@@ -742,13 +742,13 @@ This makes SSE sessions behave similarly to [stdio](#stdio-transport): the sessi
 
 ### Configuration
 
-<xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> and <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.RunSessionHandler> both work with SSE sessions. They are called during the `/sse` GET request handler, and services resolve from the GET request's `HttpContext.RequestServices`. [User binding](#user-binding) also works — the authenticated user is captured from the GET request and verified on each POST to `/message`.
+<xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.ConfigureSessionOptions> and <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.RunSessionHandler> both work with SSE sessions. They are called during the `/sse` GET request handler, and services resolve from the GET request's `HttpContext.RequestServices`. [User binding](#user-binding) also works — the authenticated user is captured from the GET request and verified on each POST to `/message`.
 
 ## Advanced features
 
 ### Session migration
 
-For high-availability deployments, <xref:ModelContextProtocol.AspNetCore.ISessionMigrationHandler> enables session migration across server instances. When a request arrives with a session ID that isn't found locally, the handler is consulted to attempt migration.
+For high-availability deployments, <xref:Garden.ModelContextProtocol.AspNetCore.ISessionMigrationHandler> enables session migration across server instances. When a request arrives with a session ID that isn't found locally, the handler is consulted to attempt migration.
 
 ```csharp
 builder.Services.AddMcpServer()
@@ -776,7 +776,7 @@ Session migration adds significant complexity. Consider whether stateless mode i
 
 ### Session resumability
 
-The server can store SSE events for replay when clients reconnect using the `Last-Event-ID` header. Configure this with <xref:ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore>:
+The server can store SSE events for replay when clients reconnect using the `Last-Event-ID` header. Configure this with <xref:Garden.ModelContextProtocol.AspNetCore.HttpServerTransportOptions.EventStreamStore>:
 
 ```csharp
 builder.Services.AddMcpServer()

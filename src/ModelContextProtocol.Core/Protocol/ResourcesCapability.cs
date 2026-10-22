@@ -1,8 +1,8 @@
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents the resources capability configuration.

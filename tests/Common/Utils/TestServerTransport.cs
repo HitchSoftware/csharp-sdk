@@ -1,8 +1,8 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text.Json;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Tests.Utils;
+namespace Garden.ModelContextProtocol.Tests.Utils;
 
 public class TestServerTransport : ITransport
 {

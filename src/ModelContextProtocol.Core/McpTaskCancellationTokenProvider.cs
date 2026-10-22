@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Provides cancellation tokens for running MCP tasks, enabling TTL-based

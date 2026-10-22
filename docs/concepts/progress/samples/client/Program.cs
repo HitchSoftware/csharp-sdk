@@ -1,7 +1,7 @@
 using System.Text.Json;
-using ModelContextProtocol;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 
 var endpoint = Environment.GetEnvironmentVariable("ENDPOINT") ?? "http://localhost:3001";
 

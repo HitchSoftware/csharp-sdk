@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 
-namespace ModelContextProtocol.Tests.Utils;
+namespace Garden.ModelContextProtocol.Tests.Utils;
 
 public class MockLoggerProvider : ILoggerProvider
 {

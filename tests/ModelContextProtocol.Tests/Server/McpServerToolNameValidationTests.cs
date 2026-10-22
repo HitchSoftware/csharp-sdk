@@ -1,7 +1,7 @@
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.Tests.Server;
+namespace Garden.ModelContextProtocol.Tests.Server;
 
 public class McpServerToolNameValidationTests
 {

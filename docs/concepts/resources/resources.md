@@ -17,11 +17,11 @@ This document covers implementing resources on the server, consuming them from t
 
 Resources can be defined in several ways:
 
-- Using the <xref:ModelContextProtocol.Server.McpServerResourceAttribute> attribute on methods within a class marked with <xref:ModelContextProtocol.Server.McpServerResourceTypeAttribute>
-- Using <xref:ModelContextProtocol.Server.McpServerResource.Create*> factory methods from a delegate, `MethodInfo`, or `AIFunction`
-- Deriving from <xref:ModelContextProtocol.Server.McpServerResource> or <xref:ModelContextProtocol.Server.DelegatingMcpServerResource>
-- Implementing a custom <xref:ModelContextProtocol.Server.McpRequestHandler`2> via <xref:ModelContextProtocol.Server.McpServerHandlers>
-- Implementing a low-level <xref:ModelContextProtocol.Server.McpRequestFilter`2>
+- Using the <xref:Garden.ModelContextProtocol.Server.McpServerResourceAttribute> attribute on methods within a class marked with <xref:Garden.ModelContextProtocol.Server.McpServerResourceTypeAttribute>
+- Using <xref:Garden.ModelContextProtocol.Server.McpServerResource.Create*> factory methods from a delegate, `MethodInfo`, or `AIFunction`
+- Deriving from <xref:Garden.ModelContextProtocol.Server.McpServerResource> or <xref:Garden.ModelContextProtocol.Server.DelegatingMcpServerResource>
+- Implementing a custom <xref:Garden.ModelContextProtocol.Server.McpRequestHandler`2> via <xref:Garden.ModelContextProtocol.Server.McpServerHandlers>
+- Implementing a low-level <xref:Garden.ModelContextProtocol.Server.McpRequestFilter`2>
 
 The attribute-based approach is the most common and is shown throughout this document.
 
@@ -81,7 +81,7 @@ builder.Services.AddMcpServer()
 
 ### Reading text resources
 
-Text resources return their content as <xref:ModelContextProtocol.Protocol.TextResourceContents> with a `Text` property:
+Text resources return their content as <xref:Garden.ModelContextProtocol.Protocol.TextResourceContents> with a `Text` property:
 
 ```csharp
 [McpServerResource(UriTemplate = "notes://daily/{date}", Name = "Daily Notes")]
@@ -99,7 +99,7 @@ public static TextResourceContents GetDailyNotes(string date)
 
 ### Reading binary resources
 
-Binary resources return their content as <xref:ModelContextProtocol.Protocol.BlobResourceContents> with a `Blob` property containing the raw bytes. Use the <xref:ModelContextProtocol.Protocol.BlobResourceContents.FromBytes*> factory method to construct instances:
+Binary resources return their content as <xref:Garden.ModelContextProtocol.Protocol.BlobResourceContents> with a `Blob` property containing the raw bytes. Use the <xref:Garden.ModelContextProtocol.Protocol.BlobResourceContents.FromBytes*> factory method to construct instances:
 
 ```csharp
 [McpServerResource(UriTemplate = "images://photos/{id}", Name = "Photo")]
@@ -113,7 +113,7 @@ public static BlobResourceContents GetPhoto(int id)
 
 ### Consuming resources on the client
 
-Clients can discover and read resources using <xref:ModelContextProtocol.Client.McpClient>:
+Clients can discover and read resources using <xref:Garden.ModelContextProtocol.Client.McpClient>:
 
 #### Listing resources
 

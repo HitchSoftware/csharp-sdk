@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.AspNetCore;
+namespace Garden.ModelContextProtocol.AspNetCore;
 
 /// <summary>
 /// Represents configuration options for <see cref="M:McpEndpointRouteBuilderExtensions.MapMcp"/>,
@@ -87,13 +87,13 @@ public class HttpServerTransportOptions
     /// throws an <see cref="InvalidOperationException"/> at startup, because SSE requires in-memory session state.
     /// </para>
     /// <para>
-    /// This property can also be enabled via the <c>ModelContextProtocol.AspNetCore.EnableLegacySse</c>
+    /// This property can also be enabled via the <c>Garden.ModelContextProtocol.AspNetCore.EnableLegacySse</c>
     /// <see cref="AppContext"/> switch.
     /// </para>
     /// </remarks>
     [Obsolete(Obsoletions.EnableLegacySse_Message, DiagnosticId = Obsoletions.EnableLegacySse_DiagnosticId, UrlFormat = Obsoletions.EnableLegacySse_Url)]
     public bool EnableLegacySse { get; set; } =
-        AppContext.TryGetSwitch("ModelContextProtocol.AspNetCore.EnableLegacySse", out var enabled) && enabled;
+        AppContext.TryGetSwitch("Garden.ModelContextProtocol.AspNetCore.EnableLegacySse", out var enabled) && enabled;
 
     /// <summary>
     /// Gets or sets the event store for resumability support.

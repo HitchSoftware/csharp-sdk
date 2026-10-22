@@ -20,13 +20,13 @@ This project illustrates the common case of a server tool that performs a long-r
 
 ### Server Implementation
 
-When processing a request, the server can use the <xref:ModelContextProtocol.McpSession.SendNotificationAsync*> extension method of <xref:ModelContextProtocol.Server.McpServer> to send progress updates,
+When processing a request, the server can use the <xref:Garden.ModelContextProtocol.McpSession.SendNotificationAsync*> extension method of <xref:Garden.ModelContextProtocol.Server.McpServer> to send progress updates,
 specifying `"notifications/progress"` as the notification method name.
-The C# SDK registers an instance of <xref:ModelContextProtocol.Server.McpServer> with the dependency injection container,
-so tools can simply add a parameter of type <xref:ModelContextProtocol.Server.McpServer> to their method signature to access it.
-The parameters passed to <xref:ModelContextProtocol.McpSession.SendNotificationAsync*> should be an instance of <xref:ModelContextProtocol.Protocol.ProgressNotificationParams>, which includes the current progress, total steps, and an optional message.
+The C# SDK registers an instance of <xref:Garden.ModelContextProtocol.Server.McpServer> with the dependency injection container,
+so tools can simply add a parameter of type <xref:Garden.ModelContextProtocol.Server.McpServer> to their method signature to access it.
+The parameters passed to <xref:Garden.ModelContextProtocol.McpSession.SendNotificationAsync*> should be an instance of <xref:Garden.ModelContextProtocol.Protocol.ProgressNotificationParams>, which includes the current progress, total steps, and an optional message.
 
-The server must verify that the caller provided a `progressToken` in the request and include it in the call to <xref:ModelContextProtocol.McpSession.SendNotificationAsync*>. The following example demonstrates how a server can send a progress notification:
+The server must verify that the caller provided a `progressToken` in the request and include it in the call to <xref:Garden.ModelContextProtocol.McpSession.SendNotificationAsync*>. The following example demonstrates how a server can send a progress notification:
 
 [!code-csharp[](samples/server/Tools/LongRunningTools.cs?name=snippet_SendProgress)]
 
@@ -37,7 +37,7 @@ Note that servers aren't required to support progress tracking, so clients shoul
 
 In the MCP C# SDK, clients can specify a `progressToken` in the request parameters when calling a tool method.
 The client should also provide a notification handler to process "notifications/progress" notifications.
-There are two ways to do this. The first is to register a notification handler using the <xref:ModelContextProtocol.McpSession.RegisterNotificationHandler*> method on the <xref:ModelContextProtocol.Client.McpClient> instance. A handler registered this way will receive all progress notifications sent by the server.
+There are two ways to do this. The first is to register a notification handler using the <xref:Garden.ModelContextProtocol.McpSession.RegisterNotificationHandler*> method on the <xref:Garden.ModelContextProtocol.Client.McpClient> instance. A handler registered this way will receive all progress notifications sent by the server.
 
 ```csharp
 await using var handler = mcpClient.RegisterNotificationHandler(NotificationMethods.ProgressNotification,
@@ -54,7 +54,7 @@ await using var handler = mcpClient.RegisterNotificationHandler(NotificationMeth
 ```
 
 The second way is to pass a [`Progress<T>`](https://learn.microsoft.com/dotnet/api/system.progress-1) instance to the tool method. `Progress<T>` is a standard .NET type that provides a way to receive progress updates.
-For the purposes of MCP progress notifications, `T` should be <xref:ModelContextProtocol.ProgressNotificationValue>.
+For the purposes of MCP progress notifications, `T` should be <xref:Garden.ModelContextProtocol.ProgressNotificationValue>.
 The MCP C# SDK will automatically handle progress notifications and report them through the `Progress<T>` instance.
 This notification handler will only receive progress updates for the specific request that was made,
 rather than all progress notifications from the server.

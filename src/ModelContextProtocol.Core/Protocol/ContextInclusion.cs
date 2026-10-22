@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Specifies the context inclusion options for a request in the Model Context Protocol (MCP).

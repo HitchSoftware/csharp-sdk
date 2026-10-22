@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace ModelContextProtocol.Tests.Utils;
+namespace Garden.ModelContextProtocol.Tests.Utils;
 
 public class LoggedTest : IDisposable
 {

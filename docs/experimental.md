@@ -35,7 +35,7 @@ For a full list of experimental diagnostic IDs and their descriptions, see the [
 
 ## Serialization behavior
 
-Experimental properties on protocol types are fully serialized and deserialized when using the SDK's built-in serialization via <xref:ModelContextProtocol.McpJsonUtilities.DefaultOptions>. This means experimental data is transmitted on the wire even if your application code doesn't directly interact with it, preserving protocol compatibility.
+Experimental properties on protocol types are fully serialized and deserialized when using the SDK's built-in serialization via <xref:Garden.ModelContextProtocol.McpJsonUtilities.DefaultOptions>. This means experimental data is transmitted on the wire even if your application code doesn't directly interact with it, preserving protocol compatibility.
 
 The behavior of experimental properties differs depending on whether you use [reflection-based or source-generated](https://learn.microsoft.com/dotnet/standard/serialization/system-text-json/source-generation) serialization:
 
@@ -49,7 +49,7 @@ This means that switching between reflection-based and source-generated serializ
 If you define your own `JsonSerializerContext` that includes MCP protocol types, configure a `TypeInfoResolverChain` so the SDK's resolver handles MCP types:
 
 ```csharp
-using ModelContextProtocol;
+using Garden.ModelContextProtocol;
 
 JsonSerializerOptions options = new()
 {

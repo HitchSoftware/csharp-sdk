@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 internal static class PlatformDetection
 {

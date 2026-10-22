@@ -5,9 +5,9 @@ using System.Text.Json;
 using System.Buffers;
 #endif
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Extracts parameter values from tool call arguments and adds them as HTTP headers

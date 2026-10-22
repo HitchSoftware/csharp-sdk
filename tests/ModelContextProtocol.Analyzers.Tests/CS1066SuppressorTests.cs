@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using Xunit;
 
-namespace ModelContextProtocol.Analyzers.Tests;
+namespace Garden.ModelContextProtocol.Analyzers.Tests;
 
 public class CS1066SuppressorTests
 {
@@ -12,7 +12,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMcpServerToolAttribute_SuppressesCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 
@@ -48,7 +48,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMcpServerPromptAttribute_SuppressesCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 
@@ -84,7 +84,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMcpServerResourceAttribute_SuppressesCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 
@@ -151,7 +151,7 @@ public class CS1066SuppressorTests
     public void Suppressor_WithMultipleParameters_SuppressesAllCS1066()
     {
         var result = RunSuppressor("""
-            using ModelContextProtocol.Server;
+            using Garden.ModelContextProtocol.Server;
 
             namespace Test;
 
@@ -196,8 +196,8 @@ public class CS1066SuppressorTests
         referenceList.Add(MetadataReference.CreateFromFile(Path.Combine(runtimePath, "System.Runtime.dll")));
         referenceList.Add(MetadataReference.CreateFromFile(Path.Combine(runtimePath, "netstandard.dll")));
 
-        // Add ModelContextProtocol.Core if available
-        var coreAssemblyPath = Path.Combine(AppContext.BaseDirectory, "ModelContextProtocol.Core.dll");
+        // Add Garden.ModelContextProtocol.Core if available
+        var coreAssemblyPath = Path.Combine(AppContext.BaseDirectory, "Garden.ModelContextProtocol.Core.dll");
         if (File.Exists(coreAssemblyPath))
         {
             referenceList.Add(MetadataReference.CreateFromFile(coreAssemblyPath));

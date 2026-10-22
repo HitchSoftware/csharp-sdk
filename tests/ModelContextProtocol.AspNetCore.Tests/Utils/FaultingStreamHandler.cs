@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Net;
 
-namespace ModelContextProtocol.AspNetCore.Tests.Utils;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
 
 /// <summary>
 /// A message handler that wraps SSE response streams and can trigger faults mid-stream

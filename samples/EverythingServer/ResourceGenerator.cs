@@ -1,4 +1,4 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
 namespace EverythingServer;
 

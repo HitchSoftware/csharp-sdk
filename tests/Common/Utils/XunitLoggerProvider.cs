@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace ModelContextProtocol.Tests.Utils;
+namespace Garden.ModelContextProtocol.Tests.Utils;
 
 public class XunitLoggerProvider(ITestOutputHelper output) : ILoggerProvider
 {

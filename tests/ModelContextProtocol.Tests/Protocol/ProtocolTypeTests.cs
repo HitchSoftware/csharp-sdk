@@ -1,7 +1,7 @@
-﻿using ModelContextProtocol.Protocol;
+﻿using Garden.ModelContextProtocol.Protocol;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Tests.Protocol;
+namespace Garden.ModelContextProtocol.Tests.Protocol;
 
 public static class ProtocolTypeTests
 {

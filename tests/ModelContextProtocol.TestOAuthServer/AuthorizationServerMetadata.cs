@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.TestOAuthServer;
+namespace Garden.ModelContextProtocol.TestOAuthServer;
 
 /// <summary>
 /// Represents the authorization server metadata for OAuth discovery.

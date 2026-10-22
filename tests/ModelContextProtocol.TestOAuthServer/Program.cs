@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace ModelContextProtocol.TestOAuthServer;
+namespace Garden.ModelContextProtocol.TestOAuthServer;
 
 public sealed class Program
 {

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.TestOAuthServer;
+namespace Garden.ModelContextProtocol.TestOAuthServer;
 
 /// <summary>
 /// Represents an OAuth error response.

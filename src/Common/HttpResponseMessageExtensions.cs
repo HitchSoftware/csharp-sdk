@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Http;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 /// <summary>
 /// Extension methods for <see cref="HttpResponseMessage"/>.

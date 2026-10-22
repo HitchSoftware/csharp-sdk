@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.IO.Pipelines;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Tests.Transport;
+namespace Garden.ModelContextProtocol.Tests.Transport;
 
 public class StdioClientTransportTests(ITestOutputHelper testOutputHelper) : LoggedTest(testOutputHelper)
 {

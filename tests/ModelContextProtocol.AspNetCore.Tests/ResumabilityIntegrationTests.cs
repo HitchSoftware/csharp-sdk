@@ -1,9 +1,9 @@
 using System.Net.ServerSentEvents;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 /// <summary>
 /// Integration tests for SSE resumability using the in-memory <see cref="TestSseEventStreamStore"/>.

@@ -1,10 +1,10 @@
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Collections.Concurrent;
 using System.Text.Json.Nodes;
 using Xunit;
 
-namespace ModelContextProtocol.Tests.Utils;
+namespace Garden.ModelContextProtocol.Tests.Utils;
 
 /// <summary>
 /// Tracks MRTR protocol mode via incoming and outgoing message filters.

@@ -1,5 +1,5 @@
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// Caches the token in-memory within this instance.

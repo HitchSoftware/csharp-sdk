@@ -9,7 +9,7 @@ This SDK is the official C# SDK for the [Model Context Protocol](https://modelco
 For more details on available functionality, see:
 
 - [Conceptual documentation](https://csharp.sdk.modelcontextprotocol.io/concepts/index.html)
-- [API documentation](https://csharp.sdk.modelcontextprotocol.io/api/ModelContextProtocol.html).
+- [API documentation](https://csharp.sdk.modelcontextprotocol.io/api/Garden.ModelContextProtocol.html).
 
 ## About MCP
 
@@ -25,7 +25,7 @@ For how-to guides, tutorials, and additional guidance, see the [official MCP doc
 
 ## Official SDK packages
 
-The official C# SDK packages for stable and prerelease versions are published to the [NuGet Gallery](https://www.nuget.org) under the [ModelContextProtocol](https://www.nuget.org/profiles/ModelContextProtocol) profile. _Prior to v0.5.0, packages were published using the [ModelContextProtocolOfficial](https://www.nuget.org/profiles/ModelContextProtocolOfficial) profile._
+The official C# SDK packages for stable and prerelease versions are published to the [NuGet Gallery](https://www.nuget.org) under the [Garden.ModelContextProtocol](https://www.nuget.org/profiles/Garden.ModelContextProtocol) profile. _Prior to v0.5.0, packages were published using the [Garden.ModelContextProtocolOfficial](https://www.nuget.org/profiles/Garden.ModelContextProtocolOfficial) profile._
 
 Continuous integration builds are published to the modelcontextprotocol organization's [GitHub NuGet package registry](https://github.com/orgs/modelcontextprotocol/packages?ecosystem=nuget).
 

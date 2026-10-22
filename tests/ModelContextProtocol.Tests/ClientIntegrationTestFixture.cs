@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 using System.Runtime.InteropServices;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 public class ClientIntegrationTestFixture
 {

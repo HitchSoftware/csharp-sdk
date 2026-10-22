@@ -1,5 +1,5 @@
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 #if NET9_0_OR_GREATER
@@ -12,7 +12,7 @@ using System.Text;
 using System.Text.Json;
 using System.Web;
 
-namespace ModelContextProtocol.Authentication;
+namespace Garden.ModelContextProtocol.Authentication;
 
 /// <summary>
 /// A generic implementation of an OAuth authorization provider.

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Net;
 using System.Net.ServerSentEvents;
 using System.Text;
@@ -11,7 +11,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 /// <summary>
 /// Protocol-level tests for Multi Round-Trip Requests (MRTR).
@@ -218,7 +218,7 @@ public class MrtrProtocolTests(ITestOutputHelper outputHelper) : KestrelInMemory
     /// outgoing <c>roots/list</c> request through the session-level transport, which silently
     /// dropped the message when the client's GET stream had not been established yet. The
     /// outgoing request must instead go through the POST's response stream (the request's
-    /// <see cref="ModelContextProtocol.Protocol.JsonRpcMessageContext.RelatedTransport"/>) so it
+    /// <see cref="Garden.ModelContextProtocol.Protocol.JsonRpcMessageContext.RelatedTransport"/>) so it
     /// reaches the client without depending on the GET stream at all.
     ///
     /// This test deliberately never opens a GET stream - it only POSTs the initialize, the

@@ -16,9 +16,9 @@ The protocol supports two modes of elicitation:
 
 ### Server Support for Elicitation
 
-Servers request information from users with the <xref:ModelContextProtocol.Server.McpServer.ElicitAsync*> extension method on <xref:ModelContextProtocol.Server.McpServer>.
-The C# SDK registers an instance of <xref:ModelContextProtocol.Server.McpServer> with the dependency injection container,
-so tools can simply add a parameter of type <xref:ModelContextProtocol.Server.McpServer> to their method signature to access it.
+Servers request information from users with the <xref:Garden.ModelContextProtocol.Server.McpServer.ElicitAsync*> extension method on <xref:Garden.ModelContextProtocol.Server.McpServer>.
+The C# SDK registers an instance of <xref:Garden.ModelContextProtocol.Server.McpServer> with the dependency injection container,
+so tools can simply add a parameter of type <xref:Garden.ModelContextProtocol.Server.McpServer> to their method signature to access it.
 
 #### Form Mode Elicitation (In-Band)
 
@@ -77,10 +77,10 @@ var result = await server.ElicitAsync(new ElicitRequestParams
 
 Enum schemas allow the server to present a set of choices to the user.
 
-- <xref:ModelContextProtocol.Protocol.ElicitRequestParams.UntitledSingleSelectEnumSchema>: Simple single-select where enum values serve as both the value and display text.
-- <xref:ModelContextProtocol.Protocol.ElicitRequestParams.TitledSingleSelectEnumSchema>: Single-select with separate display titles for each option using JSON Schema `oneOf` with `const` and `title`.
-- <xref:ModelContextProtocol.Protocol.ElicitRequestParams.UntitledMultiSelectEnumSchema>: Multi-select allowing multiple values.
-- <xref:ModelContextProtocol.Protocol.ElicitRequestParams.TitledMultiSelectEnumSchema>: Multi-select with display titles.
+- <xref:Garden.ModelContextProtocol.Protocol.ElicitRequestParams.UntitledSingleSelectEnumSchema>: Simple single-select where enum values serve as both the value and display text.
+- <xref:Garden.ModelContextProtocol.Protocol.ElicitRequestParams.TitledSingleSelectEnumSchema>: Single-select with separate display titles for each option using JSON Schema `oneOf` with `const` and `title`.
+- <xref:Garden.ModelContextProtocol.Protocol.ElicitRequestParams.UntitledMultiSelectEnumSchema>: Multi-select allowing multiple values.
+- <xref:Garden.ModelContextProtocol.Protocol.ElicitRequestParams.TitledMultiSelectEnumSchema>: Multi-select with display titles.
 
 ```csharp
 // Titled single-select: display titles differ from values
@@ -138,7 +138,7 @@ var result = await server.ElicitAsync(
 
 Clients declare their support for elicitation in their capabilities as part of the `initialize` request. Clients can support `Form` (in-band), `Url` (out-of-band), or both.
 
-In the MCP C# SDK, this is done by configuring the capabilities and an <xref:ModelContextProtocol.Client.McpClientHandlers.ElicitationHandler> in the <xref:ModelContextProtocol.Client.McpClientOptions>:
+In the MCP C# SDK, this is done by configuring the capabilities and an <xref:Garden.ModelContextProtocol.Client.McpClientHandlers.ElicitationHandler> in the <xref:Garden.ModelContextProtocol.Client.McpClientOptions>:
 
 ```csharp
 var options = new McpClientOptions
@@ -163,8 +163,8 @@ The `ElicitationHandler` is an asynchronous method that will be called when the 
 - **Form Mode**: Present the form defined by `RequestedSchema` to the user. Return the user's input in the `Content` of the result.
 - **URL Mode**: Present the `Message` and `Url` to the user. Ask for consent to open the URL. If the user consents, open the URL and return `Action="accept"`. If the user declines, return `Action="decline"`.
 
-If the user provides the requested information (or consents to URL mode), the ElicitationHandler should return an <xref:ModelContextProtocol.Protocol.ElicitResult> with the action set to "accept".
-If the user does not provide the requested information, the ElicitationHandler should return an <xref:ModelContextProtocol.Protocol.ElicitResult> with the action set to "reject" (or "decline" / "cancel").
+If the user provides the requested information (or consents to URL mode), the ElicitationHandler should return an <xref:Garden.ModelContextProtocol.Protocol.ElicitResult> with the action set to "accept".
+If the user does not provide the requested information, the ElicitationHandler should return an <xref:Garden.ModelContextProtocol.Protocol.ElicitResult> with the action set to "reject" (or "decline" / "cancel").
 
 Here's an example implementation of how a console application might handle elicitation requests:
 
@@ -172,7 +172,7 @@ Here's an example implementation of how a console application might handle elici
 
 ### Multi Round-Trip Requests (MRTR)
 
-[MRTR](xref:mrtr) is the SEP-2322 mechanism for server-driven input requests, finalized in protocol revision `DRAFT-2026-v1`. Under the draft protocol, the server-to-client `elicitation/create` request method is removed; the recommended way to ask the user for input from a server handler is to throw <xref:ModelContextProtocol.Protocol.InputRequiredException> and let the SDK emit an <xref:ModelContextProtocol.Protocol.InputRequiredResult> on the wire.
+[MRTR](xref:mrtr) is the SEP-2322 mechanism for server-driven input requests, finalized in protocol revision `DRAFT-2026-v1`. Under the draft protocol, the server-to-client `elicitation/create` request method is removed; the recommended way to ask the user for input from a server handler is to throw <xref:Garden.ModelContextProtocol.Protocol.InputRequiredException> and let the SDK emit an <xref:Garden.ModelContextProtocol.Protocol.InputRequiredResult> on the wire.
 
 > [!IMPORTANT]
 > `ElicitAsync` throws `InvalidOperationException("Elicitation is not supported in stateless mode.")` whenever the server is running stateless — which includes every Streamable HTTP server under `DRAFT-2026-v1` once that revision is forced to stateless-only in a future PR. Stdio servers and current-protocol stateful Streamable HTTP servers continue to work via the legacy server-to-client `elicitation/create` request flow. For code that needs to run on stateless servers — including all `DRAFT-2026-v1` Streamable HTTP servers going forward — throw `InputRequiredException` from your handler instead. It works under both protocols and both session modes.
@@ -227,7 +227,7 @@ public static string ElicitWithMrtr(
 
 ### URL Elicitation Required Error
 
-When a tool cannot proceed without first completing a URL-mode elicitation (for example, when third-party OAuth authorization is needed), and calling `ElicitAsync` is not practical (for example in [stateless](xref:stateless) mode where server-to-client requests are disabled), the server may throw a <xref:ModelContextProtocol.UrlElicitationRequiredException>. This is a specialized error (JSON-RPC error code `-32042`) that signals to the client that one or more URL-mode elicitations must be completed before the original request can be retried.
+When a tool cannot proceed without first completing a URL-mode elicitation (for example, when third-party OAuth authorization is needed), and calling `ElicitAsync` is not practical (for example in [stateless](xref:stateless) mode where server-to-client requests are disabled), the server may throw a <xref:Garden.ModelContextProtocol.UrlElicitationRequiredException>. This is a specialized error (JSON-RPC error code `-32042`) that signals to the client that one or more URL-mode elicitations must be completed before the original request can be retried.
 
 #### Throwing UrlElicitationRequiredException on the Server
 

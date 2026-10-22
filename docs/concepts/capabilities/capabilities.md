@@ -13,13 +13,13 @@ MCP uses a [capability negotiation] mechanism during connection setup. Clients a
 
 ### Client capabilities
 
-<xref:ModelContextProtocol.Protocol.ClientCapabilities> declares what features the client supports:
+<xref:Garden.ModelContextProtocol.Protocol.ClientCapabilities> declares what features the client supports:
 
 | Capability | Type | Description |
 |-----------|------|-------------|
-| `Roots` | <xref:ModelContextProtocol.Protocol.RootsCapability> | Client can provide filesystem root URIs |
-| `Sampling` | <xref:ModelContextProtocol.Protocol.SamplingCapability> | Client can handle LLM sampling requests |
-| `Elicitation` | <xref:ModelContextProtocol.Protocol.ElicitationCapability> | Client can present forms or URLs to the user |
+| `Roots` | <xref:Garden.ModelContextProtocol.Protocol.RootsCapability> | Client can provide filesystem root URIs |
+| `Sampling` | <xref:Garden.ModelContextProtocol.Protocol.SamplingCapability> | Client can handle LLM sampling requests |
+| `Elicitation` | <xref:Garden.ModelContextProtocol.Protocol.ElicitationCapability> | Client can present forms or URLs to the user |
 | `Experimental` | `IDictionary<string, object>` | Experimental capabilities |
 
 Configure client capabilities when creating an MCP client:
@@ -46,15 +46,15 @@ Handlers for each capability (roots, sampling, elicitation) are covered in their
 
 ### Server capabilities
 
-<xref:ModelContextProtocol.Protocol.ServerCapabilities> declares what features the server supports:
+<xref:Garden.ModelContextProtocol.Protocol.ServerCapabilities> declares what features the server supports:
 
 | Capability | Type | Description |
 |-----------|------|-------------|
-| `Tools` | <xref:ModelContextProtocol.Protocol.ToolsCapability> | Server exposes callable tools |
-| `Prompts` | <xref:ModelContextProtocol.Protocol.PromptsCapability> | Server exposes prompt templates |
-| `Resources` | <xref:ModelContextProtocol.Protocol.ResourcesCapability> | Server exposes readable resources |
-| `Logging` | <xref:ModelContextProtocol.Protocol.LoggingCapability> | Server can send log messages |
-| `Completions` | <xref:ModelContextProtocol.Protocol.CompletionsCapability> | Server supports argument completions |
+| `Tools` | <xref:Garden.ModelContextProtocol.Protocol.ToolsCapability> | Server exposes callable tools |
+| `Prompts` | <xref:Garden.ModelContextProtocol.Protocol.PromptsCapability> | Server exposes prompt templates |
+| `Resources` | <xref:Garden.ModelContextProtocol.Protocol.ResourcesCapability> | Server exposes readable resources |
+| `Logging` | <xref:Garden.ModelContextProtocol.Protocol.LoggingCapability> | Server can send log messages |
+| `Completions` | <xref:Garden.ModelContextProtocol.Protocol.CompletionsCapability> | Server supports argument completions |
 | `Experimental` | `IDictionary<string, object>` | Experimental capabilities |
 
 Server capabilities are automatically inferred from the configured features. For example, registering tools with `.WithTools<T>()` automatically declares the tools capability.

@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.AspNetCore.Authentication;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.AspNetCore.Authentication;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Authentication;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Encodings.Web;
 
-namespace ModelContextProtocol.AspNetCore.Tests.OAuth;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests.OAuth;
 
 public class McpAuthenticationHandlerTests(ITestOutputHelper outputHelper) : KestrelInMemoryTest(outputHelper)
 {

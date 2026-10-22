@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 
-namespace ModelContextProtocol.Tests.Configuration;
+namespace Garden.ModelContextProtocol.Tests.Configuration;
 
 public class McpServerBuilderExtensionsRequestFilterTests(ITestOutputHelper testOutputHelper) : ClientServerTestBase(testOutputHelper)
 {

@@ -1,7 +1,7 @@
 using System.Security.Claims;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides a context container that provides access to the server and resources for processing a JSON-RPC message.

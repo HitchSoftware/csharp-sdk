@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Net;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Tests.Utils;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 public class EverythingSseServerFixture : IAsyncDisposable
 {

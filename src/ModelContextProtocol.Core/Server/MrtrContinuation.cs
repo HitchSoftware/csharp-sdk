@@ -1,6 +1,6 @@
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Represents the lifecycle state for an MRTR handler invocation across retries.

@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using Moq;
 using System.Collections;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Tests.Configuration;
+namespace Garden.ModelContextProtocol.Tests.Configuration;
 
 public partial class McpServerBuilderExtensionsPromptsTests : ClientServerTestBase
 {

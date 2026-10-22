@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Connections;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using Serilog;
 using System.Diagnostics;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Text.Json;
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
-namespace ModelContextProtocol.TestSseServer;
+namespace Garden.ModelContextProtocol.TestSseServer;
 
 public class Program
 {

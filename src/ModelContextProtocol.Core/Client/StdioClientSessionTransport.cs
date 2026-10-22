@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>Provides the client side of a stdio-based session transport.</summary>
 internal sealed class StdioClientSessionTransport : StreamClientSessionTransport

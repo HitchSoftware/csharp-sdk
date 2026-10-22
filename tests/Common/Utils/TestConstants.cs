@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Tests.Utils;
+namespace Garden.ModelContextProtocol.Tests.Utils;
 
 /// <summary>
 /// Provides centralized constants for tests

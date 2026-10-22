@@ -1,11 +1,11 @@
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Manages the MRTR (Multi Round-Trip Request) coordination between a handler and the pipeline.
-/// When a handler calls <see cref="McpServer.ElicitAsync(ModelContextProtocol.Protocol.ElicitRequestParams, System.Threading.CancellationToken)"/> or
-/// <see cref="McpServer.SampleAsync(ModelContextProtocol.Protocol.CreateMessageRequestParams, System.Threading.CancellationToken)"/>,
+/// When a handler calls <see cref="McpServer.ElicitAsync(Garden.ModelContextProtocol.Protocol.ElicitRequestParams, System.Threading.CancellationToken)"/> or
+/// <see cref="McpServer.SampleAsync(Garden.ModelContextProtocol.Protocol.CreateMessageRequestParams, System.Threading.CancellationToken)"/>,
 /// the handler sets the exchange TCS and suspends on a response TCS. The pipeline detects the exchange
 /// via <see cref="InitialExchangeTask"/> or the task returned by <see cref="ResetForNextExchange"/>,
 /// sends an <see cref="InputRequiredResult"/>, and later completes the response TCS when the retry arrives.
@@ -49,8 +49,8 @@ internal sealed class MrtrContext
     }
 
     /// <summary>
-    /// Called by <see cref="McpServer.ElicitAsync(ModelContextProtocol.Protocol.ElicitRequestParams, System.Threading.CancellationToken)"/>
-    /// or <see cref="McpServer.SampleAsync(ModelContextProtocol.Protocol.CreateMessageRequestParams, System.Threading.CancellationToken)"/>
+    /// Called by <see cref="McpServer.ElicitAsync(Garden.ModelContextProtocol.Protocol.ElicitRequestParams, System.Threading.CancellationToken)"/>
+    /// or <see cref="McpServer.SampleAsync(Garden.ModelContextProtocol.Protocol.CreateMessageRequestParams, System.Threading.CancellationToken)"/>
     /// to request input from the client via the MRTR mechanism.
     /// </summary>
     /// <param name="inputRequest">The input request describing what the server needs.</param>

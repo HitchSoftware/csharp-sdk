@@ -22,7 +22,7 @@ Two levels of API are provided for paginated operations:
 
 ### Automatic pagination
 
-The convenience methods on <xref:ModelContextProtocol.Client.McpClient> handle pagination automatically, fetching all pages and returning the complete list:
+The convenience methods on <xref:Garden.ModelContextProtocol.Client.McpClient> handle pagination automatically, fetching all pages and returning the complete list:
 
 ```csharp
 // Fetches all tools, handling pagination automatically

@@ -68,7 +68,7 @@ builder.Services.AddMcpServer(options =>
 .WithTools<MyTools>();
 ```
 
-The <xref:ModelContextProtocol.InMemoryMcpTaskStore> is a reference implementation suitable for development and single-server deployments. For production multi-server scenarios, implement <xref:ModelContextProtocol.IMcpTaskStore> with a persistent backing store (database, Redis, etc.).
+The <xref:Garden.ModelContextProtocol.InMemoryMcpTaskStore> is a reference implementation suitable for development and single-server deployments. For production multi-server scenarios, implement <xref:Garden.ModelContextProtocol.IMcpTaskStore> with a persistent backing store (database, Redis, etc.).
 
 ### Task Store Configuration
 
@@ -112,7 +112,7 @@ public class MyTools
 }
 ```
 
-You can explicitly control task support using <xref:ModelContextProtocol.Server.McpServerToolCreateOptions>:
+You can explicitly control task support using <xref:Garden.ModelContextProtocol.Server.McpServerToolCreateOptions>:
 
 ```csharp
 // In Program.cs or configuration
@@ -139,7 +139,7 @@ Task support levels:
 
 ### Explicit Task Creation with `IMcpTaskStore`
 
-For more control over task lifecycle, tools can directly interact with <xref:ModelContextProtocol.IMcpTaskStore> and return an `McpTask`. This approach allows you to:
+For more control over task lifecycle, tools can directly interact with <xref:Garden.ModelContextProtocol.IMcpTaskStore> and return an `McpTask`. This approach allows you to:
 
 - Create a task and return immediately while work continues in the background
 - Control exactly when and how task status and results are updated
@@ -238,8 +238,8 @@ Clients receive `notifications/tasks/status` messages when task status changes.
 To execute a tool as a task, include the `Task` property in the request:
 
 ```csharp
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 
 var client = await McpClient.CreateAsync(transport);
 
@@ -269,7 +269,7 @@ if (result.Task != null)
 
 ### Polling for Task Status
 
-Use <xref:ModelContextProtocol.Client.McpClient.GetTaskAsync*> to check task status:
+Use <xref:Garden.ModelContextProtocol.Client.McpClient.GetTaskAsync*> to check task status:
 
 ```csharp
 var task = await client.GetTaskAsync(taskId, cancellationToken: cancellationToken);
@@ -367,7 +367,7 @@ var client = await McpClient.CreateAsync(transport, options);
 
 ## Implementing a Custom Task Store
 
-For production deployments, implement <xref:ModelContextProtocol.IMcpTaskStore> with a persistent backing store:
+For production deployments, implement <xref:Garden.ModelContextProtocol.IMcpTaskStore> with a persistent backing store:
 
 ```csharp
 public class DatabaseTaskStore : IMcpTaskStore
@@ -425,7 +425,7 @@ public class DatabaseTaskStore : IMcpTaskStore
 
 ## Error Handling
 
-Task operations may throw <xref:ModelContextProtocol.McpException> with these error codes:
+Task operations may throw <xref:Garden.ModelContextProtocol.McpException> with these error codes:
 
 | Error Code | Scenario |
 |------------|----------|
@@ -597,8 +597,8 @@ While this file-based approach demonstrates the pattern, production systems shou
 
 ## See Also
 
-- <xref:ModelContextProtocol.IMcpTaskStore>
-- <xref:ModelContextProtocol.InMemoryMcpTaskStore>
-- <xref:ModelContextProtocol.Protocol.McpTask>
-- <xref:ModelContextProtocol.Protocol.McpTaskStatus>
+- <xref:Garden.ModelContextProtocol.IMcpTaskStore>
+- <xref:Garden.ModelContextProtocol.InMemoryMcpTaskStore>
+- <xref:Garden.ModelContextProtocol.Protocol.McpTask>
+- <xref:Garden.ModelContextProtocol.Protocol.McpTaskStatus>
 - [MCP Tasks Specification](https://modelcontextprotocol.io/seps/1686-tasks)

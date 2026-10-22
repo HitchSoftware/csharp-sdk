@@ -1,8 +1,8 @@
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 
-namespace ModelContextProtocol.Tests.Transport;
+namespace Garden.ModelContextProtocol.Tests.Transport;
 
 public class StreamableHttpServerTransportTests(ITestOutputHelper testOutputHelper) : LoggedTest(testOutputHelper)
 {

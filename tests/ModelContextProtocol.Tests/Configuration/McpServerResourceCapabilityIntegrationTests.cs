@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Tests.Configuration;
+namespace Garden.ModelContextProtocol.Tests.Configuration;
 
 // Integration test with full client-server setup
 public class McpServerResourceCapabilityIntegrationTests : ClientServerTestBase

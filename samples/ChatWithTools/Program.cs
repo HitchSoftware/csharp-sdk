@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol;
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Client;
 using OpenAI;
 using OpenTelemetry;
 using OpenTelemetry.Logs;

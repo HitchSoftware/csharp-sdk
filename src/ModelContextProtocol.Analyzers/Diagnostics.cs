@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 using System.Text;
 using System.Xml.Linq;
 
-namespace ModelContextProtocol.Analyzers;
+namespace Garden.ModelContextProtocol.Analyzers;
 
 /// <summary>Provides the diagnostic descriptors used by the assembly.</summary>
 /// <remarks>

@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace ModelContextProtocol;
+namespace Garden.ModelContextProtocol;
 
 internal static class HttpClientExt
 {

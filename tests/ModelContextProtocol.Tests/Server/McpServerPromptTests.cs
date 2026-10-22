@@ -1,7 +1,7 @@
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using Moq;
 using System.ComponentModel;
 using System.Reflection;
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Tests.Server;
+namespace Garden.ModelContextProtocol.Tests.Server;
 
 public class McpServerPromptTests
 {

@@ -4,7 +4,9 @@
     <TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
-    <PackageId>ModelContextProtocol.Core</PackageId>
+    <PackageId>Garden.ModelContextProtocol.Core</PackageId>
+    <AssemblyName>Garden.ModelContextProtocol.Core</AssemblyName>
+    <RootNamespace>Garden.ModelContextProtocol</RootNamespace>
     <Description>Core .NET SDK for the Model Context Protocol (MCP)</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <!-- Suppress the experimental tasks warning -->
@@ -67,7 +69,7 @@
   <!-- Package the analyzer/source generator assembly in the NuGet package -->
   <ItemGroup>
     <!-- Include the analyzer DLL directly in the package. The ProjectReference with OutputItemType="Analyzer" ensures it's built before packing. -->
-    <None Include="$(ArtifactsBinDir)ModelContextProtocol.Analyzers\$(Configuration)\netstandard2.0\ModelContextProtocol.Analyzers.dll" 
+    <None Include="$(ArtifactsBinDir)ModelContextProtocol.Analyzers\$(Configuration)\netstandard2.0\Garden.ModelContextProtocol.Analyzers.dll" 
           Pack="true" 
           PackagePath="analyzers/dotnet/cs" 
           Visible="false" />

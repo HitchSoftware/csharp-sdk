@@ -1,6 +1,6 @@
-﻿using ModelContextProtocol.Client;
+﻿using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 public class NotificationHandlerTests : ClientServerTestBase
 {

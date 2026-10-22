@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Provides a base class for implementing <see cref="ITransport"/>.

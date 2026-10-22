@@ -1,8 +1,8 @@
 using Json.Schema;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using Moq;
 using System.ComponentModel;
 using System.Reflection;
@@ -13,7 +13,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using Xunit.Sdk;
 
-namespace ModelContextProtocol.Tests.Server;
+namespace Garden.ModelContextProtocol.Tests.Server;
 
 public partial class McpServerToolTests
 {

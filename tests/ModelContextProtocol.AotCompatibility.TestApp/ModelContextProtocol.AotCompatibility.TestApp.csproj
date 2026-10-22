@@ -16,9 +16,9 @@
     <ProjectReference Include="..\..\src\ModelContextProtocol\ModelContextProtocol.csproj" />
     <ProjectReference Include="..\..\src\ModelContextProtocol.AspNetCore\ModelContextProtocol.AspNetCore.csproj" />
 
-    <TrimmerRootAssembly Include="ModelContextProtocol.Core" />
-    <TrimmerRootAssembly Include="ModelContextProtocol" />
-    <TrimmerRootAssembly Include="ModelContextProtocol.AspNetCore" />
+    <TrimmerRootAssembly Include="Garden.ModelContextProtocol.Core" />
+    <TrimmerRootAssembly Include="Garden.ModelContextProtocol" />
+    <TrimmerRootAssembly Include="Garden.ModelContextProtocol.AspNetCore" />
   </ItemGroup>
 
 </Project>

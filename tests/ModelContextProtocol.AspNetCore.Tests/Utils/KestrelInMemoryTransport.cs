@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Net;
 using System.Threading.Channels;
 
-namespace ModelContextProtocol.AspNetCore.Tests.Utils;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
 
 public sealed class KestrelInMemoryTransport : IConnectionListenerFactory
 {

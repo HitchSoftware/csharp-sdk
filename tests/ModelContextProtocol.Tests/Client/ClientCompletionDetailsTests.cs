@@ -1,6 +1,6 @@
-using ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Client;
 
-namespace ModelContextProtocol.Tests.Client;
+namespace Garden.ModelContextProtocol.Tests.Client;
 
 public class ClientCompletionDetailsTests
 {

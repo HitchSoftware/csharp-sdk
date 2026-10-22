@@ -17,7 +17,7 @@ MCP supports [cancellation] of in-flight requests. Either side can cancel a prev
 
 ### How cancellation maps to MCP notifications
 
-When a `CancellationToken` passed to a client method (such as <xref:ModelContextProtocol.Client.McpClient.CallToolAsync*>) is cancelled, a `notifications/cancelled` notification is sent to the server with the request ID. On the server side, the `CancellationToken` provided to the tool method is then triggered, allowing the handler to stop work gracefully. This same mechanism works in reverse for server-to-client requests.
+When a `CancellationToken` passed to a client method (such as <xref:Garden.ModelContextProtocol.Client.McpClient.CallToolAsync*>) is cancelled, a `notifications/cancelled` notification is sent to the server with the request ID. On the server side, the `CancellationToken` provided to the tool method is then triggered, allowing the handler to stop work gracefully. This same mechanism works in reverse for server-to-client requests.
 
 ### Server-side cancellation handling
 
@@ -47,7 +47,7 @@ The cancellation notification includes:
 - **RequestId**: The ID of the request to cancel, allowing the receiver to correlate the cancellation with the correct in-flight request.
 - **Reason**: An optional human-readable reason for the cancellation.
 
-Cancellation notifications can be observed by registering a handler. For broader interception of notifications and other messages, <xref:ModelContextProtocol.Server.McpMessageFilter> delegates can be added to the <xref:ModelContextProtocol.Server.McpMessageFilters.IncomingFilters> collection in <xref:ModelContextProtocol.Server.McpServerOptions.Filters>.
+Cancellation notifications can be observed by registering a handler. For broader interception of notifications and other messages, <xref:Garden.ModelContextProtocol.Server.McpMessageFilter> delegates can be added to the <xref:Garden.ModelContextProtocol.Server.McpMessageFilters.IncomingFilters> collection in <xref:Garden.ModelContextProtocol.Server.McpServerOptions.Filters>.
 
 ```csharp
 mcpClient.RegisterNotificationHandler(

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
-using ModelContextProtocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Server;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

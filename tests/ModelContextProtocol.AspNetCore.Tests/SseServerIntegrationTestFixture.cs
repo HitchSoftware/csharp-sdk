@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using ModelContextProtocol.AspNetCore.Tests.Utils;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Tests.Utils;
-using ModelContextProtocol.TestSseServer;
+using Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.TestSseServer;
 using System.Net;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 public class SseServerIntegrationTestFixture : IAsyncDisposable
 {

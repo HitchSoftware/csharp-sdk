@@ -15,13 +15,13 @@ The SDK ships as three NuGet packages. Pick the one that matches your scenario:
 
 | Package | Use when... |
 | - | - |
-| **[ModelContextProtocol.Core](https://www.nuget.org/packages/ModelContextProtocol.Core/absoluteLatest)** | You only need the client or low-level server APIs and want the **minimum set of dependencies**. |
-| **[ModelContextProtocol](https://www.nuget.org/packages/ModelContextProtocol/absoluteLatest)** | You're building a client or a **stdio-based** server and want hosting, dependency injection, and attribute-based tool/prompt/resource discovery. References `ModelContextProtocol.Core`. **This is the right starting point for most projects.** |
-| **[ModelContextProtocol.AspNetCore](https://www.nuget.org/packages/ModelContextProtocol.AspNetCore/absoluteLatest)** | You're building an **HTTP-based** MCP server hosted in ASP.NET Core. References `ModelContextProtocol`, so you get everything above plus the HTTP transport. |
+| **[Garden.ModelContextProtocol.Core](https://www.nuget.org/packages/Garden.ModelContextProtocol.Core/absoluteLatest)** | You only need the client or low-level server APIs and want the **minimum set of dependencies**. |
+| **[Garden.ModelContextProtocol](https://www.nuget.org/packages/Garden.ModelContextProtocol/absoluteLatest)** | You're building a client or a **stdio-based** server and want hosting, dependency injection, and attribute-based tool/prompt/resource discovery. References `Garden.ModelContextProtocol.Core`. **This is the right starting point for most projects.** |
+| **[Garden.ModelContextProtocol.AspNetCore](https://www.nuget.org/packages/Garden.ModelContextProtocol.AspNetCore/absoluteLatest)** | You're building an **HTTP-based** MCP server hosted in ASP.NET Core. References `Garden.ModelContextProtocol`, so you get everything above plus the HTTP transport. |
 
 <!-- mlc-disable-next-line -->
 > [!TIP]
-> If you're unsure, start with the **ModelContextProtocol** package. You can always add **ModelContextProtocol.AspNetCore** later if you need HTTP transport support.
+> If you're unsure, start with the **Garden.ModelContextProtocol** package. You can always add **Garden.ModelContextProtocol.AspNetCore** later if you need HTTP transport support.
 
 ### Building an MCP server
 
@@ -33,7 +33,7 @@ Create a new console app, add the required packages, and replace `Program.cs` wi
 
 ```
 dotnet new console
-dotnet add package ModelContextProtocol
+dotnet add package Garden.ModelContextProtocol
 dotnet add package Microsoft.Extensions.Hosting
 ```
 
@@ -41,7 +41,7 @@ dotnet add package Microsoft.Extensions.Hosting
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -70,11 +70,11 @@ For HTTP-based servers using ASP.NET Core:
 
 ```
 dotnet new web
-dotnet add package ModelContextProtocol.AspNetCore
+dotnet add package Garden.ModelContextProtocol.AspNetCore
 ```
 
 ```csharp
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -121,12 +121,12 @@ Create a new console app, add the package, and replace `Program.cs` with the cod
 
 ```
 dotnet new console
-dotnet add package ModelContextProtocol
+dotnet add package Garden.ModelContextProtocol
 ```
 
 ```csharp
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
 
 var clientTransport = new StdioClientTransport(new StdioClientTransportOptions
 {

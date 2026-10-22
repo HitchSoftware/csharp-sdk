@@ -1,9 +1,9 @@
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides an <see cref="AIFunction"/> that calls a tool via an <see cref="McpClient"/>.

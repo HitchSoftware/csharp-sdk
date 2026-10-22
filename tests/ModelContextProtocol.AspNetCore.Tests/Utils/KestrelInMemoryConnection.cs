@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.Features;
 using System.IO.Pipelines;
 
-namespace ModelContextProtocol.AspNetCore.Tests.Utils;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests.Utils;
 
 public sealed class KestrelInMemoryConnection : ConnectionContext
 {

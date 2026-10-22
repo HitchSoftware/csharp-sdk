@@ -1,10 +1,10 @@
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.Collections.Concurrent;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Tests.Server;
+namespace Garden.ModelContextProtocol.Tests.Server;
 
 /// <summary>
 /// Tests for task status notification functionality in McpServer.

@@ -1,8 +1,8 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 /// <summary>
 /// Validates the internal property pattern used for experimental MCP properties.
@@ -48,7 +48,7 @@ public class ExperimentalInternalPropertyTests
     private static IEnumerable<(Type Type, PropertyInfo Property)> GetExperimentalPropertiesOnStableTypes()
     {
         var protocolTypes = typeof(Tool).Assembly.GetTypes()
-            .Where(t => t.Namespace == "ModelContextProtocol.Protocol" && t.IsClass && !t.IsAbstract);
+            .Where(t => t.Namespace == "Garden.ModelContextProtocol.Protocol" && t.IsClass && !t.IsAbstract);
 
         foreach (var type in protocolTypes)
         {

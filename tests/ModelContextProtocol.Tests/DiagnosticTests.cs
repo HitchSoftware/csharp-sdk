@@ -1,13 +1,13 @@
-﻿using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+﻿using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
 using System.IO.Pipelines;
 using System.Text;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Tests;
+namespace Garden.ModelContextProtocol.Tests;
 
 [Collection(nameof(DisableParallelization))]
 public class DiagnosticTests
@@ -31,7 +31,7 @@ public class DiagnosticTests
             a.Tags.Any(t => t.Key == "mcp.session.id" && !string.IsNullOrEmpty(t.Value));
 
         using (var tracerProvider = OpenTelemetry.Sdk.CreateTracerProviderBuilder()
-            .AddSource("Experimental.ModelContextProtocol")
+            .AddSource("Experimental.Garden.ModelContextProtocol")
             .AddInMemoryExporter(activities)
             .Build())
         {
@@ -114,7 +114,7 @@ public class DiagnosticTests
         var activities = new List<Activity>();
 
         using (var tracerProvider = OpenTelemetry.Sdk.CreateTracerProviderBuilder()
-            .AddSource("Experimental.ModelContextProtocol")
+            .AddSource("Experimental.Garden.ModelContextProtocol")
             .AddInMemoryExporter(activities)
             .Build())
         {
@@ -181,7 +181,7 @@ public class DiagnosticTests
 
         using (var tracerProvider = OpenTelemetry.Sdk.CreateTracerProviderBuilder()
             .AddSource(outerSourceName)
-            .AddSource("Experimental.ModelContextProtocol")
+            .AddSource("Experimental.Garden.ModelContextProtocol")
             .AddInMemoryExporter(activities)
             .Build())
         {
@@ -216,7 +216,7 @@ public class DiagnosticTests
 
         // Verify that no separate MCP client activity was created for this tool call
         var mcpClientActivities = activities.Where(a =>
-            a.Source.Name == "Experimental.ModelContextProtocol" &&
+            a.Source.Name == "Experimental.Garden.ModelContextProtocol" &&
             a.Kind == ActivityKind.Client &&
             a.Tags.Any(t => t.Key == "mcp.method.name" && t.Value == "tools/call") &&
             a.Tags.Any(t => t.Key == "gen_ai.tool.name" && t.Value == "DoubleValue"));

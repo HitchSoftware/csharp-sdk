@@ -1,10 +1,10 @@
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 
-namespace ModelContextProtocol.Tests.Server;
+namespace Garden.ModelContextProtocol.Tests.Server;
 
 /// <summary>
 /// Tests for McpServer methods that query tasks on the client (Phase 4 implementation).

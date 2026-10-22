@@ -1,5 +1,5 @@
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Protocol;
 using Microsoft.Extensions.AI;
 using System.ComponentModel;
 

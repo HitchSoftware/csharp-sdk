@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Authentication;
 
-namespace ModelContextProtocol.AspNetCore.Authentication;
+namespace Garden.ModelContextProtocol.AspNetCore.Authentication;
 
 /// <summary>
 /// Represents options for the MCP authentication handler.

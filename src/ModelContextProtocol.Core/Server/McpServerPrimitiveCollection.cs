@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>Provides a thread-safe collection of <typeparamref name="T"/> instances, indexed by their names.</summary>
 /// <typeparam name="T">The type of primitive stored in the collection.</typeparam>

@@ -8,9 +8,9 @@ Validate code samples from the **package README** files — these are shipped wi
 
 | README | Package |
 |--------|---------|
-| `README.md` (root) | ModelContextProtocol |
-| `src/ModelContextProtocol.Core/README.md` | ModelContextProtocol.Core |
-| `src/ModelContextProtocol.AspNetCore/README.md` | ModelContextProtocol.AspNetCore |
+| `README.md` (root) | Garden.ModelContextProtocol |
+| `src/ModelContextProtocol.Core/README.md` | Garden.ModelContextProtocol.Core |
+| `src/ModelContextProtocol.AspNetCore/README.md` | Garden.ModelContextProtocol.AspNetCore |
 
 Sample README files (`samples/*/README.md`) are excluded — the samples themselves are buildable projects and are validated by CI.
 
@@ -51,8 +51,8 @@ Create a **temporary** test project that references the SDK projects, wraps each
     <NoWarn>CS1998;CS8321;CS0168;CS0219;CS1591;CS8602</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ModelContextProtocol\ModelContextProtocol.csproj" />
-    <ProjectReference Include="..\..\src\ModelContextProtocol.AspNetCore\ModelContextProtocol.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\ModelContextProtocol\Garden.ModelContextProtocol.csproj" />
+    <ProjectReference Include="..\..\src\ModelContextProtocol.AspNetCore\Garden.ModelContextProtocol.AspNetCore.csproj" />
   </ItemGroup>
 </Project>
 ```
@@ -72,10 +72,10 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Text.Json;
 

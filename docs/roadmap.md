@@ -1,7 +1,7 @@
 ---
 title: C# SDK Roadmap
 author: jeffhandley
-description: ModelContextProtocol C# SDK roadmap and spec implementation tracking
+description: Garden.ModelContextProtocol C# SDK roadmap and spec implementation tracking
 uid: roadmap
 ---
 ## Spec Implementation Tracking

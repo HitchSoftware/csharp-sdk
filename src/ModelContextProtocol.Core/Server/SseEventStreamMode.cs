@@ -1,4 +1,4 @@
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Represents the mode of an SSE event stream.

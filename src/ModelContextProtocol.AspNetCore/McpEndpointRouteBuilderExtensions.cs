@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.AspNetCore;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.AspNetCore;
+using Garden.ModelContextProtocol.Protocol;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Builder;

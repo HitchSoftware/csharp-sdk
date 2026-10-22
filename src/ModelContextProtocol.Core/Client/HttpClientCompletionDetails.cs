@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides details about the completion of an HTTP-based MCP client session,

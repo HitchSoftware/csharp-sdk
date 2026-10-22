@@ -18,7 +18,7 @@ Completions work with two types of references:
 - **Prompt argument completions**: Suggest values for prompt parameters (e.g., language names, style options)
 - **Resource template argument completions**: Suggest values for URI template parameters (e.g., file paths, resource IDs)
 
-The server returns a <xref:ModelContextProtocol.Protocol.Completion> object containing a list of suggested values, an optional total count, and a flag indicating if more values are available.
+The server returns a <xref:Garden.ModelContextProtocol.Protocol.Completion> object containing a list of suggested values, an optional total count, and a flag indicating if more values are available.
 
 ### Implementing completions on the server
 
@@ -119,7 +119,7 @@ With these attributes in place, when a client sends a `completion/complete` requ
 
 ### Requesting completions on the client
 
-Clients request completions using <xref:ModelContextProtocol.Client.McpClient.CompleteAsync*>. Provide a reference to the prompt or resource template, the argument name, and the current partial value:
+Clients request completions using <xref:Garden.ModelContextProtocol.Client.McpClient.CompleteAsync*>. Provide a reference to the prompt or resource template, the argument name, and the current partial value:
 
 #### Prompt argument completions
 

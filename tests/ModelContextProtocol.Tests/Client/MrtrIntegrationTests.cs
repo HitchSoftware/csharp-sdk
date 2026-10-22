@@ -2,19 +2,19 @@
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
-using ModelContextProtocol.Tests.Utils;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Tests.Utils;
 using System.IO.Pipelines;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Tests.Client;
+namespace Garden.ModelContextProtocol.Tests.Client;
 
 /// <summary>
 /// Edge-case and guardrail tests for MRTR over in-memory pipe transport. These focus on
-/// scenarios not easily covered by <see cref="T:ModelContextProtocol.AspNetCore.Tests.MapMcpTests"/>
+/// scenarios not easily covered by <see cref="T:Garden.ModelContextProtocol.AspNetCore.Tests.MapMcpTests"/>
 /// which provides broad happy-path coverage across StreamableHttp, SSE, and Stateless transports.
 /// </summary>
 public class MrtrIntegrationTests : ClientServerTestBase

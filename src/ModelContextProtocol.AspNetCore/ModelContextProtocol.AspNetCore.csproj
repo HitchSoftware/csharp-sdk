@@ -6,7 +6,9 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
-    <PackageId>ModelContextProtocol.AspNetCore</PackageId>
+    <PackageId>Garden.ModelContextProtocol.AspNetCore</PackageId>
+    <AssemblyName>Garden.ModelContextProtocol.AspNetCore</AssemblyName>
+    <RootNamespace>Garden.ModelContextProtocol.AspNetCore</RootNamespace>
     <Description>ASP.NET Core extensions for the C# Model Context Protocol (MCP) SDK.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IsAotCompatible>true</IsAotCompatible>

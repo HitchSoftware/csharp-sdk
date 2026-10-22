@@ -1,10 +1,10 @@
 ---
 title: C# SDK Versioning
 author: jeffhandley
-description: ModelContextProtocol C# SDK approach to versioning, breaking changes, and support
+description: Garden.ModelContextProtocol C# SDK approach to versioning, breaking changes, and support
 uid: versioning
 ---
-The ModelContextProtocol specification continues to evolve rapidly, and it's important for the C# SDK to remain current with specification additions and updates. To enable this, all NuGet packages that compose the SDK follow [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) with MAJOR.MINOR.PATCH version numbers, and optional prerelease versions.
+The Garden.ModelContextProtocol specification continues to evolve rapidly, and it's important for the C# SDK to remain current with specification additions and updates. To enable this, all NuGet packages that compose the SDK follow [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) with MAJOR.MINOR.PATCH version numbers, and optional prerelease versions.
 
 Given a version number MAJOR.MINOR.PATCH, the package versions increment the:
 
@@ -16,7 +16,7 @@ Given a version number MAJOR.MINOR.PATCH, the package versions increment the:
 
 ## Supported versions
 
-Beginning with the 1.0.0 release, the following support policy will be applied for the official C# ModelContextProtocol SDK packages:
+Beginning with the 1.0.0 release, the following support policy will be applied for the official C# Garden.ModelContextProtocol SDK packages:
 
 1. New functionality and additive APIs will be introduced in MINOR releases within the current MAJOR version only.
     * New functionality will not be added to an earlier MAJOR version.
@@ -43,7 +43,7 @@ All releases are posted to https://github.com/modelcontextprotocol/csharp-sdk/re
 
 ### Specification schema changes
 
-If the MCP specification changes the schema for JSON payloads, the C# SDK might use the [`McpSession.NegotiatedProtocolVersion`](https://csharp.sdk.modelcontextprotocol.io/api/ModelContextProtocol.McpSession.html#ModelContextProtocol_McpSession_NegotiatedProtocolVersion) to dynamically change the payload schema, potentially using internal data transfer objects (DTOs) to achieve the needed deserialization behavior. These techniques will be applied where feasible to maintain backward-compatibility and forward-compatibility between MCP specification versions.
+If the MCP specification changes the schema for JSON payloads, the C# SDK might use the [`McpSession.NegotiatedProtocolVersion`](https://csharp.sdk.modelcontextprotocol.io/api/Garden.ModelContextProtocol.McpSession.html#Garden.ModelContextProtocol_McpSession_NegotiatedProtocolVersion) to dynamically change the payload schema, potentially using internal data transfer objects (DTOs) to achieve the needed deserialization behavior. These techniques will be applied where feasible to maintain backward-compatibility and forward-compatibility between MCP specification versions.
 
 For illustrations of how this could be achieved, see the following prototypes:
 

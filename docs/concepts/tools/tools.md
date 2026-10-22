@@ -17,13 +17,13 @@ This document covers tool content types, change notifications, and schema genera
 
 Tools can be defined in several ways:
 
-- Using the <xref:ModelContextProtocol.Server.McpServerToolAttribute> attribute on methods within a class marked with <xref:ModelContextProtocol.Server.McpServerToolTypeAttribute>
-- Using <xref:ModelContextProtocol.Server.McpServerTool.Create*> factory methods from a delegate, `MethodInfo`, or `AIFunction`
-- Deriving from <xref:ModelContextProtocol.Server.McpServerTool> or <xref:ModelContextProtocol.Server.DelegatingMcpServerTool>
-- Implementing a custom <xref:ModelContextProtocol.Server.McpRequestHandler`2> via <xref:ModelContextProtocol.Server.McpServerHandlers>
-- Implementing a low-level <xref:ModelContextProtocol.Server.McpRequestFilter`2>
+- Using the <xref:Garden.ModelContextProtocol.Server.McpServerToolAttribute> attribute on methods within a class marked with <xref:Garden.ModelContextProtocol.Server.McpServerToolTypeAttribute>
+- Using <xref:Garden.ModelContextProtocol.Server.McpServerTool.Create*> factory methods from a delegate, `MethodInfo`, or `AIFunction`
+- Deriving from <xref:Garden.ModelContextProtocol.Server.McpServerTool> or <xref:Garden.ModelContextProtocol.Server.DelegatingMcpServerTool>
+- Implementing a custom <xref:Garden.ModelContextProtocol.Server.McpRequestHandler`2> via <xref:Garden.ModelContextProtocol.Server.McpServerHandlers>
+- Implementing a low-level <xref:Garden.ModelContextProtocol.Server.McpRequestFilter`2>
 
-The attribute-based approach is the most common and is shown throughout this document. Parameters are automatically deserialized from JSON and documented using `[Description]` attributes. In addition to tool arguments, methods can accept special parameter types that are resolved automatically: <xref:ModelContextProtocol.Server.McpServer>, `IProgress<ProgressNotificationValue>`, `ClaimsPrincipal`, and any service registered through dependency injection.
+The attribute-based approach is the most common and is shown throughout this document. Parameters are automatically deserialized from JSON and documented using `[Description]` attributes. In addition to tool arguments, methods can accept special parameter types that are resolved automatically: <xref:Garden.ModelContextProtocol.Server.McpServer>, `IProgress<ProgressNotificationValue>`, `ClaimsPrincipal`, and any service registered through dependency injection.
 
 ```csharp
 [McpServerToolType]
@@ -45,11 +45,11 @@ builder.Services.AddMcpServer()
 
 ### Content types
 
-Tools can return various content types. The simplest is a `string`, which is automatically wrapped in a <xref:ModelContextProtocol.Protocol.TextContentBlock>. For richer content, tools can return one or more <xref:ModelContextProtocol.Protocol.ContentBlock> instances. Tools can also return `DataContent` from Microsoft.Extensions.AI, which is automatically mapped to the appropriate MCP content block: image MIME types become <xref:ModelContextProtocol.Protocol.ImageContentBlock>, audio MIME types become <xref:ModelContextProtocol.Protocol.AudioContentBlock>, and all other MIME types become <xref:ModelContextProtocol.Protocol.EmbeddedResourceBlock> with binary resource contents.
+Tools can return various content types. The simplest is a `string`, which is automatically wrapped in a <xref:Garden.ModelContextProtocol.Protocol.TextContentBlock>. For richer content, tools can return one or more <xref:Garden.ModelContextProtocol.Protocol.ContentBlock> instances. Tools can also return `DataContent` from Microsoft.Extensions.AI, which is automatically mapped to the appropriate MCP content block: image MIME types become <xref:Garden.ModelContextProtocol.Protocol.ImageContentBlock>, audio MIME types become <xref:Garden.ModelContextProtocol.Protocol.AudioContentBlock>, and all other MIME types become <xref:Garden.ModelContextProtocol.Protocol.EmbeddedResourceBlock> with binary resource contents.
 
 #### Text content
 
-Return a `string` or a <xref:ModelContextProtocol.Protocol.TextContentBlock> directly:
+Return a `string` or a <xref:Garden.ModelContextProtocol.Protocol.TextContentBlock> directly:
 
 ```csharp
 [McpServerTool, Description("Returns a greeting")]
@@ -58,8 +58,8 @@ public static string Greet(string name) => $"Hello, {name}!";
 
 #### Image content
 
-Return an <xref:ModelContextProtocol.Protocol.ImageContentBlock> with base64-encoded image data and a MIME type.
-Use the <xref:ModelContextProtocol.Protocol.ImageContentBlock.FromBytes*> factory method or construct the block directly:
+Return an <xref:Garden.ModelContextProtocol.Protocol.ImageContentBlock> with base64-encoded image data and a MIME type.
+Use the <xref:Garden.ModelContextProtocol.Protocol.ImageContentBlock.FromBytes*> factory method or construct the block directly:
 
 ```csharp
 [McpServerTool, Description("Returns a generated image")]
@@ -72,8 +72,8 @@ public static ImageContentBlock GenerateImage()
 
 #### Audio content
 
-Return an <xref:ModelContextProtocol.Protocol.AudioContentBlock> with base64-encoded audio data and a MIME type.
-The <xref:ModelContextProtocol.Protocol.AudioContentBlock.FromBytes*> factory method encodes the raw bytes automatically:
+Return an <xref:Garden.ModelContextProtocol.Protocol.AudioContentBlock> with base64-encoded audio data and a MIME type.
+The <xref:Garden.ModelContextProtocol.Protocol.AudioContentBlock.FromBytes*> factory method encodes the raw bytes automatically:
 
 ```csharp
 [McpServerTool, Description("Returns a synthesized audio clip")]
@@ -88,8 +88,8 @@ Supported audio MIME types include `audio/wav`, `audio/mp3`, `audio/ogg`, and ot
 
 #### Embedded resources
 
-Return an <xref:ModelContextProtocol.Protocol.EmbeddedResourceBlock> to embed a resource directly in a tool result.
-The resource can contain either text or binary data through <xref:ModelContextProtocol.Protocol.TextResourceContents> or <xref:ModelContextProtocol.Protocol.BlobResourceContents>:
+Return an <xref:Garden.ModelContextProtocol.Protocol.EmbeddedResourceBlock> to embed a resource directly in a tool result.
+The resource can contain either text or binary data through <xref:Garden.ModelContextProtocol.Protocol.TextResourceContents> or <xref:Garden.ModelContextProtocol.Protocol.BlobResourceContents>:
 
 ```csharp
 [McpServerTool, Description("Returns a document as an embedded resource")]
@@ -107,7 +107,7 @@ public static EmbeddedResourceBlock GetDocument()
 }
 ```
 
-For binary resources, use <xref:ModelContextProtocol.Protocol.BlobResourceContents>:
+For binary resources, use <xref:Garden.ModelContextProtocol.Protocol.BlobResourceContents>:
 
 ```csharp
 [McpServerTool, Description("Returns a binary resource")]
@@ -141,7 +141,7 @@ public static IEnumerable<ContentBlock> DescribeImage()
 
 #### Content annotations
 
-Any content block can include <xref:ModelContextProtocol.Protocol.Annotations> to provide hints about the intended audience and priority:
+Any content block can include <xref:Garden.ModelContextProtocol.Protocol.Annotations> to provide hints about the intended audience and priority:
 
 ```csharp
 new TextContentBlock
@@ -157,7 +157,7 @@ new TextContentBlock
 
 ### Consuming tools on the client
 
-Clients can discover and call tools using <xref:ModelContextProtocol.Client.McpClient>:
+Clients can discover and call tools using <xref:Garden.ModelContextProtocol.Client.McpClient>:
 
 ```csharp
 // List available tools
@@ -197,16 +197,16 @@ foreach (var content in result.Content)
 
 ### Error handling
 
-Tool errors in MCP are distinct from protocol errors. When a tool encounters an error during execution, the error is reported inside the <xref:ModelContextProtocol.Protocol.CallToolResult> with <xref:ModelContextProtocol.Protocol.CallToolResult.IsError> set to `true`, rather than as a protocol-level exception. This allows the LLM to see the error and potentially recover.
+Tool errors in MCP are distinct from protocol errors. When a tool encounters an error during execution, the error is reported inside the <xref:Garden.ModelContextProtocol.Protocol.CallToolResult> with <xref:Garden.ModelContextProtocol.Protocol.CallToolResult.IsError> set to `true`, rather than as a protocol-level exception. This allows the LLM to see the error and potentially recover.
 
 #### Automatic exception handling
 
 When a tool method throws an exception, the server catches it and returns a `CallToolResult` with `IsError = true`, with the following exceptions:
 
-- <xref:ModelContextProtocol.McpProtocolException> is re-thrown as a JSON-RPC error response (not a tool error result).
+- <xref:Garden.ModelContextProtocol.McpProtocolException> is re-thrown as a JSON-RPC error response (not a tool error result).
 - `OperationCanceledException` is re-thrown when the cancellation token was triggered.
 
-For all other exceptions, the error is returned as a tool result. If the exception derives from <xref:ModelContextProtocol.McpException> (excluding `McpProtocolException`, which is re-thrown above), its message is included in the error text; otherwise, a generic message is returned to avoid leaking internal details.
+For all other exceptions, the error is returned as a tool result. If the exception derives from <xref:Garden.ModelContextProtocol.McpException> (excluding `McpProtocolException`, which is re-thrown above), its message is included in the error text; otherwise, a generic message is returned to avoid leaking internal details.
 
 ```csharp
 [McpServerTool, Description("Divides two numbers")]
@@ -225,7 +225,7 @@ public static double Divide(double a, double b)
 
 #### Protocol errors
 
-Throw <xref:ModelContextProtocol.McpProtocolException> to signal a protocol-level error (e.g., invalid parameters or unknown tool). These exceptions propagate as JSON-RPC error responses rather than tool error results:
+Throw <xref:Garden.ModelContextProtocol.McpProtocolException> to signal a protocol-level error (e.g., invalid parameters or unknown tool). These exceptions propagate as JSON-RPC error responses rather than tool error results:
 
 ```csharp
 [McpServerTool, Description("Processes the input")]
@@ -244,7 +244,7 @@ public static string Process(string input)
 
 #### Checking for errors on the client
 
-On the client side, inspect the <xref:ModelContextProtocol.Protocol.CallToolResult.IsError> property after calling a tool:
+On the client side, inspect the <xref:Garden.ModelContextProtocol.Protocol.CallToolResult.IsError> property after calling a tool:
 
 ```csharp
 CallToolResult result = await client.CallToolAsync("divide", new Dictionary<string, object?>
@@ -266,7 +266,7 @@ Servers can dynamically add, remove, or modify tools at runtime. When the tool l
 
 #### Sending notifications from the server
 
-Inject <xref:ModelContextProtocol.Server.McpServer> and call the notification method after modifying the tool list:
+Inject <xref:Garden.ModelContextProtocol.Server.McpServer> and call the notification method after modifying the tool list:
 
 ```csharp
 // After adding or removing tools dynamically
@@ -318,7 +318,7 @@ public static string Search(
 
 ### Custom HTTP headers from tool parameters
 
-When using the Streamable HTTP transport, tool parameters can be mirrored as HTTP headers so that network infrastructure (load balancers, proxies, gateways) can make routing decisions without parsing the JSON-RPC request body. Apply the <xref:ModelContextProtocol.Server.McpHeaderAttribute> to a parameter to opt it in:
+When using the Streamable HTTP transport, tool parameters can be mirrored as HTTP headers so that network infrastructure (load balancers, proxies, gateways) can make routing decisions without parsing the JSON-RPC request body. Apply the <xref:Garden.ModelContextProtocol.Server.McpHeaderAttribute> to a parameter to opt it in:
 
 ```csharp
 [McpServerTool, Description("Executes a SQL query in a specific region")]
@@ -343,7 +343,7 @@ Rules and constraints:
 
 ### Pre-loading tool definitions on the client
 
-By default, `Mcp-Param-*` headers are sent only for tools discovered via <xref:ModelContextProtocol.Client.McpClient.ListToolsAsync*>. If a client already has tool schema information (for example, from a previous session, hardcoded configuration, or an out-of-band source), it can pre-load those definitions so that headers are sent immediately—without a round trip to the server.
+By default, `Mcp-Param-*` headers are sent only for tools discovered via <xref:Garden.ModelContextProtocol.Client.McpClient.ListToolsAsync*>. If a client already has tool schema information (for example, from a previous session, hardcoded configuration, or an out-of-band source), it can pre-load those definitions so that headers are sent immediately—without a round trip to the server.
 
 ```csharp
 // Build the tool definition with x-mcp-header annotations
@@ -374,9 +374,9 @@ var result = await client.CallToolAsync("execute_sql",
     new Dictionary<string, object?> { ["region"] = "us-west-2", ["query"] = "SELECT 1" });
 ```
 
-Known tools survive <xref:ModelContextProtocol.Client.McpClient.ListToolsAsync*> cache clears—they remain in the cache even when the server's tool list is refreshed. If the server returns a tool with the same name, the server's definition overwrites the cached one, but the tool keeps its known status.
+Known tools survive <xref:Garden.ModelContextProtocol.Client.McpClient.ListToolsAsync*> cache clears—they remain in the cache even when the server's tool list is refreshed. If the server returns a tool with the same name, the server's definition overwrites the cached one, but the tool keeps its known status.
 
-To remove known tools, use <xref:ModelContextProtocol.Client.McpClient.RemoveKnownTools*> for specific tools or <xref:ModelContextProtocol.Client.McpClient.ClearKnownTools*> to remove all:
+To remove known tools, use <xref:Garden.ModelContextProtocol.Client.McpClient.RemoveKnownTools*> for specific tools or <xref:Garden.ModelContextProtocol.Client.McpClient.ClearKnownTools*> to remove all:
 
 ```csharp
 // Remove specific known tools by name
@@ -386,4 +386,4 @@ client.RemoveKnownTools(["execute_sql"]);
 client.ClearKnownTools();
 ```
 
-All tools passed to <xref:ModelContextProtocol.Client.McpClient.AddKnownTools*> are validated for correct `x-mcp-header` annotations. If any tool in the batch fails validation, an <xref:System.ArgumentException> is thrown and no tools are added (all-or-nothing).
+All tools passed to <xref:Garden.ModelContextProtocol.Client.McpClient.AddKnownTools*> are validated for correct `x-mcp-header` annotations. If any tool in the batch fails validation, an <xref:System.ArgumentException> is thrown and no tools are added (all-or-nothing).

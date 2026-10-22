@@ -274,15 +274,15 @@ Refer to the [C# SDK Versioning](https://csharp.sdk.modelcontextprotocol.io/vers
 
 ## API Diff Report
 
-### ModelContextProtocol.Core
+### Garden.ModelContextProtocol.Core
 
 [API diff — additions, removals, changes]
 
-### ModelContextProtocol
+### Garden.ModelContextProtocol
 
 [API diff — additions, removals, changes]
 
-### ModelContextProtocol.AspNetCore
+### Garden.ModelContextProtocol.AspNetCore
 
 [API diff — additions, removals, changes]
 ```

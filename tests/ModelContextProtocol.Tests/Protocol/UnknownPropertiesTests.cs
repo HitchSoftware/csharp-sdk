@@ -1,7 +1,7 @@
 using System.Text.Json;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 
-namespace ModelContextProtocol.Tests.Protocol;
+namespace Garden.ModelContextProtocol.Tests.Protocol;
 
 /// <summary>
 /// Tests that custom JSON converters properly handle unknown additional properties

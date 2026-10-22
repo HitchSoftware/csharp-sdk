@@ -1,8 +1,8 @@
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Server;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Tests.Server;
+namespace Garden.ModelContextProtocol.Tests.Server;
 
 public partial class McpMetaAttributeTests
 {

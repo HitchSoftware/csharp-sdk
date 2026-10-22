@@ -1,10 +1,10 @@
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Protocol;
 using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Server;
+namespace Garden.ModelContextProtocol.Server;
 
 /// <summary>
 /// Provides options for controlling the creation of an <see cref="McpServerResource"/>.

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.AI;
 using System.Text.Json.Serialization;
 
-namespace ModelContextProtocol.Protocol;
+namespace Garden.ModelContextProtocol.Protocol;
 
 /// <summary>
 /// Represents a server's response to a <see cref="RequestMethods.PromptsGet"/> request from the client.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
-using ModelContextProtocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol;
+using Garden.ModelContextProtocol.Server;
 
 internal class SubscriptionMessageSender(McpServer server, ConcurrentDictionary<string, byte> subscriptions) : BackgroundService
 {

@@ -1,8 +1,8 @@
-﻿using ModelContextProtocol.Client;
+﻿using Garden.ModelContextProtocol.Client;
 using System.Net;
 using System.Text;
 
-namespace ModelContextProtocol.AspNetCore.Tests;
+namespace Garden.ModelContextProtocol.AspNetCore.Tests;
 
 public class SseServerIntegrationTests(SseServerIntegrationTestFixture fixture, ITestOutputHelper testOutputHelper)
     : HttpServerIntegrationTests(fixture, testOutputHelper)

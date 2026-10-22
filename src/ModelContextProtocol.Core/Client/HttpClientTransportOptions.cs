@@ -1,6 +1,6 @@
-using ModelContextProtocol.Authentication;
+using Garden.ModelContextProtocol.Authentication;
 
-namespace ModelContextProtocol.Client;
+namespace Garden.ModelContextProtocol.Client;
 
 /// <summary>
 /// Provides options for configuring <see cref="HttpClientTransport"/> instances.

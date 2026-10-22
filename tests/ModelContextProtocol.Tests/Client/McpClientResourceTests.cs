@@ -1,11 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
-using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
+using Garden.ModelContextProtocol.Client;
+using Garden.ModelContextProtocol.Protocol;
+using Garden.ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Text.Json.Nodes;
 
-namespace ModelContextProtocol.Tests.Client;
+namespace Garden.ModelContextProtocol.Tests.Client;
 
 public class McpClientResourceTests : ClientServerTestBase
 {

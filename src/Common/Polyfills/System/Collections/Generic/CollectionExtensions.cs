@@ -1,5 +1,5 @@
 #if !NET
-using ModelContextProtocol;
+using Garden.ModelContextProtocol;
 
 namespace System.Collections.Generic;
 
