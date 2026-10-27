@@ -81,7 +81,7 @@ public class ClientConformanceTests
     {
         // Construct an absolute path to the conformance client executable
         var exeSuffix = OperatingSystem.IsWindows() ? ".exe" : "";
-        var conformanceClientPath = Path.GetFullPath($"./Garden.ModelContextProtocol.ConformanceClient{exeSuffix}");
+        var conformanceClientPath = Path.GetFullPath($"./ModelContextProtocol.ConformanceClient{exeSuffix}");
         // Replace AspNetCore.Tests with ConformanceClient in the path
         conformanceClientPath = conformanceClientPath.Replace("AspNetCore.Tests", "ConformanceClient");
 
