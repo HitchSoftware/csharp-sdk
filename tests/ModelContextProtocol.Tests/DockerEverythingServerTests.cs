@@ -93,8 +93,8 @@ public class DockerEverythingServerTests(ITestOutputHelper testOutputHelper) : L
             loggerFactory: LoggerFactory,
             cancellationToken: TestContext.Current.CancellationToken);
 
-        // Call the server's trigger-sampling-request tool which should trigger our sampling handler
-        var result = await client.CallToolAsync("trigger-sampling-request", new Dictionary<string, object?>
+        // The pinned Docker v1 image exposes sampleLLM, unlike the newer npm server.
+        var result = await client.CallToolAsync("sampleLLM", new Dictionary<string, object?>
             {
                 ["prompt"] = "Test prompt",
                 ["maxTokens"] = 100
@@ -105,5 +105,6 @@ public class DockerEverythingServerTests(ITestOutputHelper testOutputHelper) : L
         var textContent = Assert.Single(result.Content.OfType<TextContentBlock>());
         Assert.Equal("text", textContent.Type);
         Assert.False(string.IsNullOrEmpty(textContent.Text));
+        Assert.Equal(1, samplingHandlerCalls);
     }
 }

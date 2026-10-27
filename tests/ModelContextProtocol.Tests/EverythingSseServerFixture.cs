@@ -15,7 +15,7 @@ public class EverythingSseServerFixture : IAsyncDisposable
     public EverythingSseServerFixture(int port)
     {
         _port = port;
-        _containerName = $"mcp-everything-server-{_port}";
+        _containerName = $"mcp-everything-server-{_port}-{Guid.NewGuid():N}";
     }
 
     public async Task StartAsync()
